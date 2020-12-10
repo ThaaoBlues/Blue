@@ -53,8 +53,9 @@ class blue_bot_server():
         database='sqlite:\\\db.sqlite3')
         self.trainer.train("chatterbot.corpus.french")"""
 
-
-        print("Starting server...")
+        print("starting web config server on port 8080")
+        subprocess.Popen(["python3","blue_config_server.py"])
+        print("Starting BLUE server...")
         #litteraly starting the server like I said above
         self.start_server()
 

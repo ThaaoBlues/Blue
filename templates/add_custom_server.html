@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADD CUSTOM SERVER</title>
+</head>
+<body>
+    <form action="/process/[ADD WEBSITE VOICE COMMAND]" method="post">
+        <div>
+            <label for="ip_addr">IP</label>
+            <input type="text" id="ip_addr" name="ip_addr">
+        </div>
+        <br>
+        <div>
+            <label for="command">VOICE COMMAND</label>
+            <input type="text" id="command" name="command">
+        </div>
+        <br>
+        <div>
+            <label for="msg">MESSAGE TO SEND (use \n for a new line delimiter)</label>
+            <textarea id="msg" name="user_message"></textarea>
+        </div>
+        <br><br>
+        <div class="button">
+            <button type="submit">Enregistrer la commande</button>
+        </div>
+    </form>
+</body>
+</html>
