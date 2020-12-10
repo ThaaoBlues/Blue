@@ -89,17 +89,11 @@ class blue_bot_server():
             try:
                 message = client.recv(1024)
                 message = message.decode('utf-8')
-                if message != "" and  message != " " and message != "":
+                if not self.check_commands(message,client):
                     print(message)
                     response = str(self.chatbot.get_response(message))
-                    """try:
-                        client.send(response)
-                    except:
-                        pass"""
-                    if not self.check_commands(message,client):
-
-                        print(f"BLUE:{response}")
-                        client.send(bytes(response,'utf-8'))
+                    print(f"BLUE:{response}")
+                    client.send(bytes(response,'utf-8'))
                     
             except:
                 pass
@@ -110,7 +104,7 @@ class blue_bot_server():
         self.accept_process.terminate()
 
     def display_website(self,ws):
-        subprocess.run(["python3", "/media/pi/a27ac5a0-2e59-413e-8f4c-1d59773fb4a11/run/Blue/websearch.py",ws])
+        subprocess.run(["python3","websearch.py",ws])
 
 
     def check_commands(self,message,client):
