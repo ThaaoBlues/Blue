@@ -11,7 +11,7 @@ import locale
 import time
 import datetime
 import random
-#from googlesearch_python import search
+from googlesearch import search
 import sys
 import webbrowser
 from threading import Thread
@@ -39,6 +39,7 @@ class blue_bot_server():
         self.lang = locale.getdefaultlocale()[2:]
         print(self.lang)
         wikipedia.set_lang("fr")
+
         # Create a new chat bot named  Blue
         self.chatbot = ChatBot('Blue',
         filters=[filters.get_recent_repeated_responses],
@@ -51,7 +52,7 @@ class blue_bot_server():
         storage_adapter='chatterbot.storage.SQLStorageAdapter',
         database='sqlite:\\\db.sqlite3')
         self.trainer.train("chatterbot.corpus.french")"""
-        
+
 
         print("Starting server...")
         #litteraly starting the server like I said above
@@ -89,11 +90,12 @@ class blue_bot_server():
             try:
                 message = client.recv(1024)
                 message = message.decode('utf-8')
-                if not self.check_commands(message,client):
-                    print(message)
-                    response = str(self.chatbot.get_response(message))
-                    print(f"BLUE:{response}")
-                    client.send(bytes(response,'utf-8'))
+                if message != "" and message != " " and message != "\n" and message != "\r" and message != "\r\n": 
+                    if not self.check_commands(message,client):
+                        print(message)
+                        response = str(self.chatbot.get_response(message))
+                        print(f"BLUE:{response}")
+                        client.send(bytes(response,'utf-8'))
                     
             except:
                 pass
