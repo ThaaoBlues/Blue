@@ -90,7 +90,8 @@ class blue_bot_server():
             try:
                 message = client.recv(1024)
                 message = message.decode('utf-8')
-                if message != "" and message != " " and message != "\n" and message != "\r" and message != "\r\n": 
+                if message != "" and message != " " and message != "\n" and message != "\r" and message != "\r\n":
+                    print(message)
                     if not self.check_commands(message,client):
                         print(message)
                         response = str(self.chatbot.get_response(message))
@@ -117,7 +118,9 @@ class blue_bot_server():
                 client.send(bytes(f"j'ai affiché {message.strip('va sur').replace(' ','').lower()} sur la base BLUE","utf-8"))
                 self.speak(f"j'ai affiché {message.strip('va sur').replace(' ','').lower()} sur la base BLUE")
             else:
-                self.display_website(search(message.strip('va sur').replace(' ','').lower())[0])
+                self.display_website(str(list(search(message.strip('va sur').replace(' ','').lower(),num=1,start=0,stop=1))[0]))
+                client.send(bytes(f"j'ai affiché {message.strip('va sur').replace(' ','').lower()} sur la base BLUE","utf-8"))
+                self.speak(f"j'ai affiché {message.strip('va sur').replace(' ','').lower()} sur la base BLUE")
             return True
 
 
