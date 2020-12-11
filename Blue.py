@@ -35,6 +35,10 @@ class blue_bot_server():
         self.accept_process = ""
         self.accept_process = ""
         self.response = ""
+        self.engine = pyttsx3.init()
+        self.engine.setProperty('rate', 110)
+        voices = engine.getProperty('voices')
+        self.engine.setProperty("voice", voices[26].id)
         self.chatbot = ""
         self.hosts_number = Manager().Value('i',0)
         self.lang = locale.getdefaultlocale()[2:]
@@ -71,8 +75,11 @@ class blue_bot_server():
 
     def speak(self,text):
         print(text)
-        os.system(f"espeak -v fr -s 6 \"{text}\"")
+        self.engine.say(text)
+        self.engine.runAndWait()
+
         
+
     def check_files_integrity(self):
         if not os.path.isfile("custom_websites.blue"):
             subprocess.Popen(["python3","setup.py"])

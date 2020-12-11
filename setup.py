@@ -1,6 +1,9 @@
 from subprocess import Popen
 Popen(["sudo","apt","install","espeak"])
-Popen(["python3","-m","pip","install","chatterbot==1.0.4","youtube_search","googletrans","colorama","speedtest-cli","wikipedia","google","googlesearch-python","flask","pyirobot"])
+Popen(["sudo","apt","install","alsa"])
+Popen(["sudo","apt","install","libasound-dev"])
+Popen(["sudo","apt","install","alsa-utils"])
+Popen(["python3","-m","pip","install","chatterbot==1.0.4","youtube_search","googletrans","colorama","speedtest-cli","wikipedia","google","googlesearch-python","flask","pyirobot","pyttsx3"])
 
 #custom files, can be modified by user on [blue IP]:8080
 open("custom_websites.blue","w")
