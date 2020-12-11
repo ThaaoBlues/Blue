@@ -6,10 +6,15 @@
     <title>ADD CUSTOM SERVER</title>
 </head>
 <body>
-    <form action="/process/[ADD WEBSITE VOICE COMMAND]" method="post">
+    <form action="/process/[ADD CUSTOM VOICE COMMAND TO SEND TO A SERVER]" method="post">
         <div>
             <label for="ip_addr">IP</label>
             <input type="text" id="ip_addr" name="ip_addr">
+        </div>
+        <br>
+        <div>
+            <label for="port">PORT</label>
+            <input type="text" id="port" name="port">
         </div>
         <br>
         <div>
@@ -18,8 +23,8 @@
         </div>
         <br>
         <div>
-            <label for="msg">MESSAGE TO SEND (use \n for a new line delimiter)</label>
-            <textarea id="msg" name="user_message"></textarea>
+            <label for="msg">MESSAGE TO SEND</label>
+            <textarea id="msg" name="msg"></textarea>
         </div>
         <br><br>
         <div class="button">

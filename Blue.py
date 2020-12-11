@@ -7,6 +7,7 @@ from youtube_search import YoutubeSearch
 import webbrowser
 import platform
 import os
+from pyirobot import robot
 import locale
 import time
 import datetime
@@ -72,6 +73,17 @@ class blue_bot_server():
         print(text)
         os.system(f"espeak -v fr -s 6 \"{text}\"")
         
+    def check_files_integrity(self):
+        if not os.path.isfile("custom_websites.blue"):
+            subprocess.Popen(["python3","setup.py"])
+
+        if not os.path.isfile("custom_servers.blue"):
+            subprocess.Popen(["python3","setup.py"])
+
+        if not os.path.isfile("irobot_cleaners.blue"):
+            subprocess.Popen(["python3","setup.py"])
+    
+
         
 #funtion of the process accept_hosts_process to...yeah it's accepting hosts while the server is running
     def accept_hosts(self):
@@ -107,12 +119,85 @@ class blue_bot_server():
         self.broadcast_process.terminate()
         self.accept_process.terminate()
 
+    #to send custom message to a server
+    def interact_with_server(self,ip,port,message):
+        try:
+            s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+            s.connect((ip,int(port)))
+            s.send(bytes(message,"utf-8"))
+            s.close()
+            return True
+        except:
+            return False
+
+    #to interact with a irobot cleaner
+    def interact_with_cleaner(self,ip,password):
+        robot = Robot(ip,password)
+        ms = robot.GetMission()
+        if not "cleaning" in str(ms):
+            robot.StartCleaning()
+        else:
+            robot.StopCleaning()
+            robot.ReturnHome()
+
+
+    #to basically call the module and display a website by his url
     def display_website(self,ws):
         subprocess.run(["python3","websearch.py",ws])
 
 
     def check_commands(self,message,client):
 
+        #checking custom files
+        with open("irobot_cleaners.blue","r") as f:
+            while(True):
+                try:
+                    if f.readline() in message:
+                        password = f.readline()
+                        ip = f.readline()
+                        self.interact_with_cleaner(ip,password)
+                        f.close()
+                        break
+                except:
+                    f.close()
+                    break
+
+        with open("custom_servers.blue","r") as f:
+            while(True):
+                try:
+                    if message in f.readline():
+                        ip = f.readline()
+                        port = f.readline()
+                        command = f.readline().replace("[NL]","\n")
+                        res = self.interact_with_server(ip,port,command)
+                        if not res:
+                            self.speak("Erreur lors de l'envoi du message au serveur")
+                            client.send(bytes("Erreur lors de l'envoi du message au serveur","utf-8"))
+                        else:
+                            self.speak("Message bien envoyé au serveur")
+                            client.send(bytes("Message bien envoyé au serveur","utf-8"))
+                        f.close()
+                        return True
+                        break
+                except:
+                    f.close()
+                    break
+
+
+        with open("custom_websites.blue","r") as f:
+            while(True):
+                try:
+                    if message in f.readline():
+                        url = f.readline()
+                        self.display_website(url)
+                        f.close()
+                        return True
+                        break
+                except:
+                    f.close()
+                    break
+
+            
         if "va sur" in message:
             if "." in message:
                 self.display_website("http://www."+message.strip('va sur').replace(' ','').lower())
