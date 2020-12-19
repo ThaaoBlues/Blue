@@ -14,8 +14,55 @@ def action(page):
         return render_template("add_custom_website.html")
     elif page == "[ADD CUSTOM VOICE COMMAND TO SEND TO A SERVER]":
         return render_template("add_custom_server.html")
+    
+    elif page == "[MANAGE IROBOT CLEANER]":
+        with open("irobot_cleaners.blue","r") as f:
+            array = [""] 
+            i=0
+            j=0
+            name = [""]
+            for lines in f.read().split("\n"):
+                
+                if i%3==0 and i != 0:
+                    array.append("Robot name : " + lines + " || ")
+                    j+=1
+                    i=0
+                elif i==0:
+                    array[j] = array[j] + "Robot name : " + lines + " || "
+                    name.append(lines)
+                    print(name)
+                    i+=1
+                elif i==1:
+                    i+=1
+                else:
+                    array[j] = array[j] + "Robot IP address : " + lines + " || "
+                    i+=1
+
+        return render_template("manage_irobot_cleaner.html",lenght=len(array),array=array,name=name)
+    
+    elif page == "[MANAGE WEBSITE VOICE COMMAND]":
+        with open("custom_websites.blue","r") as f:
+            array = [""]
+            name = [""]
+            a = f.read().split("\n")
+            i=0
+            for line in range(0,len(a)):
+                print(a[line])
+                if line%2==0:
+                    array.append(a[line]+"||")
+                    name.append(a[line])
+                    i+=1
+                else:
+                    array[i] += a[line]
+
+
+        return render_template("manage_custom_website.html",lenght=len(array),array=array,name=name)
+    
     else:
         return page
+
+
+
 
 @app.route("/process/<process_id>",methods=['GET','POST'])
 def process(process_id):
@@ -56,6 +103,51 @@ def process(process_id):
 
         return render_template("success_message.html")
 
+    elif "[MANAGE IROBOT CLEANER]" in process_id:
+        with open("irobot_cleaners.blue","r") as f:
+            content = ""
+            name = process_id.replace("[MANAGE IROBOT CLEANER]","")
+            while(True):
+                try:
+                    l = f.readline()
+                    if l != "":
+                        l = l.strip("\n")
+                        print(l)
+                        if l == name:
+                            print("found")
+                            l = ""
+                            f.readline()
+                            f.readline()
+                        else:
+                            content+="\n"+l
+                    else:
+                        break
+                except:
+                    f.close()
+                    break
+        print(content)
+        with open("irobot_cleaners.blue","w") as f:
+            f.write(content)
+            f.close()
+        return render_template("success_message.html")
+    elif "[MANAGE WEBSITE VOICE COMMAND]" in process_id:
+        name = process_id.replace("[MANAGE WEBSITE VOICE COMMAND]","")
+        with open("custom_websites.blue","r") as f:
+            tt = f.read().split("\n")
+            print(tt)
+            for ele in tt:
+                if ele == name:
+                    tt.pop(tt.index(name))
+                    tt.pop(tt.index(name)+1)
+        
+        with open("custom_websites.blue","w") as f:
+            f.write(tt)
+            f.close()
+
+        return render_template("success_message.html")
+    elif process_id == "[MANAGE CUSTOM VOICE COMMAND TO SEND TO A SERVER]'":
+        return render_template("success_message.html")
+
     else:
         return render_template("config_page.html")
 
@@ -66,4 +158,4 @@ def page_not_found(error):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0",port="8080")
+    app.run(host="0.0.0.0",port="8080",use_reloader = True)
