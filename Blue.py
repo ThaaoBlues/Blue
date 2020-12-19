@@ -31,13 +31,12 @@ class blue_bot_server():
         
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.accept_process = ""
-        self.accept_process = ""
         self.response = ""
+        self.ans = answer.answer()
         self.engine = pyttsx3.init()
         self.engine.setProperty('rate', 110)
         voices = self.engine.getProperty('voices')
         self.engine.setProperty("voice", voices[26].id)
-        self.chatbot = ""
         self.hosts_number = Manager().Value('i',0)
         self.lang = locale.getdefaultlocale()[2:]
 
@@ -46,38 +45,26 @@ class blue_bot_server():
             self.r.adjust_for_ambient_noise(source)
 
         print(self.lang)
-        wikipedia.set_lang("fr")
-
-        # Create a new chat bot named  Blue
-        self.chatbot = ChatBot('Blue',
-        filters=[filters.get_recent_repeated_responses],
-        storage_adapter='chatterbot.storage.SQLStorageAdapter',
-        database='sqlite:///db.sqlite3')
-
-
-        #ONLY USE IT THE FIRST TIME DUMBASS
-        """self.trainer = ChatterBotCorpusTrainer(self.chatbot,
-        storage_adapter='chatterbot.storage.SQLStorageAdapter',
-        database='sqlite:\\\db.sqlite3')
-        self.trainer.train("chatterbot.corpus.french")"""
-
         print("starting web config server on port 8080")
         subprocess.Popen(["python3","blue_config_server.py"])
         print("Starting BLUE server...")
         #litteraly starting the server like I said above
         self.start_server()
-        proc = Process(target=self.start_listening)
-        proc.start()
         self.start_listening()
+        
+        
+
 
 
     def start_listening(self):
-        
+        print("started")
         while True:
-            print("listening..")
-            voice_command = str(listen(5))
-            if voice_command.startswith("Blue"):
-                answer.get_answer(voice_command.strip("Blue"),client=None)
+            print("\rlistening..",end="")
+            voice_command = str(self.listen(5))
+            print(voice_command)
+            if voice_command.startswith("blue"):
+                
+                self.ans.get_answer(voice_command.strip("Blue"),client=None)
 
 
     def start_server(self):
@@ -86,7 +73,6 @@ class blue_bot_server():
         self.accept_process.start()
         print("[+]Server is now online.")
         print("[+]Listening on : (Private IP) {} || (Public IP) {}".format(socket.gethostbyname_ex(socket.gethostname())[2],get('https://api.ipify.org').text))
-        self.accept_process.join()
         
 
     def speak(self,text):
@@ -97,8 +83,8 @@ class blue_bot_server():
     def listen(self,second):
         try:
             with sr.Microphone() as source:
-                data = r.record(source, duration=second)
-                voice_command = r.recognize_google(data,language='fr')
+                data = self.r.record(source, duration=second)
+                voice_command = self.r.recognize_google(data,language='fr')
                 return voice_command
         except:
             pass
@@ -138,7 +124,7 @@ class blue_bot_server():
                 message = message.decode('utf-8')
                 if message != "" and message != " " and message != "\n" and message != "\r" and message != "\r\n":
                     print(message)
-                    answer.get_answer(message,client)        
+                    self.ans.get_answer(message,client)        
             except:
                 self.hosts_number.value -= 1
                 
