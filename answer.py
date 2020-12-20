@@ -13,7 +13,7 @@ import subprocess
 from gtts import gTTS
 import playsound
 import os
-
+import pafy
 class answer():
     def __init__(self):
 
@@ -160,7 +160,7 @@ class answer():
 
 
 
-            elif "mets" in message or "met" in message:
+            elif "mets la" in message or "met la" in message:
                 message = message.strip("mets").strip("met").strip("la video de").strip("la chanson de").strip("la musique de").strip("une video de").strip("une chanson de").strip("une musique de")
                 pywhatkit.playonyt(message)
                 print(f"j'ai affiché {message.lower()} sur la base BLUE")
@@ -256,9 +256,11 @@ class answer():
                 return True, response
 
 
-            elif message in "joue de la musique mets de la musique" or "top 50" in message or "top 100" in message:
-                pywhatkit.playonyt("https://www.youtube.com/watch?v=TmKh7lAwnBI&list=PL4fGSI1pDJn5kI81J1fYWK5eZRl1zJ5kM")
-
+            elif message in "joue de la musique" or "mets de la musique" in message or "top 50" in message or "top 100" in message:
+                url = "https://www.youtube.com/watch?v=TmKh7lAwnBI&list=PL4fGSI1pDJn5kI81J1fYWK5eZRl1zJ5kM"
+                vid = pafy.new(url)
+                best = vid.getbest()
+                self.display_website(best.url)
                 return True, response
 
             elif message in "ifconfig ipconfig quelle est mon adresse IP locale mon IP locale":
