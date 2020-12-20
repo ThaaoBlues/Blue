@@ -7,8 +7,12 @@ from googlesearch import search
 import speedtest
 from youtube_search import YoutubeSearch
 import googletrans
+from random import randint
 import pywhatkit
-
+import subprocess
+from gtts import gTTS
+import playsound
+import os
 
 class answer():
     def __init__(self):
@@ -26,9 +30,16 @@ class answer():
         wikipedia.set_lang("fr")
 
     def speak(self,text):
-        print(text)
-        self.engine.say(text)
-        self.engine.runAndWait()
+        if "127.0.0.1" in str(socket.gethostbyname(socket.gethostname())):
+            print(text)
+            self.engine.say(text)
+            self.engine.runAndWait()
+        else:
+            tts = gTTS(text,lang="fr-FR")
+            sn = str(randint(1,100000))+".mp3"
+            tts.save(sn)
+            playsound.playsound(sn)
+            os.remove(sn)
 
 
     #to send custom message to a server
@@ -128,7 +139,7 @@ class answer():
             
             if "va sur" in message:
                 if "." in message:
-                    self.display_website("http://www."+message.strip('va sur').replace(' ','').lower())
+                    self.display_website("http://www."+message.strip("va sur").replace(' ','').replace('blue',"").lower())
                     response = (f"j'ai affiché {message.strip('va sur').replace(' ','').lower()} sur la base BLUE")
                     self.speak(f"j'ai affiché {message.strip('va sur').replace(' ','').lower()} sur la base BLUE")
                 else:
@@ -311,13 +322,20 @@ class answer():
 
 
 
-            elif "définition" in message or "qui est" in message or "qui etait" in message or "c'est quoi" in message or "qu'est-ce qu":
+            elif "définition" in message or "qui est" in message or "qui était" in message or "c'est quoi" in message or "qu'est-ce qu" in message:
                 message = message.split()
                 message = message[-1]
-                res = wikipedia.summary(message,sentences=1)
-                response = (res)
-                self.speak(res)
-                return True, response
+                try:
+                    res = wikipedia.summary(message,sentences=1)
+                    response = (res)
+                    self.speak(res)
+                    return True, response
+                except:
+                    self.speak("Auncun article sur wikipedia correspond à ce nom.")
+                    return True, response
+                
+                
+                
 
             elif message in "fait un compte à rebours":
                 #pas finis
@@ -387,6 +405,8 @@ class answer():
                 print(message)
                 response = str(self.chatbot.get_response(message))
                 print(f"BLUE:{response}")
+                self.speak(response)
             else:
+                
                 print(response)
 
