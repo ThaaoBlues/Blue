@@ -52,9 +52,8 @@ class blue_bot_server():
             print("\rlistening..",end="")
             voice_command = str(self.listen(5))
             print(voice_command)
-            if voice_command.startswith("Robert"):
-                print(voice_command)
-                self.ans.get_answer(voice_command.replace("Robert","").strip(" "),client=None)
+            if voice_command.startswith("blue"):
+                self.ans.get_answer(voice_command.replace("blue","").strip(" "),client=None)
 
 
     def start_server(self):
