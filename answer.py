@@ -177,11 +177,11 @@ class answer():
 
             elif "mets la" in message or "mets le clip" in message:
                 message = message.strip("mets la").strip("mets le clip").strip("la video de").strip("la chanson de").strip("la musique de").strip("une video de").strip("une chanson de").strip("une musique de")
-                result = YoutubeSearch('music', max_results=10).to_dict()[0]['url_suffix']
+                results = YoutubeSearch(message, max_results=10).to_dict()
                 url = "https://youtube.com" + results[0]['url_suffix']
                 vid = pafy.new(url)
                 best = vid.getbest()
-                self.speak("j'ai affiché {message.lower()} sur la base BLUE")
+                self.speak(f"j'ai affiché {message.lower()} sur la base BLUE")
                 webbrowser.open(best.url)
                 print(f"j'ai affiché {message.lower()} sur la base BLUE")
                 return True, response
