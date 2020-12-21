@@ -169,14 +169,12 @@ class answer():
 
 
 
-            if "cherche" in message:
+            elif "cherche" in message:
                 response = GoogleSearch().search(message.replace("cherche","",1))
                 result1 = response.results[0]
                 self.speak(f"selon {result1.title}, {result1.getText()}")
 
                 return True, response
-
-
 
 
             elif ("mets la" in message or "mets le clip" in message) and not message.startswith("mets de"):

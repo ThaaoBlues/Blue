@@ -5,15 +5,14 @@ import pyttsx3
 import sys
 from threading import Thread
 import socket
-import string
-from colorama import *
 import subprocess
 import signal
 from multiprocessing import Process, freeze_support
 import speech_recognition as sr
 import pyaudio
 import answer
-import webbrowser
+import os
+from gtts import gTTS
 from requests import get
 
 
@@ -52,7 +51,17 @@ class blue_bot_server():
             print("\rlistening..",end="")
             voice_command = str(self.listen(5))
             print(voice_command)
-            if voice_command.startswith("blue"):
+            elif voice_command == "merci":
+                self.speak("Avec plaisir mec !")
+            elif voice_command == "stop":
+                p = subprocess.Popen(['ps', '-A'], stdout=subprocess.PIPE)
+                out, err = p.communicate()
+                for line in out.splitlines():
+                    print(line)
+                    if 'midori' in str(line).lower():
+                        pid = int(line.split(None, 1)[0])
+                        os.kill(pid, signal.SIGKILL)
+            elif voice_command.startswith("blue"):
                 self.ans.get_answer(voice_command.replace("blue","").strip(" "),client=None)
 
 
@@ -65,9 +74,15 @@ class blue_bot_server():
         
 
     def speak(self,text):
-        print(text)
-        self.engine.say(text)
-        self.engine.runAndWait()
+        try:
+            tts = gTTS(text,lang="fr-FR")
+            sn = str(randint(1,100000))+".mp3"
+            tts.save(sn)
+            playsound.playsound(sn)
+            os.remove(sn)
+        except:
+            self.engine.say(text)
+            self.engine.runAndWait()
 
     def listen(self,second):
         try:
