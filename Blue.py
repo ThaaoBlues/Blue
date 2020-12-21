@@ -63,8 +63,8 @@ class blue_bot_server():
             voice_command = str(self.listen(5))
             print(voice_command)
             if voice_command.startswith("blue"):
-                
-                self.ans.get_answer(voice_command.strip("Blue"),client=None)
+                print(voice_command.replace("blue",""))
+                self.ans.get_answer(voice_command.replace("blue","").strip(" "),client=None)
 
 
     def start_server(self):
@@ -83,7 +83,7 @@ class blue_bot_server():
     def listen(self,second):
         try:
             with sr.Microphone() as source:
-                data = self.r.record(source, duration=second)
+                data = self.r.record(source,duration=second)
                 voice_command = self.r.recognize_google(data,language='fr')
                 return voice_command
         except:

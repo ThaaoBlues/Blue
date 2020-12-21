@@ -3,6 +3,7 @@ from chatterbot.trainers import ChatterBotCorpusTrainer
 import wikipedia
 import pyttsx3
 import socket
+from time import sleep
 from googlesearch import search
 import speedtest
 from youtube_search import YoutubeSearch
@@ -66,6 +67,18 @@ class answer():
     def display_website(self,ws):
         subprocess.run(["python3","websearch.py",ws])
 
+    def end_video(time):
+        time = time.split(":")
+        time = int(time[0])*60 + int(time[1])
+        sleep(time)
+        p = subprocess.Popen(['ps', '-A'], stdout=subprocess.PIPE)
+        out, err = p.communicate()
+        for line in out.splitlines():
+            print(line)
+            if 'midori' in str(line).lower():
+                pid = int(line.split(None, 1)[0])
+                os.kill(pid, signal.SIGKILL)
+        sleep(1)
 
     def check_commands_files(self,message):
         response = ""
@@ -160,11 +173,15 @@ class answer():
 
 
 
-            elif "mets la" in message or "met la" in message:
-                message = message.strip("mets").strip("met").strip("la video de").strip("la chanson de").strip("la musique de").strip("une video de").strip("une chanson de").strip("une musique de")
-                pywhatkit.playonyt(message)
+            elif "mets la" in message or "mets le clip" in message:
+                message = message.strip("mets la").strip("mets le clip").strip("la video de").strip("la chanson de").strip("la musique de").strip("une video de").strip("une chanson de").strip("une musique de")
+                result = YoutubeSearch('music', max_results=10).to_dict()[1]['url_suffix']
+                url = "https://youtube.com" + results[i]['url_suffix']
+                vid = pafy.new(url)
+                best = vid.getbest()
+                self.speak("j'ai affiché {message.lower()} sur la base BLUE")
+                webbrowser.open(best.url)
                 print(f"j'ai affiché {message.lower()} sur la base BLUE")
-                response = (f"j'ai affiché {message.lower()} sur la base BLUE")
                 return True, response
 
             elif message in "quelle heure est-il quelle heure il est donne moi l'heure s'il te plais":
@@ -257,10 +274,19 @@ class answer():
 
 
             elif message in "joue de la musique" or "mets de la musique" in message or "top 50" in message or "top 100" in message:
-                url = "https://www.youtube.com/watch?v=TmKh7lAwnBI&list=PL4fGSI1pDJn5kI81J1fYWK5eZRl1zJ5kM"
-                vid = pafy.new(url)
-                best = vid.getbest()
-                self.display_website(best.url)
+                results = YoutubeSearch('music', max_results=10).to_dict()
+                print(results[0]['url_suffix'])
+                print(results[0]['duration'])
+                for i in range(len(results)):
+                    url = "https://youtube.com" + results[i]['url_suffix']
+                    vid = pafy.new(url)
+                    best = vid.getbest()
+                    print(best.url)
+                    webbrowser.open(best.url)
+                    proc = multiprocessing.Process(target=end_video,args=(results[i]['duration'],))  
+                    proc.start()
+                    proc.join()
+
                 return True, response
 
             elif message in "ifconfig ipconfig quelle est mon adresse IP locale mon IP locale":
