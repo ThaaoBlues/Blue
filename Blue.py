@@ -1,13 +1,5 @@
 import socket
-from requests import get
 from multiprocessing import Process, freeze_support, Manager
-import webbrowser
-import platform
-import os
-#from pyirobot import robot
-import locale
-import time
-import datetime
 import random
 import pyttsx3
 import sys
@@ -21,9 +13,8 @@ from multiprocessing import Process, freeze_support
 import speech_recognition as sr
 import pyaudio
 import answer
-
-
-
+import webbrowser
+from requests import get
 
 
 class blue_bot_server():
@@ -38,13 +29,12 @@ class blue_bot_server():
         voices = self.engine.getProperty('voices')
         self.engine.setProperty("voice", voices[26].id)
         self.hosts_number = Manager().Value('i',0)
-        self.lang = locale.getdefaultlocale()[2:]
+    
 
         self.r = sr.Recognizer()
         with sr.Microphone() as source:
             self.r.adjust_for_ambient_noise(source)
 
-        print(self.lang)
         print("starting web config server on port 8080")
         subprocess.Popen(["python3","blue_config_server.py"])
         print("Starting BLUE server...")
@@ -62,9 +52,9 @@ class blue_bot_server():
             print("\rlistening..",end="")
             voice_command = str(self.listen(5))
             print(voice_command)
-            if voice_command.startswith("blue"):
-                print(voice_command.replace("blue",""))
-                self.ans.get_answer(voice_command.replace("blue","").strip(" "),client=None)
+            if voice_command.startswith("Robert"):
+                print(voice_command)
+                self.ans.get_answer(voice_command.replace("Robert","").strip(" "),client=None)
 
 
     def start_server(self):

@@ -10,6 +10,8 @@ from youtube_search import YoutubeSearch
 import googletrans
 from random import randint
 import pywhatkit
+import multiprocessing
+import webbrowser
 import subprocess
 from gtts import gTTS
 import playsound
@@ -67,7 +69,7 @@ class answer():
     def display_website(self,ws):
         subprocess.run(["python3","websearch.py",ws])
 
-    def end_video(time):
+    def end_video(self,time):
         time = time.split(":")
         time = int(time[0])*60 + int(time[1])
         sleep(time)
@@ -176,7 +178,7 @@ class answer():
             elif "mets la" in message or "mets le clip" in message:
                 message = message.strip("mets la").strip("mets le clip").strip("la video de").strip("la chanson de").strip("la musique de").strip("une video de").strip("une chanson de").strip("une musique de")
                 result = YoutubeSearch('music', max_results=10).to_dict()[0]['url_suffix']
-                url = "https://youtube.com" + results[i]['url_suffix']
+                url = "https://youtube.com" + results[0]['url_suffix']
                 vid = pafy.new(url)
                 best = vid.getbest()
                 self.speak("j'ai affiché {message.lower()} sur la base BLUE")
@@ -274,7 +276,7 @@ class answer():
 
 
             elif message in "joue de la musique" or "mets de la musique" in message or "top 50" in message or "top 100" in message:
-                results = YoutubeSearch('music', max_results=10).to_dict()
+                results = YoutubeSearch('top trending world music', max_results=10).to_dict()
                 print(results[0]['url_suffix'])
                 print(results[0]['duration'])
                 for i in range(len(results)):
@@ -283,9 +285,14 @@ class answer():
                     best = vid.getbest()
                     print(best.url)
                     webbrowser.open(best.url)
-                    proc = multiprocessing.Process(target=end_video,args=(results[i]['duration'],))  
-                    proc.start()
-                    proc.join()
+                    if results[0]['duration'] != 0:
+                        proc = multiprocessing.Process(target=self.end_video,args=(results[i]['duration'],))  
+                        proc.start()
+                        proc.join()
+                    else:
+                        proc = multiprocessing.Process(target=self.end_video,args=("10:0",))
+                        proc.start()
+                        proc.join()
 
                 return True, response
 
