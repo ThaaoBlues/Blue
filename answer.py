@@ -33,16 +33,20 @@ class answer():
         wikipedia.set_lang("fr")
 
     def speak(self,text):
-        if "127.0.0.1" in str(socket.gethostbyname(socket.gethostname())):
-            print(text)
-            self.engine.say(text)
-            self.engine.runAndWait()
-        else:
+        try:
             tts = gTTS(text,lang="fr-FR")
             sn = str(randint(1,100000))+".mp3"
             tts.save(sn)
             playsound.playsound(sn)
             os.remove(sn)
+        except:
+            self.engine.say(text)
+            self.engine.runAndWait()
+            
+            
+            
+            
+            
 
 
     #to send custom message to a server
@@ -166,7 +170,7 @@ class answer():
 
 
             if "cherche" in message:
-                response = GoogleSearch().search(message.strip("cherche"))
+                response = GoogleSearch().search(message.replace("cherche","",1))
                 result1 = response.results[0]
                 self.speak(f"selon {result1.title}, {result1.getText()}")
 
@@ -175,8 +179,8 @@ class answer():
 
 
 
-            elif "mets la" in message or "mets le clip" in message:
-                message = message.strip("mets la").strip("mets le clip").strip("la video de").strip("la chanson de").strip("la musique de").strip("une video de").strip("une chanson de").strip("une musique de")
+            elif ("mets la" in message or "mets le clip" in message) and not message.startswith("mets de"):
+                message = message.replace("mets la","",1).replace("mets le clip","",1).replace("la video de","",1).replace("la chanson de","",1).replace("la musique de","",1).replace("une video de","",1).replace("une chanson de","",1).replace("une musique de","",1)
                 results = YoutubeSearch(message, max_results=10).to_dict()
                 url = "https://youtube.com" + results[0]['url_suffix']
                 vid = pafy.new(url)
@@ -184,6 +188,14 @@ class answer():
                 self.speak(f"j'ai affiché {message.lower()} sur la base BLUE")
                 webbrowser.open(best.url)
                 print(f"j'ai affiché {message.lower()} sur la base BLUE")
+                if results[0]['duration'] != 0:
+                    proc = multiprocessing.Process(target=self.end_video,args=(results[i]['duration'],))  
+                    proc.start()
+                    proc.join()
+                else:
+                    proc = multiprocessing.Process(target=self.end_video,args=("20:0",))
+                    proc.start()
+                    proc.join()
                 return True, response
 
             elif message in "quelle heure est-il quelle heure il est donne moi l'heure s'il te plais":
