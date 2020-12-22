@@ -51,7 +51,7 @@ class blue_bot_server():
             print("\rlistening..",end="")
             voice_command = str(self.listen(5))
             print(voice_command)
-            elif voice_command == "merci":
+            if voice_command == "merci":
                 self.speak("Avec plaisir mec !")
             elif voice_command == "stop":
                 p = subprocess.Popen(['ps', '-A'], stdout=subprocess.PIPE)

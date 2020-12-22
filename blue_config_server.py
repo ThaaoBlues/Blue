@@ -14,10 +14,29 @@ def action(page):
         return render_template("add_custom_website.html")
     elif page == "[ADD CUSTOM VOICE COMMAND TO SEND TO A SERVER]":
         return render_template("add_custom_server.html")
+    elif page == "[ADD RSS FEED]":
+        return render_template("add_rss_feed.html")
+
+    elif page == "[MANAGE RSS FEED]":
+        with open("custom_rss_feed.blue","r") as f:
+            array = [""]
+            name = [""]
+            a = f.read().split("\n")
+            i=0
+            for line in range(0,len(a)):
+                print(a[line])
+                if line%2==0:
+                    array.append(a[line]+"||")
+                    name.append(a[line])
+                    i+=1
+                else:
+                    array[i] += a[line]
+
+        return render_template("manage_rss_feed.html",array=array,lenght=len(array),name=name)
     
     elif page == "[MANAGE IROBOT CLEANER]":
-        with open("irobot_cleaners.blue","r") as f:
-            array = [""] 
+        with open("custom_rss_feed.blue","r") as f:
+            array = [""]
             i=0
             j=0
             name = [""]
@@ -78,7 +97,14 @@ def process(process_id):
             f.close()
 
         return render_template("success_message.html")
-
+    
+    elif process_id == "[ADD RSS FEED]":
+        voice_command = str(request.form['command']).lower()
+        url = request.form['url']
+        with open("custom_rss_feed.blue","a") as f:
+            f.write(f"{voice_command}\n{url}\n")
+            f.close()
+        return render_template("success_message.html")
     elif process_id == "[ADD WEBSITE VOICE COMMAND]":
 
         voice_command = str(request.form['command']).lower()
@@ -141,10 +167,29 @@ def process(process_id):
                     tt.pop(tt.index(name)+1)
         
         with open("custom_websites.blue","w") as f:
-            f.write(tt)
+            for ele in tt:
+                f.write(str(ele) + "\n")
             f.close()
 
         return render_template("success_message.html")
+
+    elif "[MANAGE RSS FEED]" in process_id:
+        
+        name = process_id.replace("[MANAGE WEBSITE VOICE COMMAND]","")
+        with open("custom_rss_feed.blue","r") as f:
+            tt = f.read().split("\n")
+            print(tt)
+            for ele in tt:
+                if ele == name:
+                    tt.pop(tt.index(name))
+                    tt.pop(tt.index(name)+1)
+ 
+        with open("custom_rss_feed.blue","w") as f:
+            for ele in tt:
+                f.write(str(ele) + "\n")
+            f.close()
+        return render_template("success_message.html")
+
     elif process_id == "[MANAGE CUSTOM VOICE COMMAND TO SEND TO A SERVER]'":
         return render_template("success_message.html")
 

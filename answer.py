@@ -14,6 +14,7 @@ import multiprocessing
 import webbrowser
 import subprocess
 from gtts import gTTS
+import feedparser
 import playsound
 import os
 import pafy
@@ -89,8 +90,7 @@ class answer():
     def check_commands_files(self,message):
         response = ""
         #checking custom files
-        with open("irobot_cleaners.blue","r") as f:
-            print(4)
+        with open("custom_rss_feed.blue","r") as f:
             while(True):
                 try:
                     if f.readline() in message:
@@ -102,9 +102,33 @@ class answer():
                 except:
                     f.close()
                     break
+                
+
+        with open("custom_rss_feed.blue","r") as f:
+            while(True):
+                try:
+                    l = f.readline().lower()
+                    if message.lower() in l:
+                        url = f.readline()
+                        feed = feedparser.parse(url)
+                        self.speak("Voici les deux derniers articles publiés :")
+                        for entry in feed.entries[:2]:
+                            self.speak(entry.title)
+                            sleep(1)
+                            self.speak("voici donc le contenu de l'article :")
+                            sleep(0.5)
+                            self.speak(entry.summary)
+
+                        f.close()
+                        return True, response
+                        break
+                except:
+                    print(e)
+                    f.close()
+                    return False,response
+                    break
 
         with open("custom_servers.blue","r") as f:
-            print(5)
             while(True):
                 try:
                     l =  f.readline()
@@ -131,7 +155,6 @@ class answer():
 
 
         with open("custom_websites.blue","r") as f:
-            print(6)
             while(True):
                 try:
                     if message in f.readline():
@@ -146,11 +169,9 @@ class answer():
         
 
     def check_commands(self,message):
-        print(3)
         response = ""
         
         checked, response = self.check_commands_files(message=message)
-        print(7)
         if checked:
             return checked, response
         
@@ -427,6 +448,9 @@ class answer():
             elif message == "test":
                 self.display_website("www.google.com")
                 print("in test")
+            
+            elif "informations" in message or "info" in message or "nouvelles" in message:
+                self.speak("d'après le journal Le monde, ")
             else:
                 return False, response
         
