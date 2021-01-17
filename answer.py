@@ -109,7 +109,7 @@ class answer():
             for line in f:
                 line = line.split(":")
                 if (message in line[0]):
-                    subprocess.run(["python3","/skills/"line[1]],shell=True)
+                    subprocess.run(["python3","/skills/"+line[1],message],shell=True)
 
 
         with open("custom_rss_feed.blue","r") as f:
