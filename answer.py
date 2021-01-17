@@ -60,6 +60,8 @@ class answer():
             return True, response
         except:
             return False
+
+
     #to interact with a irobot cleaner
     def interact_with_cleaner(self,ip,password):
         robot = Robot(ip,password)
@@ -103,6 +105,12 @@ class answer():
                     f.close()
                     break
                 
+        with open("skills.blue","w") as f:
+            for line in f:
+                line = line.split(":")
+                if (message in line[0]):
+                    subprocess.run(["python3","/skills/"line[1]],shell=True)
+
 
         with open("custom_rss_feed.blue","r") as f:
             while(True):

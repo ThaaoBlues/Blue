@@ -96,14 +96,17 @@ class blue_bot_server():
 
     def check_files_integrity(self):
         if not os.path.isfile("custom_websites.blue"):
-            subprocess.Popen(["python3","setup.py"])
+            subprocess.run(["python3","setup.py"],shell=True)
 
         if not os.path.isfile("custom_servers.blue"):
-            subprocess.Popen(["python3","setup.py"])
+            subprocess.run(["python3","setup.py"],shell=True)
 
         if not os.path.isfile("irobot_cleaners.blue"):
-            subprocess.Popen(["python3","setup.py"])
-    
+            subprocess.run(["python3","setup.py"],shell=True)
+
+        if not os.path.isfile("skills.blue"):
+            subprocess.run(["python3","setup.py"],shell=True)
+
 
     
 

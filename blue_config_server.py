@@ -1,21 +1,42 @@
-from flask import Flask, render_template, request, send_file, send_from_directory
+from flask import Flask, render_template, request, send_file, send_from_directory, flash
+from werkzeug.utils import secure_filename
+import os
+
+UPLOAD_FOLDER = os.path.dirname(__file__)+'/skills/'
+ALLOWED_EXTENSIONS = {'py'}
 
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 @app.route('/', methods=['GET', 'POST'])
 def config_page():
     return render_template("config_page.html")
 
 @app.route("/action/<page>",methods=['GET', 'POST'])
 def action(page):
+
     if page == "[ADD IROBOT CLEANER]":
         return render_template("add_irobot_cleaner.html")
+
     elif page == "[ADD WEBSITE VOICE COMMAND]":
         return render_template("add_custom_website.html")
+
     elif page == "[ADD CUSTOM VOICE COMMAND TO SEND TO A SERVER]":
         return render_template("add_custom_server.html")
+
     elif page == "[ADD RSS FEED]":
         return render_template("add_rss_feed.html")
+
+    elif page == "[ADD BLUE SKILL]":
+        return render_template("add_skill.html")
 
     elif page == "[MANAGE RSS FEED]":
         with open("custom_rss_feed.blue","r") as f:
@@ -35,6 +56,8 @@ def action(page):
         return render_template("manage_rss_feed.html",array=array,lenght=len(array),name=name)
     
     elif page == "[MANAGE IROBOT CLEANER]":
+
+
         with open("custom_rss_feed.blue","r") as f:
             array = [""]
             i=0
@@ -58,6 +81,8 @@ def action(page):
                     i+=1
 
         return render_template("manage_irobot_cleaner.html",lenght=len(array),array=array,name=name)
+    
+
     
     elif page == "[MANAGE WEBSITE VOICE COMMAND]":
         with open("custom_websites.blue","r") as f:
@@ -85,6 +110,31 @@ def action(page):
 
 @app.route("/process/<process_id>",methods=['GET','POST'])
 def process(process_id):
+
+    if process_id == "[ADD BLUE SKILL]":
+
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+
+        file = request.files['file']
+
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+
+            file.save(app.config['UPLOAD_FOLDER']+ filename)
+
+            with open("skills.blue","a") as f:
+                f.write(request.form['voice_command']+":"+filename)
+
+            return render_template("success_message.html")
+
 
     if process_id == "[ADD IROBOT CLEANER]":
 
