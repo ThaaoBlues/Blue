@@ -92,7 +92,7 @@ class answer():
     def check_commands_files(self,message):
         response = ""
         #checking custom files
-        with open("custom_rss_feed.blue","r") as f:
+        with open("irobot_cleaners.blue","r") as f:
             while(True):
                 try:
                     if f.readline() in message:
@@ -439,26 +439,13 @@ class answer():
                             response = ("Je n'ai pas trouvé ton application, modifie le fichier App.data pour l'ajouter.")
                             return True, response
 
-                if platform.system() == "Linux":
-                    with open("res/dictionary/App_Linux.data.Blue","r",encoding = "utf-8") as f:
-                        for line in f:
-                            if voice_list.lower() in line.lower():
-                                response = ("Okay, j'ouvre : {}".format(voice_list))
-                                found = True
-                                path = f.readline().strip("\n")
-                                subprocess.call([path])
-                                return True, response
-                        f.close()
-                        if found == False:
-                            response = ("Je n'ai pas trouvé ton application, modifie le fichier App.data pour l'ajouter.")
-                            return True, response
-
             elif message == "test":
                 self.display_website("www.google.com")
                 print("in test")
             
             elif "informations" in message or "info" in message or "nouvelles" in message:
                 self.speak("d'après le journal Le monde, ")
+
             else:
                 return False, response
         
