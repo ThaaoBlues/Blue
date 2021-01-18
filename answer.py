@@ -3,6 +3,7 @@ from chatterbot.trainers import ChatterBotCorpusTrainer
 import wikipedia
 import pyttsx3
 import socket
+import platform
 from time import sleep
 from googlesearch import search
 import speedtest
@@ -130,7 +131,7 @@ class answer():
                         f.close()
                         return True, response
                         break
-                    
+
                     elif l.strip("\n").strip("\r") == "":
                         return False, response
                 except:
