@@ -1,12 +1,8 @@
 from subprocess import Popen
-
+from os import system
 
 password = input("type your password : ")
-Popen(["echo",password,"|","sudo","apt","--assume-yes","install","espeak"]).wait()
-Popen(["echo",password,"|","sudo","apt","--assume-yes","install","alsa"]).wait()
-Popen(["echo",password,"|","sudo","apt","--assume-yes","install","libasound-dev"]).wait()
-Popen(["echo",password,"|","sudo","apt","--assume-yes","install","alsa-utils"]).wait()
-Popen(["echo",password,"|","sudo","apt","--assume-yes","install","python3-pyaudio"]).wait()
+system(f"echo {password} | sudo apt --assume-yes install espeak alsa libasound-dev alsa-utils python3-pyaudio"])
 
 Popen(["python3","-m","pip","install","feedparser","youtube-dl","pafy","playsound","gTTS","GoogleNews","pywhatkit","SpeechRecognition","chatterbot==1.0.4","youtube_search","googletrans","colorama","speedtest-cli","wikipedia","google","googlesearch-python","flask","pyirobot","pyttsx3"]).wait()
 
