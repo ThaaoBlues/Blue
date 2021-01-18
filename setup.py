@@ -2,11 +2,11 @@ from subprocess import Popen
 
 
 password = input("type your password : ")
-Popen(["echo",password,"|","echo","yes","|","sudo","apt","install","espeak"]).wait()
-Popen(["echo",password,"|","echo","yes","|","sudo","apt","install","alsa"]).wait()
-Popen(["echo",password,"|","echo","yes","|","sudo","apt","install","libasound-dev"]).wait()
-Popen(["echo",password,"|","echo","yes","|","sudo","apt","install","alsa-utils"]).wait()
-Popen(["echo",password,"|","echo","yes","|","sudo","apt","install","python3-pyaudio"]).wait()
+Popen(["echo",password,"|","sudo","apt","--assume-yes","install","espeak"]).wait()
+Popen(["echo",password,"|","sudo","apt","--assume-yes","install","alsa"]).wait()
+Popen(["echo",password,"|","sudo","apt","--assume-yes","install","libasound-dev"]).wait()
+Popen(["echo",password,"|","sudo","apt","--assume-yes","install","alsa-utils"]).wait()
+Popen(["echo",password,"|","sudo","apt","--assume-yes","install","python3-pyaudio"]).wait()
 
 Popen(["python3","-m","pip","install","feedparser","youtube-dl","pafy","playsound","gTTS","GoogleNews","pywhatkit","SpeechRecognition","chatterbot==1.0.4","youtube_search","googletrans","colorama","speedtest-cli","wikipedia","google","googlesearch-python","flask","pyirobot","pyttsx3"]).wait()
 
