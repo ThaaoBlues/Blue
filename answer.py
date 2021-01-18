@@ -130,6 +130,9 @@ class answer():
                         f.close()
                         return True, response
                         break
+                    
+                    elif l.strip("\n").strip("\r") == "":
+                        return False, response
                 except:
                     print(e)
                     f.close()
