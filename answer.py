@@ -105,7 +105,7 @@ class answer():
                     f.close()
                     break
                 
-        with open("skills.blue","w") as f:
+        with open("skills.blue","r") as f:
             for line in f:
                 line = line.split(":")
                 if (message in line[0]):
