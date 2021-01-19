@@ -29,19 +29,19 @@ class blue_bot_server():
         self.engine.setProperty("voice", voices[26].id)
         self.hosts_number = Manager().Value('i',0)
     
-        try:
-            self.r = sr.Recognizer()
-            with sr.Microphone() as source:
-                self.r.adjust_for_ambient_noise(source)
-        except:
-            print("[+] No microphone detected, please use the app on your phone !")
-
         print("starting web config server on port 8080")
         subprocess.Popen(["python3","blue_config_server.py"])
         print("Starting BLUE server...")
         #litteraly starting the server like I said above
         self.start_server()
-        self.start_listening()
+        try:
+            self.r = sr.Recognizer()
+            with sr.Microphone() as source:
+                self.r.adjust_for_ambient_noise(source)
+            self.start_listening()
+        except:
+            print("[+] No microphone detected, please use the app on your phone !")
+        
         
         
 
