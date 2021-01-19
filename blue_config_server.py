@@ -155,6 +155,8 @@ def process(process_id):
             f.write(f"{voice_command}\n{url}\n")
             f.close()
         return render_template("success_message.html")
+
+        
     elif process_id == "[ADD WEBSITE VOICE COMMAND]":
 
         voice_command = str(request.form['command']).lower()

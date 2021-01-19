@@ -171,6 +171,7 @@ class answer():
                 try:
                     if message in f.readline():
                         url = f.readline()
+                        print(url)
                         self.display_website(url)
                         f.close()
                         return True, response
@@ -324,21 +325,10 @@ class answer():
                 results = YoutubeSearch('top trending world music', max_results=10).to_dict()
                 print(results[0]['url_suffix'])
                 print(results[0]['duration'])
-                for i in range(len(results)):
-                    url = "https://youtube.com" + results[i]['url_suffix']
-                    vid = pafy.new(url)
-                    best = vid.getbest()
-                    print(best.url)
-                    webbrowser.open(best.url)
-                    if results[0]['duration'] != 0:
-                        proc = multiprocessing.Process(target=self.end_video,args=(results[i]['duration'],))  
-                        proc.start()
-                        proc.join()
-                    else:
-                        proc = multiprocessing.Process(target=self.end_video,args=("10:0",))
-                        proc.start()
-                        proc.join()
-
+                url = "https://youtube.com" + results[i]['url_suffix']
+                vid = pafy.new(url)
+                best = vid.getbest()
+                webbrowser.open(best.url)
                 return True, response
 
             elif message in "ifconfig ipconfig quelle est mon adresse IP locale mon IP locale":
