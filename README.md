@@ -2,7 +2,7 @@
 vocal assistant that you can use and modify to add your own features.
 
 
-Use the setup.py file before running Blue the first time.
+Use the setup.py file before running Blue the first time. (If you are on windows, run winsetup.py and winblue.py)
 
 
 Blue can do a bunch of things like:
