@@ -38,7 +38,7 @@ class blue_bot_server():
             self.r = sr.Recognizer()
             with sr.Microphone() as source:
                 self.r.adjust_for_ambient_noise(source)
-            self.start_listening()
+                self.start_listening()
         except:
             print("[+] No microphone detected, please use the app on your phone !")
         
