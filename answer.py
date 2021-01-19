@@ -369,6 +369,12 @@ class answer():
 
                 return True, response
 
+                if ("ferme google" in message) or ("ferme internet" in message) or ("ferme la fenêtre" in message):
+                    os.system("killall midori")
+                    self.speak("j'ai fermé ton navigateur internet")
+                    response = "j'ai fermé ton navigateur internet"
+                    return True, response
+                    
             elif message in "quelle est mon adresse IP routeur mon IP routeur":
                 self.speak("voici votre IP routeur " + socket.gethostbyname(socket.gethostname()))
                 response = ("Voici votre IP routeur" + socket.gethostbyname(socket.gethostname()))
