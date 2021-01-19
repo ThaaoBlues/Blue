@@ -1,5 +1,5 @@
 # Blue
-Vocal assistant that you can use and modify to add your own features.
+vocal assistant that you can use and modify to add your own features.
 
 
 Use the setup.py file before running Blue the first time.
