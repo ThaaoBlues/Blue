@@ -350,7 +350,7 @@ class answer():
                 response = ("Voici votre configuration IP")
                 return True, response
 
-            if ("ferme Google" in message) or ("ferme Internet" in message) or ("ferme la fenêtre" in message):
+            if ("ferme Google" in message) or ("ferme Internet" in message) or ("ferme la fenêtre" in message) or (message == "stop") or ("arrête" in message):
                 os.system("killall midori")
                 self.speak("j'ai fermé ton navigateur internet")
                 response = "j'ai fermé ton navigateur internet"
