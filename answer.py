@@ -400,7 +400,7 @@ class answer():
 
 
 
-            elif "définition" in message or "qui est" in message or "qui était" in message or "c'est quoi" in message or "qu'est-ce qu" in message:
+            elif ("définition" in message) or ("qui est" in message) or ("qui était" in message) or ("c'est quoi" in message) or ("qu'est-ce qu" in message):
                 message = message.split()
                 message = message[-1]
                 try:
@@ -457,6 +457,8 @@ class answer():
     def get_answer(self,message,client):
         print(1)
         if not client == None:
+            if message.lower() == "merci":
+                self.speak("Avec plaisir !")
             checked, response = self.check_commands(message)
             if not checked:
                 print(message)
