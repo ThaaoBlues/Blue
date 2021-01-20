@@ -31,7 +31,7 @@ except:
 
 print("[+] Installing requiered python modules...")
 try:
-        run_cmd("python -m pip install feedparser youtube-dl pafy playsound gTTS GoogleNews pywhatkit SpeechRecognition mathparsechatterbot youtube_search googletrans colorama speedtest-cli wikipedia google googlesearch-python flask pyirobot pyttsx3"])
+        run_cmd("python -m pip install feedparser youtube-dl pafy playsound gTTS GoogleNews pywhatkit SpeechRecognition mathparsechatterbot youtube_search googletrans colorama speedtest-cli wikipedia google googlesearch-python flask pyirobot pyttsx3")
 except:
         print("[x] An error occurred")
 
