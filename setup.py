@@ -17,16 +17,18 @@ def run_cmd(sCommand):
             :sCommand: String parameter containing the command to run
             :returns: A string containing the stdout
         """
-        return subprocess.run([sCommand],shell=True,capture_output=True).stdout.decode("utf-8")
+        return run([sCommand],shell=True,capture_output=True).stdout.decode("utf-8")
 
 
 password = input("type your password : ")
+
 
 print("[+] installing requiered debian packages")
 try:
         run_cmd(f"echo {password} | sudo apt --assume-yes install espeak libasound2-dev python3-pyaudio python3-tk python3-dev & echo kali | sudo apt --assume-yes install alsa-utils")
 except:
         print("[x] An error occurred")
+
 
 
 print("[+] Installing requiered python modules...")
@@ -44,4 +46,4 @@ open("irobot_cleaners.blue","w")
 open("custom_rss_feed.blue","w")
 open("skills.blue","w")
 
-print(banner+"\n\n[+] All is set up ! you can now use Blue by typing \"python3 Blue.py\"")
+print("\n\n[+] All is set up ! you can now use Blue by typing \"python3 Blue.py\"")
