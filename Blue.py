@@ -141,7 +141,7 @@ __________.__
             self.broadcast_process = Process(target = self.broadcast, args = (client,))
             self.broadcast_process.start()
             print("[+]user connected :: addr : {}".format(address[0]))
-            print("[!]Users are now {}".format(self.hosts_number.value))
+            #print("[!]Users are now {}".format(self.hosts_number.value))
             
             
     #recieve and send the messages
@@ -155,6 +155,7 @@ __________.__
                     self.ans.get_answer(message,client)        
             except:
                 #self.hosts_number.value -= 1
+                pass
                 
     #function to shutdown the server but this is useless you will always click on the red cross
     def shutdown_server(self):
