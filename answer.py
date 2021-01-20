@@ -238,7 +238,7 @@ class answer():
             elif (message in "quelle heure est-il") or (message in "quelle heure il est") or (message in "donne moi l'heure s'il te plais"):
                 date = datetime.datetime.now()
                 response = (str(date.hour) + ':' + str(date.minute) +"et"+ str(date.second) + " secondes")
-                print(response)
+                print("il est " response)
                 self.speak("Il est " + response)
                 return True, response
 
@@ -442,9 +442,9 @@ class answer():
                 response = str(self.chatbot.get_response(message))
                 print(f"BLUE:{response}")
                 client.send(bytes(response,'utf-8'))
-                
+
         else:
-            print(2)
+            print(3)
             checked, response = self.check_commands(message)
             print(checked)
             print(response)
