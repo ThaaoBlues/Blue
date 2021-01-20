@@ -191,7 +191,7 @@ class answer():
             return checked, response
         
         else:
-            
+            print(2)
             if "va sur" in message:
 
                 #check if the domain name is complete
@@ -238,11 +238,15 @@ class answer():
             elif (message in "quelle heure est-il") or (message in "quelle heure il est") or (message in "donne moi l'heure s'il te plais"):
                 date = datetime.datetime.now()
                 response = (str(date.hour) + ':' + str(date.minute) +"et"+ str(date.second) + " secondes")
+                print(response)
+                self.speak("Il est " + response)
                 return True, response
 
             elif message in "quel jour sommes-nous quel jour on est quel jour est-on donne moi le jour":
                 d = datetime.date.today().strftime("%d %B %Y")
                 response = (str(d))
+                print(response)
+                self.speak("Nous sommes le" + response)
                 return True, response
 
             elif message in "adieu goodbye exit aurevoir au revoir tais toi shut-up au-revoir ta gueule ferme-la chut":
@@ -437,8 +441,8 @@ class answer():
                 print(message)
                 response = str(self.chatbot.get_response(message))
                 print(f"BLUE:{response}")
-            else:
                 client.send(bytes(response,'utf-8'))
+                
         else:
             print(2)
             checked, response = self.check_commands(message)
