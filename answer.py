@@ -193,11 +193,14 @@ class answer():
         else:
             
             if "va sur" in message:
+
+                #check if the domain name is complete
                 if "." in message:
                     self.display_website("http://www."+message.strip("va sur").replace(' ','').replace('blue',"").lower())
                     response = (f"j'ai affiché {message.strip('va sur').replace(' ','').lower()} sur la base BLUE")
                     self.speak(f"j'ai affiché {message.strip('va sur').replace(' ','').lower()} sur la base BLUE")
                 else:
+                    #if not, get the first result on a google search
                     self.display_website(str(list(search(message.strip('va sur').replace(' ','').lower(),num=1,start=0,stop=1))[0]))
                     response = (f"j'ai affiché {message.strip('va sur').replace(' ','').lower()} sur la base BLUE")
                     self.speak(f"j'ai affiché {message.strip('va sur').replace(' ','').lower()} sur la base BLUE")
@@ -232,7 +235,7 @@ class answer():
                     proc.join()
                 return True, response
 
-            elif message in "quelle heure est-il quelle heure il est donne moi l'heure s'il te plais":
+            elif (message in "quelle heure est-il") or (message in "quelle heure il est") or (message in "donne moi l'heure s'il te plais"):
                 date = datetime.datetime.now()
                 response = (str(date.hour) + ':' + str(date.minute) +"et"+ str(date.second) + " secondes")
                 return True, response
@@ -302,20 +305,14 @@ class answer():
 
             elif message in "éteins toi éteins-toi extinction shutdown":
                 try:
-                    if platform.system() == "Windows":
-                        os.system("shutdown -f")
-                    else:
-                        os.system("shutdown -h now")
+                    self.run_cmd("shutdown now")
                 except:
                     response = ("Désolé, l'exécution de la commande a foirée")
                 return True, response
 
             elif message in "redémarre toi redémarre-toi redémarrage reboot":
                 try:
-                    if platform.system() == "Windows":
-                        os.system("shutdown /r")
-                    else:
-                        os.system("reboot")
+                    self.run_cmd("reboot")
                 except:
                     response = ("Désolé, l'exécution de la commande a foirée")
                 return True, response
@@ -328,42 +325,30 @@ class answer():
                 url = "https://youtube.com" + results[i]['url_suffix']
                 vid = pafy.new(url)
                 best = vid.getbest()
-                webbrowser.open(best.url)
+                self.display_website(best.url)
                 return True, response
 
             elif message in "ifconfig ipconfig quelle est mon adresse IP locale mon IP locale":
-                if platform.system() == "Windows":
-                    print(os.system("ipconfig"))
-                else:
-                    print(os.system("ifconfig"))
+                print(self.run_cmd("ifconfig"))
                 self.speak("Voici votre configuration IP")
                 response = ("Voici votre configuration IP")
                 return True, response
 
             if ("ferme Google" in message) or ("ferme Internet" in message) or ("ferme la fenêtre" in message) or (message == "stop") or ("arrête" in message):
-                os.system("killall midori")
+                #get default browser name
+                sDefault_Browser= self.run_cmd("sensible-browser -V").split('\n')[0].split(' ')[0]
+                #kill it by name
+                self.run_cmd("killall" + sDefault_Browser)
                 self.speak("j'ai fermé ton navigateur internet")
                 response = "j'ai fermé ton navigateur internet"
                 return True, response
 
             elif "ferme" in message:
                 message = message.split(sep= " ")
-                if platform.system() == "Windows":
-                    try:
-                        print(message[1:])
-                        process_name = " ".join(message[1:])
-                        print(process_name)
-                        os.system("taskkill /f /im  \"{}.exe\" ".format(process_name))
-                        self.speak("j'ai fermé {}".format(process_name))
-                        response = ("j'ai fermé {}".format(process_name))
-                    except:
-                        print("ya une couille dans le pâté")
-
-                else:
-                    process_name = " ".join(message[1:])
-                    os.system(f"killall {process_name}")
-                    self.speak("j'ai fermé {}".format(process_name))
-                    response = ("j'ai fermé {}".format(process_name))
+                process_name = " ".join(message[1:])
+                self.run_cmd(f"killall {process_name}")
+                self.speak("j'ai fermé {}".format(process_name))
+                response = ("j'ai fermé {}".format(process_name))
 
                 return True, response
 
@@ -420,29 +405,6 @@ class answer():
                 return True, response
 
 
-
-            #custom app mode (edit file in App.data file)
-            elif "ouvre" in message or "open" in message:
-                #split by space
-                message = message.split(sep = " ")
-                #important to define with a spaces so the join will separate elements with space
-                voice_list = " ".join(message[1:])
-                print(voice_list)
-                found = False
-                if platform.system() == "Windows":
-                    with open("res/dictionary/App_Windows.data.Blue","r",encoding = "utf-8") as f:
-                        for line in f:
-                            if voice_list.lower() in line.lower():
-                                response = ("ouverture de : {}".format(voice_list))
-                                found = True
-                                path = f.readline().strip("\n")
-                                subprocess.call([path])
-                                return True, response
-                        f.close()
-                        if found == False:
-                            response = ("Je n'ai pas trouvé ton application, modifie le fichier App.data pour l'ajouter.")
-                            return True, response
-
             elif message == "test":
                 self.display_website("www.google.com")
                 print("in test")
@@ -453,6 +415,16 @@ class answer():
             else:
                 return False, response
         
+
+
+    def run_cmd(self,sCommand):
+        """
+            run command line
+            :sCommand: String parameter containing the command to run
+            :returns: A string containing the stdout
+        """
+        return subprocess.run(sCommand],shell=True,capture_output=True).stdout.decode("utf-8")
+
 
     def get_answer(self,message,client):
         print(1)

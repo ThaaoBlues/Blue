@@ -18,7 +18,20 @@ from requests import get
 
 class blue_bot_server():
     def __init__(self):
-        
+        self.banner = """
+__________.__                 
+\______   \  |  __ __   ____  
+ |    |  _/  | |  |  \_/ __ \ 
+ |    |   \  |_|  |  /\  ___/ 
+ |______  /____/____/  \___  >
+        \/                 \/ 
+
+"""
+
+
+
+
+
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.accept_process = ""
         self.response = ""
@@ -54,7 +67,9 @@ class blue_bot_server():
             voice_command = str(self.listen(5))
             print(voice_command)
             if voice_command == "merci":
+                print("BLUE : Avec plaisir mec ! ")
                 self.speak("Avec plaisir mec !")
+
             elif voice_command == "stop":
                 p = subprocess.Popen(['ps', '-A'], stdout=subprocess.PIPE)
                 out, err = p.communicate()
@@ -64,13 +79,16 @@ class blue_bot_server():
                         pid = int(line.split(None, 1)[0])
                         os.kill(pid, signal.SIGKILL)
             elif voice_command.startswith("blue"):
-                self.ans.get_answer(voice_command.replace("blue","").strip(" "),client=None)
+                r = self.ans.get_answer(voice_command.replace("blue","").strip(" "),client=None)
+                subprocess.run(["clear"],shell=True)
+                print(self.banner+"\n"+r)
 
 
     def start_server(self):
         self.sock.bind(('', 8835))
         self.accept_process = Process(target = self.accept_hosts)
         self.accept_process.start()
+        subprocess.run(["clear"],shell=True)
         print("[+]Server is now online.")
         print("[+]Listening on : (Private IP) {} || (Public IP) {}".format(socket.gethostbyname_ex(socket.gethostname())[2],get('https://api.ipify.org').text))
         

@@ -1,5 +1,4 @@
-from subprocess import Popen
-from os import system
+from subprocess import run
 banner = """
 __________.__                 
 \______   \  |  __ __   ____  
@@ -12,10 +11,31 @@ __________.__
 
 print(banner)
 
-password = input("type your password : ")
-system(f"echo {password} | sudo apt --assume-yes install espeak libasound2-dev python3-pyaudio python3-tk python3-dev & echo kali | sudo apt --assume-yes install alsa-utils")
+def run_cmd(sCommand):
+        """
+            run command line
+            :sCommand: String parameter containing the command to run
+            :returns: A string containing the stdout
+        """
+        return subprocess.run(sCommand],shell=True,capture_output=True).stdout.decode("utf-8")
 
-Popen(["python3","-m","pip","install","feedparser","youtube-dl","pafy","playsound","gTTS","GoogleNews","pywhatkit","SpeechRecognition","chatterbot==1.0.4","youtube_search","googletrans","colorama","speedtest-cli","wikipedia","google","googlesearch-python","flask","pyirobot","pyttsx3"]).wait()
+
+password = input("type your password : ")
+
+print("[+] installing requiered debian packages")
+try:
+        run_cmd(f"echo {password} | sudo apt --assume-yes install espeak libasound2-dev python3-pyaudio python3-tk python3-dev & echo kali | sudo apt --assume-yes install alsa-utils")
+except:
+        print("[x] An error occurred")
+
+
+print("[+] Installing requiered python modules...")
+try:
+        run_cmd("python -m pip install feedparser youtube-dl pafy playsound gTTS GoogleNews pywhatkit SpeechRecognition mathparsechatterbot youtube_search googletrans colorama speedtest-cli wikipedia google googlesearch-python flask pyirobot pyttsx3"])
+except:
+        print("[x] An error occurred")
+
+
 
 #custom files, can be modified by user on [blue IP]:8080
 open("custom_websites.blue","w")
