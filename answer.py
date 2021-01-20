@@ -338,7 +338,7 @@ class answer():
                 #get default browser name
                 sDefault_Browser= self.run_cmd("sensible-browser -V").split('\n')[0].split(' ')[0]
                 #kill it by name
-                self.run_cmd("killall" + sDefault_Browser)
+                self.run_cmd("killall " + sDefault_Browser)
                 self.speak("j'ai fermé ton navigateur internet")
                 response = "j'ai fermé ton navigateur internet"
                 return True, response
