@@ -325,6 +325,7 @@ class answer():
                 url = "https://youtube.com" + results[i]['url_suffix']
                 vid = pafy.new(url)
                 best = vid.getbest()
+                print(best.url)
                 self.display_website(best.url)
                 return True, response
 
