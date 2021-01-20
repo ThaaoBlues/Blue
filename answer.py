@@ -423,7 +423,7 @@ class answer():
             :sCommand: String parameter containing the command to run
             :returns: A string containing the stdout
         """
-        return subprocess.run(sCommand],shell=True,capture_output=True).stdout.decode("utf-8")
+        return subprocess.run([sCommand],shell=True,capture_output=True).stdout.decode("utf-8")
 
 
     def get_answer(self,message,client):
