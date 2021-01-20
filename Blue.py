@@ -80,8 +80,9 @@ __________.__
                         os.kill(pid, signal.SIGKILL)
             elif voice_command.startswith("blue"):
                 r = self.ans.get_answer(voice_command.replace("blue","").strip(" "),client=None)
-                subprocess.run(["clear"],shell=True)
-                print(self.banner+"\n"+r)
+                
+            subprocess.run(["clear"],shell=True)
+            print(self.banner+"\n"+r)
 
 
     def start_server(self):
