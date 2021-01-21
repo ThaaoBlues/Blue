@@ -8,11 +8,12 @@ from time import sleep
 from googlesearch import search
 import speedtest
 from youtube_search import YoutubeSearch
-import googletrans
+from googletrans import  Translator
 from random import randint
 import pywhatkit
 import multiprocessing
 import webbrowser
+from locale import getdefaultlocale
 import subprocess
 from gtts import gTTS
 import feedparser
@@ -28,15 +29,24 @@ class answer():
         storage_adapter='chatterbot.storage.SQLStorageAdapter',
         database='sqlite:///db.sqlite3')
 
+        #get default system language
+        self.lang = str(getdefaultlocale()[0])
+
+        #init tts offline engine
         self.engine = pyttsx3.init()
         self.engine.setProperty('rate', 110)
         voices = self.engine.getProperty('voices')
-        self.engine.setProperty("voice", voices[26].id)        
-        wikipedia.set_lang("fr")
+        self.engine.setProperty("voice", voices[26].id)  
+
+        #init translator to support others languages
+        self.gtl = Translator(service_urls=['translate.googleapis.com'])
+
+        #set wikipedia language      
+        wikipedia.set_lang(str(getdefaultlocale()[0][0]+getdefaultlocale()[0][1]))
 
     def speak(self,text):
         try:
-            tts = gTTS(text,lang="fr-FR")
+            tts = gTTS(text,lang=self.lang)
             sn = str(randint(1,100000))+".mp3"
             tts.save(sn)
             playsound.playsound(sn)
@@ -77,6 +87,7 @@ class answer():
     def display_website(self,ws):
         subprocess.run(["python3","websearch.py",ws])
 
+
     def end_video(self,time):
         time = time.split(":")
         time = int(time[0])*60 + int(time[1])
@@ -89,6 +100,7 @@ class answer():
                 pid = int(line.split(None, 1)[0])
                 os.kill(pid, signal.SIGKILL)
         sleep(1)
+
 
     def check_commands_files(self,message):
         response = ""
@@ -434,15 +446,17 @@ class answer():
 
     def get_answer(self,message,client):
         print(1)
+        message = self.gtl.translate(message,dest="fr")
         if not client == None:
 
             if message.lower() == "merci":
                 self.speak("Avec plaisir !")
 
             checked, response = self.check_commands(message)
-            
+            response = self.gtl.translate(response,dest=self.lang[0]+self.lang[1])
             if not checked:
                 response = str(self.chatbot.get_response(message))
+                response = self.gtl.translate(response,dest=self.lang[0]+self.lang[1])
                 print(f"BLUE:{response}")
                 client.send(bytes(response,'utf-8'))
             else:
@@ -452,11 +466,12 @@ class answer():
         else:
             print(3)
             checked, response = self.check_commands(message)
-            print(checked)
+            response = self.gtl.translate(response,dest=self.lang[0]+self.lang[1])
             print(response)
             if not checked:
                 print(message)
                 response = str(self.chatbot.get_response(message))
+                response = self.gtl.translate(response,dest=self.lang[0]+self.lang[1])
                 print(f"BLUE:{response}")
                 self.speak(response)
             else:

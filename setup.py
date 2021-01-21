@@ -22,7 +22,6 @@ def run_cmd(sCommand):
 
 password = input("type your password : ")
 
-
 print("[+] installing requiered debian packages")
 try:
         run_cmd(f"echo {password} | sudo apt --assume-yes install espeak libasound2-dev python3-pyaudio python3-tk python3-dev & echo kali | sudo apt --assume-yes install alsa-utils")
@@ -33,7 +32,7 @@ except:
 
 print("[+] Installing requiered python modules...")
 try:
-        run_cmd("python -m pip install feedparser youtube-dl pafy playsound gTTS GoogleNews pywhatkit SpeechRecognition mathparsechatterbot youtube_search googletrans colorama speedtest-cli wikipedia google googlesearch-python flask pyirobot pyttsx3")
+        run_cmd("python -m pip install feedparser youtube-dl pafy playsound gTTS GoogleNews pywhatkit SpeechRecognition mathparsechatterbot youtube_search git+https://github.com/alainrouillon/py-googletrans@feature/enhance-use-of-direct-api colorama speedtest-cli wikipedia google googlesearch-python flask pyirobot pyttsx3")
 except:
         print("[x] An error occurred")
 
