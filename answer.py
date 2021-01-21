@@ -223,7 +223,7 @@ class answer():
                 vid = pafy.new(url)
                 best = vid.getbest()
                 self.speak(f"j'ai affiché {message.lower()} sur la base BLUE")
-                webbrowser.open(best.url)
+                self.display_website(best.url)
                 print(f"j'ai affiché {message.lower()} sur la base BLUE")
                 if results[0]['duration'] != 0:
                     proc = multiprocessing.Process(target=self.end_video,args=(results[i]['duration'],))  
@@ -324,12 +324,10 @@ class answer():
 
             elif message in "joue de la musique" or "mets de la musique" in message or "top 50" in message or "top 100" in message:
                 results = YoutubeSearch('top trending world music', max_results=10).to_dict()
-                print(results[0]['url_suffix'])
-                print(results[0]['duration'])
-                url = "https://youtube.com" + results[i]['url_suffix']
+                print("[+] Searching \"top trending world music\" on Youtube and getting you the best stream url... ")
+                url = "https://youtube.com" + results[0]['url_suffix']
                 vid = pafy.new(url)
                 best = vid.getbest()
-                print(best.url)
                 self.display_website(best.url)
                 return True, response
 
@@ -394,11 +392,13 @@ class answer():
                 message = message.split()
                 message = message[-1]
                 try:
+                    print("[+] Searching on wikipedia...")
                     res = wikipedia.summary(message,sentences=1)
-                    response = (res)
+                    response = str(res)
                     self.speak(res)
                     return True, response
                 except:
+                    response = "Auncun article sur wikipedia correspond à ce nom."
                     self.speak("Auncun article sur wikipedia correspond à ce nom.")
                     return True, response
                 
@@ -434,8 +434,10 @@ class answer():
     def get_answer(self,message,client):
         print(1)
         if not client == None:
+
             if message.lower() == "merci":
                 self.speak("Avec plaisir !")
+
             checked, response = self.check_commands(message)
             if not checked:
                 print(message)
