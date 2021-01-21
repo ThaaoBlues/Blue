@@ -83,7 +83,7 @@ If you are near the Blue base and a microphone is plugged in, you can talk witho
 
 
 This assistant is designed for linux so some features may not work on windows.
-All the commands are designed for french people, feel free to translate to your own langage.
+All the commands are designed for french people, the script use a translator so you can talk in any languages but it may not translate in the right way to trigger some features.
 
 If you are willing to write your own skill, please make sure that your script takes one argument. Blue will run it and pass the user voice command in argument.
 
