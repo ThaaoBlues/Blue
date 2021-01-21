@@ -250,6 +250,7 @@ class answer():
 
             elif message in "adieu goodbye exit aurevoir au revoir tais toi shut-up au-revoir ta gueule ferme-la chut":
                 response = ("bonne journée !")
+                self.run_cmd("xset dpms force off")
                 return True, response
 
 

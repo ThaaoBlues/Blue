@@ -18,6 +18,11 @@ from requests import get
 
 class blue_bot_server():
     def __init__(self):
+        
+        if os.getuid() != 0:
+            print("[!] Please run Blue as root.")
+            exit(1)
+
         self.banner = """
 __________.__                 
 \______   \  |  __ __   ____  
@@ -69,16 +74,9 @@ __________.__
             if voice_command == "merci":
                 print("BLUE : Avec plaisir mec ! ")
                 self.speak("Avec plaisir mec !")
-
-            elif voice_command == "stop":
-                p = subprocess.Popen(['ps', '-A'], stdout=subprocess.PIPE)
-                out, err = p.communicate()
-                for line in out.splitlines():
-                    print(line)
-                    if 'midori' in str(line).lower():
-                        pid = int(line.split(None, 1)[0])
-                        os.kill(pid, signal.SIGKILL)
+                
             elif voice_command.startswith("blue"):
+                self.run_cmd("xset dpms force on")
                 r = self.ans.get_answer(voice_command.replace("blue","").strip(" "),client=None)
 
             subprocess.run(["clear"],shell=True)
@@ -152,6 +150,7 @@ __________.__
                 message = message.decode('utf-8')
                 if message != "" and message != " " and message != "\n" and message != "\r" and message != "\r\n":
                     print(message)
+                    self.run_cmd("xset dpms force on")
                     self.ans.get_answer(message,client)        
             except:
                 #self.hosts_number.value -= 1
@@ -162,7 +161,13 @@ __________.__
         self.broadcast_process.terminate()
         self.accept_process.terminate()
 
-
+    def run_cmd(self,sCommand):
+        """
+            run command line
+            :sCommand: String parameter containing the command to run
+            :returns: A string containing the stdout
+        """
+        return subprocess.run([sCommand],shell=True,capture_output=True).stdout.decode("utf-8")
 
 
 if __name__ == "__main__":
