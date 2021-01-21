@@ -395,6 +395,7 @@ class answer():
                     print("[+] Searching on wikipedia...")
                     res = wikipedia.summary(message,sentences=1)
                     response = str(res)
+                    print(response)
                     self.speak(res)
                     return True, response
                 except:
@@ -439,9 +440,12 @@ class answer():
                 self.speak("Avec plaisir !")
 
             checked, response = self.check_commands(message)
+            
             if not checked:
-                print(message)
                 response = str(self.chatbot.get_response(message))
+                print(f"BLUE:{response}")
+                client.send(bytes(response,'utf-8'))
+            else:
                 print(f"BLUE:{response}")
                 client.send(bytes(response,'utf-8'))
 
