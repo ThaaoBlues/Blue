@@ -46,7 +46,7 @@ class answer():
 
     def speak(self,text):
         try:
-            tts = gTTS(text,lang=self.lang)
+            tts = gTTS(text,lang=self.lang[0]+self.lang[1])
             sn = str(randint(1,100000))+".mp3"
             tts.save(sn)
             playsound.playsound(sn)
