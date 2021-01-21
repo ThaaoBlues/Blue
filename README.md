@@ -85,5 +85,6 @@ If you are near the Blue base and a microphone is plugged in, you can talk witho
 This assistant is designed for linux so some features may not work on windows.
 All the commands are designed for french people, feel free to translate to your own langage.
 
-
 If you are willing to write your own skill, please make sure that your script takes one argument. Blue will run it and pass the user voice command in argument.
+
+If you are using Blue on a machine running 24/24, you need to desactivate the sleep mode of your os and the screen auto-lock to not have to retype your password when blue turn off the screen.
