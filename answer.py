@@ -445,7 +445,7 @@ class answer():
 
 
     def get_answer(self,message,client):
-        print(1)
+        print("[+] Translating...")
         message = self.gtl.translate(message,dest="fr")
         if not client == None:
 

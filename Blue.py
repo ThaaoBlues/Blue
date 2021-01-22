@@ -41,15 +41,21 @@ __________.__
         self.accept_process = ""
         self.response = ""
         self.ans = answer.answer()
+
+        #init offline text to speech
         self.engine = pyttsx3.init()
         self.engine.setProperty('rate', 110)
         voices = self.engine.getProperty('voices')
         self.engine.setProperty("voice", voices[26].id)
-        #self.hosts_number = Manager().Value('i',0)
+        
     
+
+        #self.hosts_number = Manager().Value('i',0)
+        self.lang = str(getdefaultlocale()[0])
         print("starting web config server on port 8080")
         subprocess.Popen(["python3","blue_config_server.py"])
         print("Starting BLUE server...")
+
         #litteraly starting the server like I said above
         self.start_server()
         try:
@@ -94,7 +100,7 @@ __________.__
 
     def speak(self,text):
         try:
-            tts = gTTS(text,lang="fr-FR")
+            tts = gTTS(text,lang=self.lang[0]+self.lang[1])
             sn = str(randint(1,100000))+".mp3"
             tts.save(sn)
             playsound.playsound(sn)
@@ -107,7 +113,7 @@ __________.__
         try:
             with sr.Microphone() as source:
                 data = self.r.record(source,duration=second)
-                voice_command = self.r.recognize_google(data,language='fr')
+                voice_command = self.r.recognize_google(data,language=self.lang[0]+self.lang[1])
                 return voice_command
         except:
             pass
