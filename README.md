@@ -10,6 +10,7 @@ Blue can do a bunch of things like:
 
 -playing music/video from youtube
 
+-talk with you and learn from your responses to be more accurate.
 
 -playing the top 100
 
