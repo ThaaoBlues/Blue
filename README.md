@@ -8,54 +8,54 @@ Use the requirements.txt and the setup.py files before running Blue the first ti
 ## Blue can do a bunch of things like:
 
 
--play music/video from youtube
+- play music/video from youtube
 
--talk with you and learn from your responses to be more accurate.
-
-
--play the top 100
+- talk with you and learn from your responses to be more accurate.
 
 
--effectuate speedtest
+- play the top 100
 
 
--display a website by name or url
+- effectuate speedtest
 
 
--make google searches
+- display a website by name or url
 
 
--make wikipedia searches and saying the result aloud
+- make google searches
 
 
--reading your favorite news feed
+- make wikipedia searches and saying the result aloud
 
 
--give you the time
+- reading your favorite news feed
 
 
--give you the date
+- give you the time
 
 
--open your google drive/Classroom/gmail
+- give you the date
 
 
--shutdown himself
+- open your google drive/Classroom/gmail
 
 
--reboot himself
+- shutdown himself
 
 
--display your IP configuration
+- reboot himself
 
 
--close/kill a process running on the machine just by name
+- display your IP configuration
 
 
--give you informations about the weather
+- close/kill a process running on the machine just by name
 
 
--interract with some irobots cleaners (very buggy)
+- give you informations about the weather
+
+
+- interract with some irobots cleaners (very buggy)
 
 
 
