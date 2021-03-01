@@ -1,18 +1,19 @@
 # Blue
-##Blue is a vocal assistant that you can use and modify to add your own features.
+## Blue is a vocal assistant that you can use and modify to add your own features.
 
 
 Use the requirements.txt and the setup.py files before running Blue the first time. (If you are on windows, download the .exe release)
 
 
-##Blue can do a bunch of things like:
+## Blue can do a bunch of things like:
 
 
--playing music/video from youtube
+-play music/video from youtube
 
 -talk with you and learn from your responses to be more accurate.
 
--playing the top 100
+
+-play the top 100
 
 
 -effectuate speedtest
@@ -61,7 +62,7 @@ Use the requirements.txt and the setup.py files before running Blue the first ti
 A webserver is running on port 8080 to access and config Blue easily.
 
 
-###By the configuration page you can add:
+### By the configuration page you can add:
 
 
 -customs RSS feed
@@ -77,10 +78,10 @@ A webserver is running on port 8080 to access and config Blue easily.
 
 
 
-##YOU CAN NOW ADD YOUR OWN PYTHON-WRITTEN SKILLS FOR BLUE DIRECTLY FROM THE WEBSERVER !
+## YOU CAN NOW ADD YOUR OWN PYTHON-WRITTEN SKILLS FOR BLUE DIRECTLY FROM THE WEBSERVER !
 
 
-###the python script must follow this pattern:
+### the python script must follow this pattern:
 
 ```python
 
@@ -97,14 +98,14 @@ def initialize(voice_command,sentences):
 ```
 
 
-###while uploading, the sentences to trigger your skill must follow these rules:
+### while uploading, the sentences to trigger your skill must follow these rules:
 
 - being separated by the "/" character.
 
 - if you want to just check if the uer sentence begin by one word, type startswith followed by a space and the word you want. 
 
 
-###Informations
+## Informations
 
 If you are near the Blue base and a microphone is plugged in, you can talk without opening the app on your phone by beginning your sentences by the hot word you have chossen at the setup.
 
