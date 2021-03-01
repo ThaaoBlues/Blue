@@ -4,6 +4,7 @@ from googlesearch import search
 
 
 def initialize(voice_command,sentences):
+
     for sentence in sentences:
         voice_command = voice_command.replace(sentence,"",1)
     
@@ -11,7 +12,7 @@ def initialize(voice_command,sentences):
         open_website("http://www."+voice_command.strip("va sur").replace(' ','').replace('blue',"").lower())
         response = (f"j'ai affiché {voice_command.strip('va sur').replace(' ','').lower()} sur la base BLUE")
     else:
-        open_website(str(list(search(voice_command.strip('va sur').replace(' ','').lower(),num=1,start=0,stop=1))[0]))
+        open_website(str(list(search(voice_command.strip('va sur').replace(' ','').lower()))[0]))
         response = (f"j'ai affiché {voice_command.strip('va sur').replace(' ','').lower()} sur la base BLUE")
     
         

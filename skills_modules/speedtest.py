@@ -1,11 +1,7 @@
 import speedtest
 
 def initialize(voice_command,sentences):
-
-    response = ("Mise en route d'un speedtest..")
     s = speedtest.Speedtest()
-    s.get_servers()
-    s.get_best_server()
     s.download()
     s.upload()
     res = s.results.dict()
