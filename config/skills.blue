@@ -1,4 +1,4 @@
-open_website:va sur/va sur le site de/ouvre le site de/open the website/go on
+open_website:startswith va sur/va sur le site de/ouvre le site de/open the website/go on
 heure:quelle heure est il/quelle heure il est/donne moi l'heure/what time is it/what hour/give me the hour/give me the time
 youtube:mets la vidéo de/mets la musique de/mets une vidéo de/play the video of/display video
 rss:donne moi des nouvelles/dis moi les informations/dis moi les dernières nouvelles/dis moi les dernières informations/lis moi le journal/give me some news
@@ -6,3 +6,7 @@ google-search:recherche des informations sur/recherche comment faire/cherche com
 date:quel jour sommes-nous/quel jour on est/quel jour est-on/donne moi le jour/on est quelle date/quelle est la date d'aujourd'hui
 say:startswith dis
 stop:startswith stop
+shutown:éteins toi/adieu/tais toi/ferme ta gueule/ferme la/mets toi en veille
+speedtest:effectue un speedtest/effectue un test de vitesse/fais un speedtest s'il te plaît/fais un test de vitesse s'il te plaît/c'est un speedtest s'il te plaît
+wikipedia:startswith qui était/startswith c'est qui/startswith qui est/startswith c'est qui/startswith qu'est-ce qu/startswith quelle est la définition de
+ip:quelle est mon adresse ip/donne moi mon adresse ip/cherche mon adresse ip
