@@ -86,13 +86,15 @@ A webserver is running on port 8080 to access and config Blue easily.
 ```python
 
 
+
 def initialize(voice_command,sentences):
     """
     :voice_command: the sentence the user said
     :sentences: the sentences that you have specified while uploading the skill
-    
+    :returns: response is a string containing the sentence you want to say aloud
     """
-    pass
+
+    return True, response
 
 
 ```
