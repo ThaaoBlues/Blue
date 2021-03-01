@@ -59,7 +59,7 @@ Use the requirements.txt and the setup.py files before running Blue the first ti
 
 
 
-A webserver is running on port 8080 to access and config Blue easily.
+A webserver is running on port 80 to access and config Blue easily.
 
 
 ### By the configuration page you can add:
