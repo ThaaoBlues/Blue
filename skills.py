@@ -11,7 +11,7 @@ from difflib import SequenceMatcher
 
 
 def check_skills(voice_command):
-    with open("config/skills.blue","r") as f:
+    with open("config/skills.blue","r",encoding="utf-8") as f:
         for line in f.read().splitlines():
             module = line.split(":")[0]
             sentences = line.split(":")[1]
@@ -19,7 +19,8 @@ def check_skills(voice_command):
             for sentence in sentences.split("/"):
 
                 if sentence.split(" ")[0] == "startswith":
-                    if(voice_command.split(" ")[0] == sentence.split(" ")[0].replace("startswith","",1)):
+                    print(sentence.replace("startswith","",1).replace(" ",""),voice_command.replace(" ","")[:len(voice_command)//2])
+                    if(sentence.replace("startswith","",1).replace(" ","") in voice_command.replace(" ","")[:len(voice_command)//2]):
                         print(f"module : {module} | confidence : startswith keyword")
                         skill = importlib.import_module(f"skills_modules.{module}")
 

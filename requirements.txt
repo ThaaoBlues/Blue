@@ -1,0 +1,14 @@
+Flask
+googlesearch-python
+speechrecognition
+gtts
+playsound
+pyautogui
+pyaudio
+youtube-search-python
+pafy
+youtube-dl
+feedparse
+google-search
+googletrans==3.1.0a0
+speedtest-cli
