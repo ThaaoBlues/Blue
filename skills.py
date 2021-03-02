@@ -7,8 +7,8 @@ from random import randint
 from os import remove
 import playsound
 from difflib import SequenceMatcher
-
-
+from utils.translator import translate
+from multiprocessing import Process
 
 def check_skills(voice_command):
     with open("config/skills.blue","r",encoding="utf-8") as f:
@@ -19,29 +19,17 @@ def check_skills(voice_command):
             for sentence in sentences.split("/"):
 
                 if sentence.split(" ")[0] == "startswith":
-                    print(sentence.replace("startswith","",1).replace(" ",""),voice_command.replace(" ","")[:len(voice_command)//2])
                     if(sentence.replace("startswith","",1).replace(" ","") in voice_command.replace(" ","")[:len(voice_command)//2]):
                         print(f"module : {module} | confidence : startswith keyword")
-                        skill = importlib.import_module(f"skills_modules.{module}")
-
-                        ret, response = skill.initialize(voice_command,sentences.split("/"))
-                        print(response)
-                        speak(response)
+                        Process(target=call_skill,args=(module,voice_command,sentences,)).start()
                         return True
-
                 else:
-
-
                     ratio = SequenceMatcher(None, voice_command, sentence).ratio()
 
                     if (ratio>=0.6):
                         ratio = round(ratio,4)
                         print(f"module : {module} | confidence : {ratio*100}%")
-                        skill = importlib.import_module(f"skills_modules.{module}")
-
-                        ret, response = skill.initialize(voice_command,sentences.split("/"))
-                        print(response)
-                        speak(response)
+                        Process(target=call_skill,args=(module,voice_command,sentences,)).start()
                         return True
 
 
@@ -56,3 +44,14 @@ def speak(text):
     except:
         print(e)
         pass
+
+
+def call_skill(module,voice_command,sentences):
+    skill = importlib.import_module(f"skills_modules.{module}")
+
+    ret, response = skill.initialize(voice_command,sentences.split("/"))
+    response = translate(response,'fr',False,dest=getlocale()[0][:2])
+    print(response)
+    if response != "":
+        speak(response)
+    

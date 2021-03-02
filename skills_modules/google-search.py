@@ -1,13 +1,13 @@
-from googlesearch.googlesearch import GoogleSearch
+from platform import system
+from webbrowser import open as display_website
+
+def initialize(voice_command,sentences):
+    for sentence in sentences:
+        voice_command = voice_command.replace(sentence,"",1)
+
+    display_website(f"https://www.google.com/search?q={voice_command}")
 
 
-
-def initialize(voice_commaend,sentences):
-
-    voice_command = voice_command.replace("recherche","",1).replace("cherche","",1)
-
-    response = GoogleSearch().search(voice_command)
-    result1 = response.results[0]
-    self.speak(f"selon {result1.title}, {result1.getText()}")
+    response = "J'ai ouvert les résultats de ta recherche dans ton navigateur"
 
     return True, response

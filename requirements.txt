@@ -12,3 +12,6 @@ feedparse
 google-search
 googletrans==3.1.0a0
 speedtest-cli
+opencv-python
+numpy
+jokeapi
