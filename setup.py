@@ -28,21 +28,4 @@ try:
 except:
         print("[x] An error occurred")
 
-
-
-print("[+] Installing requiered python modules...")
-try:
-        run_cmd("python -m pip install feedparser youtube-dl pafy playsound gTTS GoogleNews pywhatkit SpeechRecognition mathparsechatterbot youtube_search git+https://github.com/alainrouillon/py-googletrans@feature/enhance-use-of-direct-api colorama speedtest-cli wikipedia google googlesearch-python flask pyirobot pyttsx3")
-except:
-        print("[x] An error occurred")
-
-
-
-#custom files, can be modified by user on [blue IP]:8080
-open("custom_websites.blue","w")
-open("custom_servers.blue","w")
-open("irobot_cleaners.blue","w")
-open("custom_rss_feed.blue","w")
-open("skills.blue","w")
-
 print("\n\n[+] All is set up ! you can now use Blue by typing \"python3 Blue.py\"")
