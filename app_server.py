@@ -30,7 +30,7 @@ def handle_client(cli):
         if voice_command != b"":
             voice_command = voice_command.decode('utf-8')
 
-            if lgetlocale()[0][:2] != 'fr':
+            if getlocale()[0][:2] != 'fr':
                     voice_command = translate(voice_command,getlocale()[0][:2],True)
 
             if not check_skills(voice_command):
