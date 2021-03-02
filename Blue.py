@@ -9,7 +9,7 @@ from skills_modules import heure
 from config_server import start_webserver
 from utils.translator import translate
 from multiprocessing import Process,freeze_support
-
+import app_server
 
 
 
@@ -17,7 +17,7 @@ def listen():
     print("listening...")
     try:
         with sr.Microphone() as source:
-            data = r.listen(source)
+            data = r.record(source,duration=5)
             voice_command = r.recognize_google(data,language=locale.getlocale()[0][:2])
             return voice_command
     except:
@@ -41,6 +41,9 @@ if __name__ == '__main__':
     freeze_support()
     Process(target=start_webserver).start()
 
+    #start app handling server
+    app_server.initialize()
+
     #init voice recognizer
     r = sr.Recognizer()
     with sr.Microphone() as source:
@@ -53,7 +56,7 @@ if __name__ == '__main__':
             print(voice_command)
             #translate to french so the modules can be triggered if you are not french
             if locale.getlocale()[0][:2] != 'fr':
-                voice_command = translate(voice_command,locale.getlocale()[0][:2])
+                voice_command = translate(voice_command,locale.getlocale()[0][:2],True)
 
             if(hot_word in voice_command):
                 voice_command = voice_command.replace(hot_word,"")
