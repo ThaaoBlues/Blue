@@ -1,31 +1,47 @@
-from subprocess import run
-banner = """
-__________.__                 
-\______   \  |  __ __   ____  
- |    |  _/  | |  |  \_/ __ \ 
- |    |   \  |_|  |  /\  ___/ 
- |______  /____/____/  \___  >
-        \/                 \/ 
-
-"""
-
-print(banner)
-
-def run_cmd(sCommand):
-        """
-            run command line
-            :sCommand: String parameter containing the command to run
-            :returns: A string containing the stdout
-        """
-        return run([sCommand],shell=True,capture_output=True).stdout.decode("utf-8")
+from os import path,mkdir
+from utils.res import *
+from requests import get
 
 
-password = input("type your password : ")
+def get_hot_word():
 
-print("[+] installing requiered debian packages")
-try:
-        run_cmd(f"echo {password} | sudo apt --assume-yes install espeak libasound2-dev python3-pyaudio python3-tk python3-dev & echo kali | sudo apt --assume-yes install alsa-utils")
-except:
-        print("[x] An error occurred")
+    if not path.exists("config/assistant_name.blue"):
+        hot_word = input("\nplease select a word/sentence to trigger your assistant\n-->")
+        psuccess(f"Congratulations ! Your assistant is now called {hot_word} !")
+        with open("config/assistant_name.blue","w") as f:
+            f.write(hot_word)
 
-print("\n\n[+] All is set up ! you can now use Blue by typing \"python3 Blue.py\"")
+        return hot_word
+    else:
+        with open("config/assistant_name.blue","r") as f:
+            return f.read()
+
+
+def check_files_integrity():
+    
+    if not path.exists("config/"):
+        mkdir("config")
+        hot_word = input("\nplease select a word/sentence to trigger your assistant\n-->")
+        psuccess(f"Congratulations ! Your assistant is now called {hot_word} !")
+        with open("config/assistant_name.blue","w") as f:
+            f.write(hot_word)
+    
+    if not path.exists("skills_modules/"):
+        mkdir("skills_modules")
+    
+    
+    if not path.exists("config/custom_websites.blue"):
+        open("config/custom_websites.blue","w")
+    
+    
+    if not path.exists("config/custom_servers.blue"):
+        open("config/custom_servers.blue","w")
+
+       
+    if not path.exists("config/custom_rss_feed.blue"):
+        open("config/custom_rss_feed.blue","w")
+    
+    if not path.exists("config/skills.blue"):
+        with open("config/skills.blue","w",encoding="utf-8") as f:
+            f.write(get("https://raw.githubusercontent.com/ThaaoBlues/Blue/main/config/skills.blue").text.replace("\n",""))
+            f.close()
