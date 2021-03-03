@@ -10,6 +10,8 @@ Use the requirements.txt and the setup.py files before running Blue the first ti
 
 - play music/video from youtube
 
+- display the twitch stream of anyone
+
 - talk with you and learn from your responses to be more accurate.
 
 
