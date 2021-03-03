@@ -6,21 +6,119 @@
     <title>BLUE CONFIG</title>
 </head>
 <body>
-    <ul>
-        <li><button onclick="window.location.href='/action/[ADD IROBOT CLEANER]'">ADD IROBOT CLEANER</button><button onclick="window.location.href='/action/[MANAGE IROBOT CLEANER]'">MANAGE IROBOT CLEANER</button></li>
-        <br><br>
-        <li><button onclick="window.location.href='/action/[ADD WEBSITE VOICE COMMAND]'">ADD WEBSITE VOICE COMMAND</button><button onclick="window.location.href='/action/[MANAGE WEBSITE VOICE COMMAND]'">MANAGE WEBSITE VOICE COMMAND</button></li>
-        <br><br>
-        <li><button onclick="window.location.href='/action/[ADD CUSTOM VOICE COMMAND TO SEND TO A SERVER]'">ADD CUSTOM VOICE COMMAND TO SEND TO A SERVER</button><button onclick="window.location.href='/action/[MANAGE CUSTOM VOICE COMMAND TO SEND TO A SERVER]'">MANAGE CUSTOM VOICE COMMAND TO SEND TO A SERVER</button></li>
-        <br><br>
-        <li><button onclick="window.location.href='/action/[ADD RSS FEED]'">ADD RSS FEED</button><button onclick="window.location.href='/action/[MANAGE RSS FEED]'">MANAGE RSS FEED</button></li>
-        <br><br>
-        <li><button onclick="window.location.href='/action/[ADD BLUE SKILL]'">ADD BLUE SKILL</button></li>
-        <br><br>
-        <br><br>
-        <li><button onclick="window.location.href='/action/[MANAGE BLUE SKILLS]'">MANAGE BLUE SKILLS</button></li>
-        <br><br>
+    <div class="buttons">
+        <ul>
+            <li><button class="btn effect01" onclick="window.location.href='/action/[ADD IROBOT CLEANER]'">ADD IROBOT CLEANER</button><button class="btn effect01 scd_place" onclick="window.location.href='/action/[MANAGE IROBOT CLEANER]'">MANAGE IROBOT CLEANER</button></li>
+            <li><button class="btn effect01" onclick="window.location.href='/action/[ADD WEBSITE VOICE COMMAND]'">ADD WEBSITE VOICE COMMAND</button><button class="btn effect01 scd_place" onclick="window.location.href='/action/[MANAGE WEBSITE VOICE COMMAND]'">MANAGE WEBSITE VOICE COMMAND</button></li>
+            <li><button class="btn effect01" onclick="window.location.href='/action/[ADD CUSTOM VOICE COMMAND TO SEND TO A SERVER]'">ADD CUSTOM SERVER MSG</button><button class="btn effect01 scd_place" onclick="window.location.href='/action/[MANAGE CUSTOM VOICE COMMAND TO SEND TO A SERVER]'">MANAGE CUSTOM SERVER MSG</button></li>
+            <li><button class="btn effect01" onclick="window.location.href='/action/[ADD RSS FEED]'">ADD RSS FEED</button><button class="btn effect01 scd_place" onclick="window.location.href='/action/[MANAGE RSS FEED]'">MANAGE RSS FEED</button></li>
+            <li><button class="btn effect01" onclick="window.location.href='/action/[ADD BLUE SKILL]'">ADD BLUE SKILL</button><button class="btn effect01 scd_place" onclick="window.location.href='/action/[MANAGE BLUE SKILLS]'">MANAGE BLUE SKILLS</button></li>
+
+        </ul>
+        
+
+    </div>
     
-    </ul>
 </body>
+<style>
+
+body {
+	background:#333 url(https://wallpaperaccess.com/full/1236480.jpg) repeat;
+	      
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  width: 20%;
+}
+
+.scd_place{
+
+    margin-left:10px;
+}
+
+.btn {
+    margin-top: 5%;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 45px;
+    max-width: 450px;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.btn:hover {
+  text-decoration: none;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+/*   padding: 2em 0em; */
+}
+/*btn_background*/
+.effect01 {
+  color: #FFF;
+  border: 4px solid rgb(34, 128, 206);
+  box-shadow:0px 0px 0px 1px rgb(34, 128, 206);
+  background-color: rgb(34, 128, 206);
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+.effect01:hover {
+  border: 4px solid #666;
+  background-color: #FFF;
+  box-shadow:0px 0px 0px 4px #EEE inset;
+  color: #000;
+}
+
+/*btn_text*/
+.effect01 span {
+  transition: all 0.2s ease-out;
+  z-index: 2;
+}
+.effect01:hover span{
+  letter-spacing: 0.13em;
+  color: #333;
+}
+
+/*highlight*/
+.effect01:after {
+  background: #FFF;
+  border: 0px solid #000;
+  content: "";
+  height: 155px;
+  left: -75px;
+  opacity: .8;
+  position: absolute;
+  top: -50px;
+  -webkit-transform: rotate(35deg);
+          transform: rotate(35deg);
+  width: 50px;
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);/*easeOutCirc*/
+  z-index: 1;
+}
+.effect01:hover:after {
+  background: #FFF;
+  border: 20px solid #000;
+  opacity: 0;
+  left: 120%;
+  -webkit-transform: rotate(40deg);
+          transform: rotate(40deg);
+}
+</style>
 </html>

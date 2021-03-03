@@ -21,7 +21,7 @@ def check_skills(voice_command):
                 if sentence.split(" ")[0] == "startswith":
                     if(sentence.replace("startswith","",1).replace(" ","") in voice_command.replace(" ","")[:len(voice_command)//2]):
                         print(f"module : {module} | confidence : startswith keyword")
-                        Process(target=call_skill,args=(module,voice_command,sentences,)).start()
+                        Process(target=call_skill,args=(module,voice_command,sentences.split("/"),)).start()
                         return True
                 else:
                     ratio = SequenceMatcher(None, voice_command, sentence).ratio()
@@ -29,7 +29,7 @@ def check_skills(voice_command):
                     if (ratio>=0.65):
                         ratio = round(ratio,4)
                         print(f"module : {module} | confidence : {ratio*100}%")
-                        Process(target=call_skill,args=(module,voice_command,sentences,)).start()
+                        Process(target=call_skill,args=(module,voice_command,sentences.split("/"),)).start()
                         return True
 
 
@@ -47,13 +47,12 @@ def speak(text):
 
 
 def call_skill(module,voice_command,sentences):
-
     for i in range(len(sentences)):
         sentences[i] = sentences[i].replace("startswith","",1)
         
     skill = importlib.import_module(f"skills_modules.{module}")
 
-    ret, response = skill.initialize(voice_command,sentences.split("/"))
+    ret, response = skill.initialize(voice_command,sentences)
     response = translate(response,'fr',False,dest=getlocale()[0][:2])
     print(response)
     if response != "":
