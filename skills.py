@@ -53,7 +53,9 @@ def call_skill(module,voice_command,sentences):
     skill = importlib.import_module(f"skills_modules.{module}")
 
     ret, response = skill.initialize(voice_command,sentences)
-    response = translate(response,'fr',False,dest=getlocale()[0][:2])
+    if getlocale()[0][:2] != 'fr':
+        response = translate(response,'fr',dest=getlocale()[0][:2])
+
     print(response)
     if response != "":
         speak(response)
