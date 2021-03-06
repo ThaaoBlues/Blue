@@ -14,3 +14,8 @@ camera:ouvre la camera/affiche la camera/allume la camera
 jokes:raconte moi une blague/dis moi une blague/fais moi rire/fais moi rigoler
 maths:combien font/combien ça fait/ça fait combien/calcule/calcule moi/fais le calcul
 maps:aller à/startswith comment aller à/startswith montre-moi un intinéraire vers/startswith montre-moi l'intinéraire vers/startswith montre-moi l'intinéraire pour aller à/startswith montre-moi un intinéraire pour aller à/startswith affiche l'intinéraire pour aller à/startswith affiche un intinéraire pour aller à/startswith affiche l'intinéraire pour aller à/startswith affiche une carte de/affiche la carte de
+twitch:mets le stream de/affiche le stream de/sur twitch
+add_note:ajoute à ma liste de notes/note/écrit dans mes notes
+delete_note:supprime de mes notes/enlève de mes notes
+read_note:lis mes notes/quelles sont mes notes/dis moi ce qu'il y a dans mes notes
+clear_notes:supprime toutes mes notes/vide mes notes
