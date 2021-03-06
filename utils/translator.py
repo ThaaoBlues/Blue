@@ -1,7 +1,7 @@
 from googletrans import Translator
 
 
-def translate(text,src):
+def translate(text,src,dest='fr'):
     translator = Translator()
 
-    return translator.translate(text,src=src,dest='fr').text
+    return translator.translate(text,src=src,dest=dest).text

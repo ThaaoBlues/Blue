@@ -12,8 +12,10 @@ from multiprocessing import Process
 
 def check_skills(voice_command):
     with open("config/skills.blue","r",encoding="utf-8") as f:
+        ratio = 0
+        module = ""
         for line in f.read().splitlines():
-            module = line.split(":")[0]
+            
             sentences = line.split(":")[1]
 
             for sentence in sentences.split("/"):
@@ -24,13 +26,18 @@ def check_skills(voice_command):
                         Process(target=call_skill,args=(module,voice_command,sentences.split("/"),)).start()
                         return True
                 else:
-                    ratio = SequenceMatcher(None, voice_command, sentence).ratio()
+                   
+                    r = SequenceMatcher(None, voice_command, sentence).ratio()
 
-                    if (ratio>=0.65):
-                        ratio = round(ratio,4)
-                        print(f"module : {module} | confidence : {ratio*100}%")
-                        Process(target=call_skill,args=(module,voice_command,sentences.split("/"),)).start()
-                        return True
+                    if r > ratio:
+                        ratio = r
+                        module = line.split(":")[0]
+
+                    
+        ratio = round(ratio,4)
+        print(f"module : {module} | confidence : {ratio*100}%")
+        Process(target=call_skill,args=(module,voice_command,sentences.split("/"),)).start()
+        return True
 
 
 
