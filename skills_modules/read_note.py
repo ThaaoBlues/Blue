@@ -1,11 +1,8 @@
 
 
 def initialize(voice_command,sentences):
-    for sentence in sentences:
-        voice_command = voice_command.replace(sentence,"",1)
 
-
-    with open("/config/notes.txt", "r") as f:
+    with open("config/notes.txt", "r",encoding="utf-8",errors="ignore") as f:
         response = "Voici le contenu de vos notes : "+f.read()
 
 

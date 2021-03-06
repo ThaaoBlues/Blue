@@ -14,6 +14,7 @@ def check_skills(voice_command):
     with open("config/skills.blue","r",encoding="utf-8") as f:
         ratio = 0
         module = ""
+        final_sentences = ""
         for line in f.read().splitlines():
             
             sentences = line.split(":")[1]
@@ -30,13 +31,15 @@ def check_skills(voice_command):
                     r = SequenceMatcher(None, voice_command, sentence).ratio()
 
                     if r > ratio:
+                        final_sentences = sentences
                         ratio = r
                         module = line.split(":")[0]
 
                     
         ratio = round(ratio,4)
         print(f"module : {module} | confidence : {ratio*100}%")
-        Process(target=call_skill,args=(module,voice_command,sentences.split("/"),)).start()
+
+        Process(target=call_skill,args=(module,voice_command,final_sentences.split("/"),)).start()
         return True
 
 
