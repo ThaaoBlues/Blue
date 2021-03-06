@@ -7,6 +7,11 @@ Use the requirements.txt and the setup.py files before running Blue the first ti
 
 ## Blue can do a bunch of things like:
 
+- add notes
+
+- read your notes
+
+- delete a note
 
 - play music/video from youtube
 
