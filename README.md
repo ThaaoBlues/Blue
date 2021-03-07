@@ -107,7 +107,7 @@ def initialize(voice_command,sentences):
 
 - being separated by the "/" character.
 
-- if you want to just check if the uer sentence begin by one word, type startswith followed by a space and the word you want. 
+- if you want to just check if the user sentence begin by one word, type startswith followed by a space and the word you want. 
 
 
 ## Informations
