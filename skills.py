@@ -23,6 +23,8 @@ def check_skills(voice_command):
 
                 if sentence.split(" ")[0] == "startswith":
                     if(sentence.replace("startswith","",1).replace(" ","") in voice_command.replace(" ","")[:len(voice_command)//2]):
+                        final_sentences = sentences
+                        module = line.split(":")[0]
                         print(f"module : {module} | confidence : startswith keyword")
                         Process(target=call_skill,args=(module,voice_command,sentences.split("/"),)).start()
                         return True
