@@ -45,4 +45,4 @@ def check_files_integrity():
         open("config/custom_rss_feed.blue","w")
     
     if not path.exists("config/skills.blue"):
-        open("config/skills_modules/skills.blue","w")
+        open("config/skills.blue","w")
