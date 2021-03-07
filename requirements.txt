@@ -2,6 +2,7 @@ Flask
 googlesearch-python
 speechrecognition
 gtts
+python-levenstein
 playsound
 pyautogui
 pyaudio
