@@ -1,5 +1,4 @@
 from util.res import *
-import pyautogui
 import speech_recognition as sr
 from time import sleep
 import locale
@@ -10,7 +9,6 @@ from config_server import start_webserver
 from util.translator import translate
 from multiprocessing import Process,freeze_support
 import app_server
-
 
 
 def listen():
@@ -29,7 +27,7 @@ def listen():
 
 if __name__ == '__main__':
 
-    #auto_chdir_to_file_root()
+    auto_chdir_to_file_root()
 
     #make sure the user have choosen a hot word
     setup.check_files_integrity()

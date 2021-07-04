@@ -284,7 +284,7 @@ def auto_chdir_to_file_root():
     a function to make sure that the program is writing/reading at his root 
     (need to put res file in a folder)
     """
-    chdir(path.abspath(__file__).replace("res.py",""))
+    chdir(path.abspath(__file__).replace("\\util\\res.py",""))
 
 
 def get_home_dir_path():

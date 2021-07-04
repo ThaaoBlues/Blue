@@ -1,6 +1,5 @@
 from util.res import *
 import importlib
-import Levenshtein
 from locale import getlocale
 from gtts import gTTS
 from random import randint
@@ -11,6 +10,8 @@ from util.translator import translate
 from multiprocessing import Process
 
 def check_skills(voice_command):
+    
+    
     with open("config/skills.blue","r",encoding="utf-8") as f:
         ratio = 0
         module = ""
@@ -46,6 +47,7 @@ def check_skills(voice_command):
 
 
 
+
 def speak(text):
     try:
         tts = gTTS(text,lang=getlocale()[0][:2])
@@ -59,16 +61,33 @@ def speak(text):
 
 
 def call_skill(module,voice_command,sentences):
+
+
     for i in range(len(sentences)):
         sentences[i] = sentences[i].replace("startswith","",1)
-        
-    skill = importlib.import_module(f"skills_modules.{module}")
+    
+    try:
+        skill = importlib.import_module(f"skills_modules.{module}")
+    except Exception as e:
+        perror(f"Error while importing skill module : {e}")
+        return
 
     ret, response = skill.initialize(voice_command,sentences)
-    if getlocale()[0][:2] != 'fr':
-        response = translate(response,'fr',dest=getlocale()[0][:2])
+
+    try:
+        if getlocale()[0][:2] != 'fr':
+            response = translate(response,'fr',dest=getlocale()[0][:2])
+
+    except Exception as e:
+        perror(f"Error while translating Blue response to your language : {e}")
+        return
 
     print(response)
-    if response != "":
-        speak(response)
+
+    try:
+        if response != "":
+            speak(response)
+    except Exception as e:
+        perror(f"Error while trying to speak : {e}")
+        return
     
