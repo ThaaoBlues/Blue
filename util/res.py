@@ -9,8 +9,24 @@ from platform import system, platform, python_version
 from colorama import Fore, Back, Style
 from colorama import init
 from pathlib import Path
+from socket import socket, AF_INET, SOCK_DGRAM
+import logging
+import click
 
 
+
+def disable_flask_logs():
+    log = logging.getLogger('werkzeug')
+    log.setLevel(logging.ERROR)
+
+    def secho(text, file=None, nl=None, err=None, color=None, **styles):
+        pass
+
+    def echo(text, file=None, nl=None, err=None, color=None, **styles):
+        pass
+
+    click.echo = echo
+    click.secho = secho
 
 
 def check_internet():
@@ -92,7 +108,12 @@ def get_file_size(fname):
     byte = int(path.getsize(f"{getcwd()}/{fname}"))
     return f"{byte/1000000}"
 
-
+def get_time():
+    """
+    :return: a string containing the time
+    """
+    now = datetime.now()
+    return now.strftime("%H:%M:%S")
 
 
 def perror(str,time=False):
@@ -103,7 +124,7 @@ def perror(str,time=False):
     """
     init()
     if time:
-        print(f"{Fore.RED}{gettime()} [x] {str} {Fore.WHITE}")
+        print(f"{Fore.RED}{get_time()} [x] {str} {Fore.WHITE}")
     else:
         print(f"{Fore.RED}[x] {str} {Fore.WHITE}")
 
@@ -117,7 +138,7 @@ def pwarn(str,time=False):
     """
     init()
     if time:
-        print(f"{Fore.YELLOW}{gettime()} [!] {str} {Fore.WHITE}")
+        print(f"{Fore.YELLOW}{get_time()} [!] {str} {Fore.WHITE}")
     else:
         print(f"{Fore.YELLOW}[!] {str} {Fore.WHITE}")
 
@@ -132,7 +153,7 @@ def pinfo(str,time=False):
     """
     init()
     if time:
-        print(f"{Fore.BLUE}{gettime()} [+] {str} {Fore.WHITE}")
+        print(f"{Fore.BLUE}{get_time()} [+] {str} {Fore.WHITE}")
     else:
         print(f"{Fore.BLUE}[+] {str} {Fore.WHITE}")
 
@@ -147,7 +168,7 @@ def psuccess(str,time=False):
     """
     init()
     if time:
-        print(f"{Fore.GREEN}{gettime()} [v] {str} {Fore.WHITE}")
+        print(f"{Fore.GREEN}{get_time()} [v] {str} {Fore.WHITE}")
     else:
         print(f"{Fore.GREEN}[v] {str} {Fore.WHITE}")
 
@@ -159,6 +180,19 @@ def get_private_ips():
     :return: a list of all private IP addresses liked to your machine (may be vm) 
     """
     return gethostbyname_ex(gethostname())[:2]
+
+
+
+def get_private_ip():
+    """
+    get the private ip linked to your machine
+    :return: a string containing the private ip used on your machine
+
+    """
+    s = socket(AF_INET, SOCK_DGRAM)
+    s.connect(("8.8.8.8", 80))
+    return s.getsockname()[0]
+
 
 
 
@@ -176,18 +210,6 @@ def get_hostname():
     :return: a string containing the hostname
     """
     return gethostname()
-
-
-
-
-def get_time():
-    """
-    :return: a string containing the time
-    """
-    now = datetime.now()
-    return now.strftime("%H:%M:%S")
-
-
 
 
 

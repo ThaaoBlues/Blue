@@ -53,7 +53,7 @@ def speak(text):
         tts.save(sn)
         playsound.playsound(sn)
         remove(sn)
-    except:
+    except Exception as e:
         print(e)
         pass
 

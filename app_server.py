@@ -10,8 +10,8 @@ from skills import check_skills
 
 def initialize():
     Process(target=start_server).start()
-    psuccess("App server started.")
-
+    psuccess("App server started. IP : {}".format(get_private_ip()))
+    disable_flask_logs()
 
 def start_server():
     s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
