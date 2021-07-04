@@ -1,4 +1,4 @@
-from utils.res import *
+from util.res import *
 import importlib
 import Levenshtein
 from locale import getlocale
@@ -7,7 +7,7 @@ from random import randint
 from os import remove
 import playsound
 from difflib import SequenceMatcher
-from utils.translator import translate
+from util.translator import translate
 from multiprocessing import Process
 
 def check_skills(voice_command):

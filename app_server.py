@@ -1,4 +1,5 @@
-from utils.res import *
+from util.res import *
+from util.translator import translate
 import socket
 from multiprocessing import Process, freeze_support
 from locale import getlocale
@@ -24,7 +25,7 @@ def start_server():
 
 def handle_client(cli):
     while True:
-        voice_command = cli.recv(1024)
+        voice_command = cli.recv(2048)
         print(voice_command)
 
         if voice_command != b"":
