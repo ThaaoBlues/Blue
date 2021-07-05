@@ -4,7 +4,6 @@ from time import sleep
 import locale
 from skills import check_skills
 from util import setup
-from skills_modules import heure
 from config_server import start_webserver
 from util.translator import translate
 from multiprocessing import Process,freeze_support
