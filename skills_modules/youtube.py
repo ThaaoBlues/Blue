@@ -7,12 +7,15 @@ from util.res import remove_french_noises_words
 
 
 def initialize(voice_command,sentences):
+
     type = "musique" if ("musique" or "clip" in voice_command) else "vidéo"
+
+    voice_command = remove_french_useless_words(voice_command)
+
     for sentence in sentences:
         for part in sentence.split("*"):
             voice_command = voice_command.replace(part,"")
 
-    voice_command = remove_french_noises_words(voice_command)
 
     results = VideosSearch(voice_command, limit = 2).result()
     url = results['result'][1]['link']

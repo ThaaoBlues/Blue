@@ -14,9 +14,9 @@ import logging
 import click
 
 
-def remove_french_noises_words(string):
+def remove_french_useless_words(string):
 
-    ws = ["mon","ma","mes","ton","ta","tes","son","sa","ses","notre","nos","votre","vos","leur","leurs","un","une","des","la","le","les"]
+    ws = ["mon","ma","mes","ton","ta","tes","son","sa","ses","notre","nos","votre","vos","leurs","leur","une","un","des","la","les","le","de","d\'"]
     
     for w in ws:
         string = string.replace(w,"")
