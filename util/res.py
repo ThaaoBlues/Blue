@@ -14,6 +14,14 @@ import logging
 import click
 
 
+def remove_french_noises_words(string):
+
+    ws = ["mon","ma","mes","ton","ta","tes","son","sa","ses","notre","nos","votre","vos","leur","leurs","un","une","des","la","le","les"]
+    
+    for w in ws:
+        string = string.replace(w,"")
+
+    return string
 
 def disable_flask_logs():
     log = logging.getLogger('werkzeug')

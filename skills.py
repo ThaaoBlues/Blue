@@ -61,28 +61,27 @@ def check_skills(voice_command):
     with open("config/skills.blue","r",encoding="utf-8") as f:
         lines = f.read().splitlines()
         
-        final_sentences = ""
-
         pinfo("trying starred sentences ratio...")
         for line in lines:
             
             sentences = line.split(":")[1]
             for sentence in sentences.split("/"):
 
-                
                 result = starred_sentences_ratio(line,voice_command,sentence)
                 if result['match']:
-                    init_skill_call(result['module'], result['ratio'],final_sentences,voice_command)
+                    init_skill_call(result['module'], result['ratio'],sentences,voice_command)
                     return True
 
 
         ratio = 0
         module = None
+        final_sentences = ""
         pinfo("trying full sentences ratio...")
         for line in lines:
             
             sentences = line.split(":")[1]
             for sentence in sentences.split("/"):
+                final_sentences = sentences.split("/")
                 #starred lines ratio didn't work, using full ratio to get the higher match
                 result = full_sentence_ratio(line,voice_command,sentence.strip("*"))
                 if result['ratio'] > ratio:

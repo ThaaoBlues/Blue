@@ -1,11 +1,11 @@
 open_website:va sur */va sur le site de */ouvre le site de *
 heure:quelle heure est il/quelle heure il est/donne moi l'heure
-youtube:mets la vidéo de */mets la musique de */mets une vidéo de */play the video of */display a video of *
+youtube:mets * musique de */mets * vidéo de */play * video of */display * video of *
 rss:donne-moi des nouvelles/dis-moi les informations/dis-moi les dernières nouvelles/dis-moi les dernières informations/lis-moi le journal/give me some news
 google-search:recherche comment faire */cherche comment on fait */cherche des */recherche des *
 date:quel jour sommes-nous/quel jour on est/quel jour est-on/donne moi le jour/on est quelle date/quelle est la date d'aujourd'hui
 say:dis */répète *
-stop:stop/arrête
+stop:stop/arrête/ferme *
 shutown:éteins toi/adieu/tais toi/ferme ta gueule/ferme la/mets toi en veille
 speedtest:effectue un speedtest/effectue un test de vitesse/fais un speedtest s'il te plaît/fais un test de vitesse s'il te plaît/c'est un speedtest s'il te plaît
 wikipedia:qui était */c'est qui */qui est */c'est qui */qu'est-ce qu*/quelle est la définition de */recherche des informations sur *

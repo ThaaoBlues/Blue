@@ -20,6 +20,9 @@ def initialize(voice_command,sentences):
                 app.connect(title_re = w.window_text())
                 app_dialog = app.top_window()
                 app_dialog.restore().set_focus()
+                press('q')
+                hotkey("alt","f4")
+                response=""
     else:
         press('q')
         hotkey("alt","f4")
