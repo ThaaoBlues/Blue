@@ -16,3 +16,6 @@ speedtest-cli
 opencv-python
 numpy
 jokeapi
+pywin32
+pyautogui
+comtypes==1.1.7
