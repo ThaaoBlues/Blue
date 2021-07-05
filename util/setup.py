@@ -45,4 +45,6 @@ def check_files_integrity():
         open("config/custom_rss_feed.blue","w")
     
     if not path.exists("config/skills.blue"):
-        open("config/skills.blue","w")
+        with open("config/skills.blue","w",encoding="utf-8") as f:
+            f.write(get("https://raw.githubusercontent.com/ThaaoBlues/Blue/main/skills.blue").text.replace("\n",""))
+            f.close()

@@ -9,5 +9,6 @@ def initialize(voice_command,sentences):
     :returns: response is a string containing the sentence you want to say aloud
     """
     pyautogui.press('q')
+    pyautogui.hotkey("alt","f4")
     response=""
-    return True, response
+    return True, responseq

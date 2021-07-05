@@ -1,7 +1,7 @@
+from webbrowser import open as open_w
 from youtubesearchpython import VideosSearch
-from subprocess import run, Popen
-from multiprocessing import Process, freeze_support
-import webbrowser
+from subprocess import Popen
+from pyautogui import hotkey, click, size
 from platform import system
 import pafy
 from time import sleep
@@ -9,7 +9,7 @@ from time import sleep
 
 
 def initialize(voice_command,sentences):
-    freeze_support()
+
     for sentence in sentences:
         voice_command = voice_command.replace(sentence,"",1)
 
@@ -18,14 +18,12 @@ def initialize(voice_command,sentences):
     vid = pafy.new(url)
     best = vid.getbest()
 
-    if system() == "Linux":
+    #open video
+    open_w(best.url)
+    sleep(4)
+    screenWidth, screenHeight = size()
+    click(screenWidth//2,screenHeight//2)
 
-        p_video = Popen(["xdg-open",f"\"{best.url}\""])
-
-    else:
-        p_video = Popen(["start",url],shell=True)
-
-    
     response = f"j'ai affiché {voice_command.lower()} sur mon écran principal."
 
     
@@ -34,12 +32,12 @@ def initialize(voice_command,sentences):
         time = time.split(":")
         time = int(time[0])*60 + int(time[1])
         sleep(time)
-        p_video.terminate()
+        hotkey("alt","f4")
         
     else:
         
         sleep(20*60)
-        p_video.terminate()        
+        hotkey("alt","f4")        
     
     
     
