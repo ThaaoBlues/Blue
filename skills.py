@@ -81,7 +81,7 @@ def check_skills(voice_command):
             
             sentences = line.split(":")[1]
             for sentence in sentences.split("/"):
-                final_sentences = sentences.split("/")
+                final_sentences = sentences
                 #starred lines ratio didn't work, using full ratio to get the higher match
                 result = full_sentence_ratio(line,voice_command,sentence.strip("*"))
                 if result['ratio'] > ratio:

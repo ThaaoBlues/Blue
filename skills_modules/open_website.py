@@ -10,11 +10,11 @@ def initialize(voice_command,sentences):
             voice_command = voice_command.replace(part,"",1)
     
     if "." in voice_command:
-        open_website("http://www."+voice_command.strip("va sur").replace(' ','').replace('blue',"").lower())
-        response = (f"j'ai affiché {voice_command.strip('va sur').replace(' ','').lower()} sur mon écran principal.")
+        open_website("http://www."+voice_command)
+        response = (f"j'ai affiché {voice_command} sur mon écran principal.")
     else:
-        open_website(str(list(search(voice_command.strip('va sur').replace(' ','').lower()))[0]))
-        response = (f"j'ai affiché {voice_command.strip('va sur').replace(' ','').lower()} sur mon écran principal.")
+        open_website(str(list(search(voice_command))[0]))
+        response = (f"j'ai affiché {voice_command} sur mon écran principal.")
     
         
     return True, response

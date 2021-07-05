@@ -1,4 +1,4 @@
-open_website:va sur */va sur le site de */ouvre le site de *
+open_website:va sur */va sur le site de */ouvre le site de */affiche le site de *
 heure:quelle heure est il/quelle heure il est/donne moi l'heure
 youtube:mets * musique de */mets * vidéo de */play * video of */display * video of *
 rss:donne-moi des nouvelles/dis-moi les informations/dis-moi les dernières nouvelles/dis-moi les dernières informations/lis-moi le journal/give me some news
@@ -14,4 +14,5 @@ camera:ouvre la camera/affiche la camera/allume la camera
 jokes:raconte moi une blague/dis moi une blague/fais moi rire/fais moi rigoler
 maths:combien font */combien ça fait */ça fait combien */calcule */calcule moi */fais le calcul *
 maps:aller à */comment aller à */montre-moi un intinéraire vers */montre-moi l'intinéraire vers */montre-moi l'intinéraire pour aller à */montre-moi un intinéraire pour aller à */affiche l'intinéraire pour aller à */affiche un intinéraire pour aller à */affiche l'intinéraire pour aller à */affiche une carte de */affiche la carte de *
+twitch:* le stream de * sur twitch/* le stream twitch de *
 test:test

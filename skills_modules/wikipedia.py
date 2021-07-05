@@ -1,9 +1,10 @@
 import wikipedia
 import locale
+from util.res import remove_french_useless_words
 
 
 def initialize(voice_command,sentences):
-
+    voice_command = remove_french_useless_words(voice_command)
     for sentence in sentences:
         for part in sentence.split("*"):
             voice_command = voice_command.replace(part,"",1)
@@ -14,6 +15,5 @@ def initialize(voice_command,sentences):
 
         return True, response
     except:
-        print(e)
         response = "Auncun article sur wikipedia correspond à ce nom."
         return True, response

@@ -22,11 +22,9 @@ def initialize(voice_command,sentences):
                 app_dialog.restore().set_focus()
                 press('q')
                 hotkey("alt","f4")
-                response=""
     else:
         press('q')
         hotkey("alt","f4")
-        response=""
 
 
-    return True, response
+    return True, ""
