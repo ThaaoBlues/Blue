@@ -1,16 +1,17 @@
-open_website:startswith va sur/va sur le site de/ouvre le site de
+open_website:va sur */va sur le site de */ouvre le site de *
 heure:quelle heure est il/quelle heure il est/donne moi l'heure
-youtube:mets la vidéo de/mets la musique de/mets une vidéo de/play the video of/display video
+youtube:mets la vidéo de */mets la musique de */mets une vidéo de */play the video of */display a video of *
 rss:donne-moi des nouvelles/dis-moi les informations/dis-moi les dernières nouvelles/dis-moi les dernières informations/lis-moi le journal/give me some news
-google-search:recherche comment faire/cherche comment on fait/sartswith cherche des/startswith recherche des
+google-search:recherche comment faire */cherche comment on fait */cherche des */recherche des *
 date:quel jour sommes-nous/quel jour on est/quel jour est-on/donne moi le jour/on est quelle date/quelle est la date d'aujourd'hui
-say:startswith dis/startswith répète
+say:dis */répète *
 stop:stop/arrête
 shutown:éteins toi/adieu/tais toi/ferme ta gueule/ferme la/mets toi en veille
 speedtest:effectue un speedtest/effectue un test de vitesse/fais un speedtest s'il te plaît/fais un test de vitesse s'il te plaît/c'est un speedtest s'il te plaît
-wikipedia:startswith qui était/startswith c'est qui/startswith qui est/startswith c'est qui/startswith qu'est-ce qu/startswith quelle est la définition de/recherche des informations sur
+wikipedia:qui était */c'est qui */qui est */c'est qui */qu'est-ce qu*/quelle est la définition de */recherche des informations sur *
 ip:quelle est mon adresse ip/donne moi mon adresse ip/cherche mon adresse ip
 camera:ouvre la camera/affiche la camera/allume la camera
 jokes:raconte moi une blague/dis moi une blague/fais moi rire/fais moi rigoler
-maths:combien font/combien ça fait/ça fait combien/calcule/calcule moi/fais le calcul
-maps:aller à/startswith comment aller à/startswith montre-moi un intinéraire vers/startswith montre-moi l'intinéraire vers/startswith montre-moi l'intinéraire pour aller à/startswith montre-moi un intinéraire pour aller à/startswith affiche l'intinéraire pour aller à/startswith affiche un intinéraire pour aller à/startswith affiche l'intinéraire pour aller à/startswith affiche une carte de/affiche la carte de
+maths:combien font */combien ça fait */ça fait combien */calcule */calcule moi */fais le calcul *
+maps:aller à */comment aller à */montre-moi un intinéraire vers */montre-moi l'intinéraire vers */montre-moi l'intinéraire pour aller à */montre-moi un intinéraire pour aller à */affiche l'intinéraire pour aller à */affiche un intinéraire pour aller à */affiche l'intinéraire pour aller à */affiche une carte de */affiche la carte de *
+test:test

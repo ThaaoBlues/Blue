@@ -26,10 +26,10 @@ def start_server():
 def handle_client(cli):
     while True:
         voice_command = cli.recv(2048)
-        print(voice_command)
 
         if voice_command != b"":
-            voice_command = voice_command.decode('utf-8')
+            voice_command = voice_command.decode('utf-8').strip("\n")
+            pinfo(f"IN-APP VOICE COMMAND : {voice_command}")
 
             if getlocale()[0][:2] != 'fr':
                     voice_command = translate(voice_command,getlocale()[0][:2],True)

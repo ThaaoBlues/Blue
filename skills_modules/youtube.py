@@ -26,7 +26,7 @@ def initialize(voice_command,sentences):
         p_video = Popen(["start",url],shell=True)
 
     
-    response = f"j'ai affiché {voice_command.lower()} sur la base BLUE"
+    response = f"j'ai affiché {voice_command.lower()} sur mon écran principal."
 
     
     if results['result'][0]['duration'] != 0:
