@@ -3,7 +3,8 @@ from subprocess import run, Popen
 
 def initialize(voice_command,sentences):
     for sentence in sentences:
-        voice_command = voice_command.replace(sentence,"",1)
+        for part in sentence.split("*"):
+            voice_command = voice_command.replace(part,"",1)
 
     url = "www.maps.google.com/maps/dir/" + voice_command
 

@@ -3,4 +3,9 @@
 
 
 def initialize(voice_command,sentences):
-    return True, voice_command.replace("dis","",1).replace("répète","",1)
+
+    for sentence in sentences:
+        for part in sentence.split("*"):
+            voice_command = voice_command.replace(part,"",1)
+
+    return True, voice_command

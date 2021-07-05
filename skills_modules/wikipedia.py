@@ -5,7 +5,8 @@ import locale
 def initialize(voice_command,sentences):
 
     for sentence in sentences:
-        voice_command = voice_command.replace(sentence,"",1)
+        for part in sentence.split("*"):
+            voice_command = voice_command.replace(part,"",1)
         
     try:
         wikipedia.set_lang(locale.getlocale()[0][:2])

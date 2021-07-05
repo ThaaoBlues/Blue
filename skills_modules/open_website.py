@@ -6,7 +6,8 @@ from googlesearch import search
 def initialize(voice_command,sentences):
 
     for sentence in sentences:
-        voice_command = voice_command.replace(sentence,"",1)
+        for part in sentence.split("*"):
+            voice_command = voice_command.replace(part,"",1)
     
     if "." in voice_command:
         open_website("http://www."+voice_command.strip("va sur").replace(' ','').replace('blue',"").lower())

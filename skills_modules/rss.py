@@ -3,8 +3,10 @@ from difflib import SequenceMatcher
 
 
 def initialize(voice_command,sentences):
+    
     for sentence in sentences:
-        voice_command = voice_command.replace(sentence,"",1)
+        for part in sentence.split("*"):
+            voice_command = voice_command.replace(part,"",1)
 
 
     with open("config/custom_rss_feed.blue","r",encoding="utf-8") as f:
