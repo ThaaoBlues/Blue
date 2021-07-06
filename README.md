@@ -99,6 +99,12 @@ def initialize(voice_command,sentences):
     :sentences: the sentences that you have specified while uploading the skill
     :returns: response is a string containing the sentence you want to say aloud
     """
+    #use the following lines to strip voice_command and get only the main word(s)
+    for sentence in sentences:
+        for part in sentence.split("*"):
+            voice_command = voice_command.replace(part,"")
+        
+    voice_command = remove_useless_words(voice_command)
 
     return True, response
 

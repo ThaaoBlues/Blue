@@ -1,6 +1,6 @@
 from os import path,mkdir
 from util.res import *
-
+from locale import getlocale
 
 
 def get_hot_word():
@@ -43,8 +43,19 @@ def check_files_integrity():
     
     if not path.exists("config/custom_rss_feed.blue"):
         open("config/custom_rss_feed.blue","w")
-    
+
+
+    locale = getlocale()[2:]
+    if locale not in get("https://raw.githubusercontent.com/ThaaoBlues/Blue/main/language-files/supported_languages.txt").text:
+        locale = "fr"
+
+
     if not path.exists("config/skills.blue"):
         with open("config/skills.blue","w",encoding="utf-8") as f:
-            f.write(get("https://raw.githubusercontent.com/ThaaoBlues/Blue/main/skills.blue").text.replace("\n",""))
+            f.write(get(f"https://raw.githubusercontent.com/ThaaoBlues/Blue/main/language-files/{locale}/skills.blue").text.replace("\n",""))
+            f.close()
+
+    if not path.exists("config/unnecessary.blue"):
+        with open("config/unnecessary.blue","w",encoding="utf-8") as f:
+            f.write(get(f"https://raw.githubusercontent.com/ThaaoBlues/Blue/main/language-files/{locale}/unnecessary.blue").text.replace("\n",""))
             f.close()

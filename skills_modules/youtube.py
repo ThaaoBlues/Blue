@@ -3,7 +3,7 @@ from youtubesearchpython import VideosSearch
 from pyautogui import click, size
 import pafy
 from time import sleep
-from util.res import remove_french_useless_words
+from util.res import remove_useless_words
 
 
 def initialize(voice_command,sentences):
@@ -16,7 +16,7 @@ def initialize(voice_command,sentences):
             voice_command = voice_command.replace(part,"")
 
             
-    voice_command = remove_french_useless_words(voice_command)
+    voice_command = remove_useless_words(voice_command)
 
 
     results = VideosSearch(voice_command, limit = 2).result()

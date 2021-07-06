@@ -13,10 +13,9 @@ from socket import socket, AF_INET, SOCK_DGRAM
 import logging
 import click
 
+def remove_useless_words(string):
 
-def remove_french_useless_words(string):
-
-    ws = ["mon","ma","mes","ton","ta","tes","son","sa","ses","notre","nos","votre","vos","leurs","leur","une","un","des","la","les","le","de","d\'"]
+    ws = open("config/unnecessary.txt","r").read().split(",")
     
     for w in ws:
         string = string.replace(w,"")
