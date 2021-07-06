@@ -2,7 +2,10 @@
 ## Blue is a vocal assistant that you can use and modify to add your own features.
 
 
-Use the requirements.txt and the setup.py files before running Blue the first time. (If you are on windows, download the .exe release)
+Use the requirements.txt file with pip before running Blue the first time. If you are on windows, pip will not be able to install pyaudio. To install it you must install pipwin with ``pip install pipwin`` then install pyaudio with pipwin ``pipwin install pyaudio``
+
+## Language-related informations :
+This assistant is designed for french language, it will use a translator if you aren't french but the result may not be accurate. If someone is able to traduct skills.blue and unnecessary.blue with his own language I could get rid of the translator and let the user choose his language by the settings web server.
 
 
 ## Blue can do a bunch of things like:
