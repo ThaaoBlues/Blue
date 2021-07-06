@@ -86,10 +86,13 @@ def check_skills(voice_command):
                 result = full_sentence_ratio(line,voice_command,sentence.strip("*"))
                 if result['ratio'] > ratio:
                     module = result['module']
-               
-            
-        #calling module on higher ratio obtained
-        init_skill_call(module, ratio,final_sentences,voice_command)
+        
+        if ratio > 0.2:
+            #calling module on higher ratio obtained
+            init_skill_call(module, ratio,final_sentences,voice_command)
+        else:
+            module = "open_website"
+            init_skill_call(module, ratio,"",voice_command)
         
         return True
 

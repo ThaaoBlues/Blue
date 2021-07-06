@@ -15,10 +15,10 @@ import click
 
 def remove_useless_words(string):
 
-    ws = open("config/unnecessary.txt","r").read().split(",")
+    ws = open("config/unnecessary.blue","r").read().split(",")
     
     for w in ws:
-        string = string.replace(w,"")
+        string = string.replace(" "+w+" "," ")
 
     return string
 

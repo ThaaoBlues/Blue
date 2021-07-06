@@ -1,10 +1,11 @@
 from webbrowser import open as open_website
 from googlesearch import search
-
+from util.res import remove_useless_words
 
 
 def initialize(voice_command,sentences):
-
+    voice_command = remove_useless_words(voice_command)
+    
     for sentence in sentences:
         for part in sentence.split("*"):
             voice_command = voice_command.replace(part,"",1)
