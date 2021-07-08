@@ -1,5 +1,6 @@
 Flask
 googlesearch-python
+google
 speechrecognition
 gtts
 playsound

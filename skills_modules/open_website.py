@@ -6,10 +6,11 @@ from util.res import remove_useless_words
 def initialize(voice_command,sentences):
     voice_command = remove_useless_words(voice_command)
     
-    for sentence in sentences:
-        for part in sentence.split("*"):
-            voice_command = voice_command.replace(part,"",1)
-    
+    if sentences != "":
+        for sentence in sentences:
+            for part in sentence.split("*"):
+                voice_command = voice_command.replace(part,"",1)
+        
     if "." in voice_command:
         open_website("http://www."+voice_command)
         response = (f"j'ai affiché {voice_command} sur mon écran principal.")
