@@ -11,38 +11,36 @@ from skills import check_skills
 def initialize():
     Process(target=start_server).start()
     psuccess("App server started. IP : {}".format(get_private_ip()))
-    disable_flask_logs()
 
 def start_server():
     s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     s.bind(("",8835))
     s.listen(10)
     while True:
-        cli,addr = s.accept()
-        print(addr[0])
-        Process(target=handle_client,args=(cli,)).start()
-
+        try:
+            cli,addr = s.accept()
+            print(addr[0])
+            Process(target=handle_client,args=(cli,)).start()
+        except:
+            pass
 
 def handle_client(cli):
     while True:
-        voice_command = cli.recv(2048)
 
-        if voice_command != b"":
-            voice_command = voice_command.decode('utf-8').strip("\n")
-            pinfo(f"IN-APP VOICE COMMAND : {voice_command}")
+        try:
+            voice_command = cli.recv(2048)
 
-            if getlocale()[0][:2] != 'fr':
-                    voice_command = translate(voice_command,getlocale()[0][:2],True)
+            if voice_command != b"":
+                voice_command = voice_command.decode('utf-8').strip("\n")
+                pinfo(f"IN-APP VOICE COMMAND : {voice_command}")
 
-            if not check_skills(voice_command):
-                print("Je ne sais pas encore faire cela")
+                if getlocale()[0][:2] != 'fr':
+                        voice_command = translate(voice_command,getlocale()[0][:2],True)
 
-        else:
-            break
+                if not check_skills(voice_command):
+                    print("Je ne sais pas encore faire cela")
 
-
-if __name__ == '__main__':
-
-    freeze_support()
-
-    initialize()
+            else:
+                break
+        except:
+            pass

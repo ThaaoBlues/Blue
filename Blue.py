@@ -17,8 +17,8 @@ def listen():
             data = r.record(source,duration=5)
             voice_command = r.recognize_google(data,language=locale.getlocale()[0][:2])
             return voice_command
-    except:
-        pass
+    except KeyboardInterrupt:
+        raise KeyboardInterrupt
 
 
 
@@ -48,6 +48,7 @@ if __name__ == '__main__':
             r.adjust_for_ambient_noise(source)
             
         while True:
+            
             voice_command = listen()
             if voice_command != None:
                 print(voice_command)
@@ -62,7 +63,7 @@ if __name__ == '__main__':
                         print("Je ne sais pas encore faire cela")
 
     except:
-        perror("No desktop microphone found, you must use the android app.")
+        perror("No desktop microphone found or microphone listening loop manually disabled, you must use the android app.")
 
     
 
