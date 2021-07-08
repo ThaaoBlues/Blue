@@ -17,3 +17,6 @@ maps:aller à */comment aller à */montre-moi un intinéraire vers */montre-moi 
 twitch:* le stream de * sur twitch/* le stream twitch de *
 test:test
 thanks:merci *
+volume_up:monte le volume/agmente le volume/augmente le son/monte le son
+volume_down:baisse le volume/descends le volume/baisse le son/descend le son
+pause:mets en pause */pause
