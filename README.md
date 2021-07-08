@@ -5,20 +5,31 @@
 Use the requirements.txt file with pip before running Blue the first time. If you are on windows, pip will not be able to install pyaudio. To install it you must install pipwin with ``pip install pipwin`` then install pyaudio with pipwin ``pipwin install pyaudio``
 
 ## Language-related informations :
-This assistant is designed for french language, it will use a translator if you aren't french but the result may not be accurate. If someone is able to traduct skills.blue and unnecessary.blue with his own language I could get rid of the translator and let the user choose his language by the settings web server.
+This assistant is designed for french language, it will use a translator if you aren't french but the result may not be accurate. If someone is able to traduct ``skills.blue`` and ``unnecessary.blue`` files with his own language I could get rid of the translator and let the user choose his language by the settings web server.
 
 
 ## Blue can do a bunch of things like:
 
 - add notes
 
+
 - read your notes
+
 
 - delete a note
 
+
 - play music/video from youtube
 
+
+- pause music/video from youtube
+
+
+- volume up/volume down
+
+
 - display the twitch stream of anyone
+
 
 - talk with you and learn from your responses to be more accurate.
 
