@@ -45,7 +45,7 @@ def check_files_integrity():
         open("config/custom_rss_feed.blue","w")
 
 
-    locale = getlocale()[2:]
+    locale = getlocale()[0][2:]
     if locale not in get("https://raw.githubusercontent.com/ThaaoBlues/Blue/main/language-files/supported_languages.txt").text:
         locale = "fr"
 
