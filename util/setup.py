@@ -52,10 +52,10 @@ def check_files_integrity():
 
     if not path.exists("config/skills.blue"):
         with open("config/skills.blue","w",encoding="utf-8") as f:
-            f.write(get(f"https://raw.githubusercontent.com/ThaaoBlues/Blue/main/language-files/{locale}/skills.blue").text.replace("\n",""))
+            f.write(get(f"https://raw.githubusercontent.com/ThaaoBlues/Blue/main/language-files/{locale}/skills.blue").text)
             f.close()
 
     if not path.exists("config/unnecessary.blue"):
         with open("config/unnecessary.blue","w",encoding="utf-8") as f:
-            f.write(get(f"https://raw.githubusercontent.com/ThaaoBlues/Blue/main/language-files/{locale}/unnecessary.blue").text.replace("\n",""))
+            f.write(get(f"https://raw.githubusercontent.com/ThaaoBlues/Blue/main/language-files/{locale}/unnecessary.blue").text)
             f.close()
