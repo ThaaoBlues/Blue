@@ -19,4 +19,8 @@ test:test
 thanks:merci *
 volume_up:monte le volume/agmente le volume/augmente le son/monte le son
 volume_down:baisse le volume/descends le volume/baisse le son/descend le son
-pause:mets en pause */pause
+pause:mets en pause */pause/play/remet la *
+reminder:* une alarme/* un réveil/* un réveil/* une alarme
+skip:skip/change de musique/* musique suivante
+mute:mute */silence
+fullscreen:* plein écran/* fullscreen
