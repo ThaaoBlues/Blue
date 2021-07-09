@@ -146,10 +146,13 @@ def initialize(voice_command,sentences):
 
 - if you want to take some random words in you trigger sentence, just add * at the word position. 
 
+## Android app :
+The android app (Blue-v2.apk) is designed to be used as a microphone if you don't have one or there is to many noises around (the app uses google-based speech to text engine and it is super mega over turbo powerfull). You need to enter the IP of the machine where Blue is running before speaking (don't worry, it will be prompted to you).
+
 
 ## Informations
 
-If you are near the Blue base and a microphone is plugged in, you can talk without opening the app on your phone by beginning your sentences by the hot word you have chossen at the setup.
+If you are near the Blue base and a microphone is plugged in, you can talk without opening the app on your phone (Blue_v2.apk) by beginning your sentences by the hot word you have chossen at the setup.
 
 
 All the commands are designed for french people, the script use a translator so you can talk in any languages but it may not translate in the right way to trigger some features.
