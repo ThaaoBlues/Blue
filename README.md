@@ -22,11 +22,8 @@ This assistant is designed for french language, it will use a translator if you 
 - delete a note
 
 
-- play music/video from youtube
-
-
-- pause music/video from youtube
-
+- play/pause/skip/fullscreen music/video from youtube
+(needs [this browser extension](https://chrome.google.com/webstore/detail/hotkey-music-controller-y/pohakmokiogdbhiocmacgalcmnfdbbne/related) to make keyboard shortcuts work on browser)
 
 - volume up/volume down
 
@@ -34,7 +31,7 @@ This assistant is designed for french language, it will use a translator if you 
 - display the twitch stream of anyone
 
 
-- talk with you and learn from your responses to be more accurate.
+- talk with you and learn from your responses to be more accurate.(coming soon)
 
 
 - play the top 100
@@ -73,7 +70,7 @@ This assistant is designed for french language, it will use a translator if you 
 - display your IP configuration
 
 
-- close/kill a process running on the machine just by name
+- close/kill a process running on the machine just by name (coming soon)
 
 
 - give you informations about the weather
@@ -85,18 +82,18 @@ A webserver is running on port 80 to access and config Blue easily.
 ### By the configuration page you can add:
 
 
--customs RSS feed
+- customs RSS feed
 
 
--customs messages to send to an ip
+- customs messages to send to an ip
 
 
--add a voice command that open directly the desired website
+- add a voice command that open directly the desired website
 
 
--add new skills to Blue
+- add new skills to Blue
 
-
+- add a wake-up alarm the day and time you want
 
 ## YOU CAN NOW ADD YOUR OWN PYTHON-WRITTEN SKILLS FOR BLUE DIRECTLY FROM THE WEBSERVER !
 

@@ -4,6 +4,6 @@ from pyautogui import press
 
 def initialize(voice_command,sentences):
     
-    press("playpause")
+    press("f11")
 
     return True, ""
