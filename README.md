@@ -13,6 +13,7 @@ This assistant is designed for french language, it will use a translator if you 
 ```bash
 sudo apt install python python-pip python-pyaudio git
 git clone https://www.github.com/ThaaoBlues/Blue
+cd ./Blue
 pip install -r requirements.txt
 python Blue.py
 ```
@@ -21,7 +22,7 @@ python Blue.py
     - Install python from [the official page](https://www.python.org)
     - Download the zip file of the source code and extract it or clone the git repo if you have git
     - open a command prompt on the Blue/ folder
-    - type ``pip install pipwin``,``pipwin install pyaudio``, ``pip install -r requirements.txt``
+    - type ``pip install pipwin`` then ``pipwin install pyaudio`` and ``pip install -r requirements.txt``
     - and finally launch Blue with ``python Blue.py``
 
 
