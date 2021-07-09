@@ -10,6 +10,9 @@ This assistant is designed for french language, it will use a translator if you 
 
 ## Blue can do a bunch of things like:
 
+- wake you up with a video/music (program the day and the hour by the web page)
+
+
 - add notes
 
 

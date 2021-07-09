@@ -9,11 +9,12 @@
     <form action="/process/[ADD BLUE SKILL]" method="post" enctype="multipart/form-data">
         <h1>Import a Blue skill writen in python : </h1>
         <input type="file" name="file">
-        <div>
-            <label for="voice_command">Commands that will trigger this skill : (separated by /)</label>
+        <div style="margin-top: 10px;">
+            <label for="voice_command" >Commands that will trigger this skill : (separated by /), if you want to insert place of random words, just add *</label>
+            <br>
             <input type="text" id="voice_command" name="voice_command">
         </div>
-        <input type="submit" value="Upload">
+        <input type="submit" style="margin-top: 10px;" value="Upload">
     </form>
 </body>
 </html>

@@ -3,6 +3,17 @@ from util.res import *
 from locale import getlocale
 
 
+def init_reminders_file():
+
+    with open("config/reminders.xml","w") as f:
+
+        f.write("<reminders_root>\n</reminders_root>")
+
+        f.close()
+
+
+
+
 def get_hot_word():
 
     if not path.exists("config/assistant_name.blue"):
@@ -43,6 +54,9 @@ def check_files_integrity():
     
     if not path.exists("config/custom_rss_feed.blue"):
         open("config/custom_rss_feed.blue","w")
+
+    if not path.exists("config/reminders.xml"):
+        init_reminders_file()
 
 
     locale = getlocale()[0][2:]

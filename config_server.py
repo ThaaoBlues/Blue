@@ -1,8 +1,10 @@
-from flask import Flask, render_template, request, send_file, send_from_directory, flash, redirect
+from flask import Flask, render_template, request,abort, send_file, send_from_directory, flash, redirect
 from werkzeug.utils import secure_filename
-import os
+from os import path
+from util.res import *
 
-UPLOAD_FOLDER = os.path.dirname(__file__)+'/skills_modules/'
+
+UPLOAD_FOLDER = path.dirname(__file__)+'/skills_modules/'
 ALLOWED_EXTENSIONS = {'py'}
 
 
@@ -112,8 +114,33 @@ def action(page):
 
         return render_template("manage_custom_website.html",lenght=len(array),array=array,name=name)
     
+
+    elif page == "[ADD REMINDER]":
+
+        if request.method == "GET":
+
+            return render_template("add_reminder.html")
+        else:
+            
+            try:
+                w = request.form['week']
+                #this is a date based reminder
+
+                return render_template("config_page.html")
+
+            except:
+
+                #this is a wake-up alarm
+                add_wake_up_alarm(str(request.form['date']).split("-")[2],request.form['time'],request.form["wakeup_music"])
+                return render_template("config_page.html")
+                
+
+            
+    elif page == "[MANAGE REMINDERS]":
+        pass
+
     else:
-        return page
+        return abort(404)
 
 
 

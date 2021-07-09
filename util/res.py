@@ -1,10 +1,9 @@
 from socket import gethostname, gethostbyname_ex,create_connection
 from requests import get
-from datetime import datetime
+from datetime import date
 from random import randint
 from os import listdir, remove,chdir,path,getcwd
 from psutil import cpu_percent, virtual_memory
-from getpass import getpass, getuser
 from platform import system, platform, python_version
 from colorama import Fore, Back, Style
 from colorama import init
@@ -12,6 +11,40 @@ from pathlib import Path
 from socket import socket, AF_INET, SOCK_DGRAM
 import logging
 import click
+from xml.etree import ElementTree
+from xml.sax.saxutils import escape
+from json import dumps
+
+
+
+def add_wake_up_alarm(days_left,time,url):
+
+    et = ElementTree.parse("config/reminders.xml")
+    root = et.getroot()
+
+    new_ele = ElementTree.SubElement(root,"wakeup")
+    new_ele.text = dumps({"days_left" : abs(int(days_left)-date.today().day),"time" : time, "url" : escape(url)})
+    et.write("config/reminders.xml")
+    
+    from skills_modules import reminder
+
+    reminder.start_wakeup_timer(abs(int(days_left)-date.today().day),time,url)
+
+
+def add_reminder(date,time):
+    pass
+
+def get_reminders_list():
+    pass
+
+def get_wakeup_list():
+
+    et = ElementTree.parse("config/reminders.xml")
+    root = et.getroot()
+    all_tags = [ele.tag for ele in root]
+    all_times = [ele.attrib['time'] for ele in root]
+
+    return {"tags" : all_tags,"times" : all_times}
 
 def remove_useless_words(string):
 
