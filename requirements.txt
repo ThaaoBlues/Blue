@@ -6,7 +6,6 @@ gtts
 playsound
 pyautogui
 psutil
-pyaudio
 youtube-search-python
 pafy
 youtube-dl

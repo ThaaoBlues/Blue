@@ -7,6 +7,23 @@ Use the requirements.txt file with pip before running Blue the first time. If yo
 ## Language-related informations :
 This assistant is designed for french language, it will use a translator if you aren't french but the result may not be accurate. If someone is able to traduct ``skills.blue`` and ``unnecessary.blue`` files with his own language I could get rid of the translator and let the user choose his language by the settings web server.
 
+## installation :
+
+- Linux (debian-based):
+```bash
+sudo apt install python python-pip python-pyaudio git
+git clone https://www.github.com/ThaaoBlues/Blue
+pip install -r requirements.txt
+python Blue.py
+```
+
+- Windows :
+    - Install python from [the official page](https://www.python.org)
+    - Download the zip file of the source code and extract it or clone the git repo if you have git
+    - open a command prompt on the Blue/ folder
+    - type ``pip install pipwin``,``pipwin install pyaudio``, ``pip install -r requirements.txt``
+    - and finally launch Blue with ``python Blue.py``
+
 
 ## Blue can do a bunch of things like:
 
