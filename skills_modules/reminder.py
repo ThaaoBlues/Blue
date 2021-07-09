@@ -3,19 +3,21 @@ from datetime import datetime
 from threading import Timer
 from calendar import monthrange
 from functools import partial
-from webbrowser import open as open_youtube
+from webbrowser import open as open_url
 from skills import speak
 
 
 
 def initialize(voice_command,sentences):
 
-    return ""
+    open_url("http://127.0.0.1/action/[ADD REMINDER]")
+
+    return True, "J'ai ouvert la page de configuration de tes alarmes et réveils sur ton navigateur !"
 
 
 def alarm(url):
     speak("Comme prévu, je viens te réveiller !")
-    open_youtube(url)
+    open_url(url)
 
 def start_wakeup_timer(days_left,time,url):
 
