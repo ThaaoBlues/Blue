@@ -1,6 +1,6 @@
 import feedparser
 from difflib import SequenceMatcher
-
+from json import loads
 
 def initialize(voice_command,sentences):
     
@@ -10,18 +10,20 @@ def initialize(voice_command,sentences):
 
 
     with open("config/custom_rss_feed.blue","r",encoding="utf-8") as f:
-            while(True):
-                try:
-                    l = f.readline().lower()
-                    if SequenceMatcher(None, voice_command, l.strip("\n")).ratio() >= 0.65:
 
-                        url = f.readline()
-                        feed = feedparser.parse(url)
+        for line in f.read().splitlines():
+            try:
+                if line.strip("\n").strip("\r") != "":
+                    line = loads(line)
+                    if SequenceMatcher(None, voice_command, line['command']).ratio() >= 0.8:
+
+
+                        feed = feedparser.parse(line['url'])
                         response = "Voici les deux derniers articles publiés :"
                         i=1
                         for entry in feed.entries[:2]:
                             response += "article 1 :" if i == 1 else "article 2 :"
-                                
+
                             response += entry.title + "."
 
                             response += "voici donc le contenu de l'article :"
@@ -30,13 +32,12 @@ def initialize(voice_command,sentences):
 
                         f.close()
                         return True, response
-                        break
-                    
-                    elif l.strip("\n").strip("\r") == "":
-                        response = "You don't have registered any rss stream"
-                        return True, response
-                except:
-                    f.close()
-                    return False,response
-                    break
+
+                else:
+                    response = "Vous n'avez pas encore enregistré de flux RSS"
+                    return True, response
+
+            except:
+                f.close()
+                return False,"Lecture de votre flux de nouvelles impossible , une erreur est survenue."
 

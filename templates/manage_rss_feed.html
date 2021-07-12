@@ -7,8 +7,8 @@
 </head>
 <body>
     <ul>
-        {%for i in range(1,lenght-1)%}
-            <li>{{array[i]}}<button onclick="window.location.href='/process/[MANAGE RSS FEED]{{name[i]}}'">remove this website</button></li>
+        {%for i in range(lenght)%}
+            <li>{{feeds[i]['url']}}<button onclick="window.location.href='/process/[DELETE RSS FEED]?feed_id={{i}}'">remove this news feed</button></li>
         {%endfor%}
         
     </ul>
