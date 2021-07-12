@@ -2,6 +2,7 @@ from flask import Flask, render_template, request,abort, send_file, send_from_di
 from werkzeug.utils import secure_filename
 from os import path
 from util.res import *
+from json import dumps, loads
 
 
 UPLOAD_FOLDER = path.dirname(__file__)+'/skills_modules/'
@@ -52,7 +53,13 @@ def action(page):
 
     elif page == "[MANAGE RSS FEED]":
         with open("config/custom_rss_feed.blue","r") as f:
-            feeds = f.read().split("\n")
+            feeds = []
+            for line in f.read().splitlines():
+                try:
+                    feeds.append(loads(line))
+                except Exception as e:
+                    print(e)
+                    
             f.close()
 
         return render_template("manage_rss_feed.html",feeds=feeds,lenght=len(feeds))

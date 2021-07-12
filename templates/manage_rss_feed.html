@@ -8,7 +8,11 @@
 <body>
     <ul>
         {%for i in range(lenght)%}
-            <li>{{feeds[i]['url']}}<button onclick="window.location.href='/process/[DELETE RSS FEED]?feed_id={{i}}'">remove this news feed</button></li>
+            {%if feeds[i]['url'] != ""%}
+                
+                <li>{{feeds[i]['url']}}<button onclick="window.location.href='/process/[DELETE RSS FEED]?feed_id={{i}}'">remove this news feed</button></li>
+
+            {%endif%}
         {%endfor%}
         
     </ul>
