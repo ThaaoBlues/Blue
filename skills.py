@@ -19,6 +19,8 @@ the voice command is considered as matching.
 
     split = sentence.split("*")
 
+    voice_command = voice_command.lower()
+
     ratio_l = []
 
     for line_part in split:

@@ -6,8 +6,9 @@ def initialize(voice_command,sentences):
     
     for sentence in sentences:
         for part in sentence.split("*"):
-            voice_command = voice_command.replace(part,"",1)
+            voice_command = voice_command.replace(part,"")
 
+    print(voice_command)
 
     with open("config/custom_rss_feed.blue","r",encoding="utf-8") as f:
 
@@ -15,7 +16,7 @@ def initialize(voice_command,sentences):
             try:
                 if line.strip("\n").strip("\r") != "":
                     line = loads(line)
-                    if SequenceMatcher(None, voice_command, line['command']).ratio() >= 0.8:
+                    if SequenceMatcher(None, voice_command, line['command']).ratio() >= 0.65:
 
 
                         feed = feedparser.parse(line['url'])
@@ -34,6 +35,7 @@ def initialize(voice_command,sentences):
                         return True, response
 
                 else:
+                    f.close()
                     response = "Vous n'avez pas encore enregistré de flux RSS"
                     return True, response
 
