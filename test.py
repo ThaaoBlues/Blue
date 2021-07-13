@@ -1,6 +1,5 @@
 import simplenote
 
-sn = simplenote.Simplenote('thaaoblues81@gmail.com', 'a88xme35v22v53emx88a')
 from util.res import get_assistant_name
 
 found = False
