@@ -30,13 +30,10 @@ python Blue.py
 - wake you up with a video/music (program the day and the hour by the web page)
 
 
-- add notes
+- add notes to your Google Keep account
 
 
-- read your notes
-
-
-- delete a note
+- read your Google Keep account's notes
 
 
 - play/pause/skip/fullscreen music/video from youtube

@@ -15,7 +15,13 @@ from xml.etree import ElementTree
 from xml.sax.saxutils import escape
 from json import dumps
 
+def get_assistant_name():
 
+    with open("config/assistant_name.blue","r")  as f:
+        name = f.read()
+        f.close()
+
+    return name
 
 def add_wake_up_alarm(days_left,time,url):
 

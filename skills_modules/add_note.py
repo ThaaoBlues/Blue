@@ -2,6 +2,7 @@
 from keyring import get_password
 from json import loads
 import gkeepapi
+from util.res import get_assistant_name
 
 def initialize(voice_command,sentences):
 
@@ -22,6 +23,15 @@ def initialize(voice_command,sentences):
 
     else:
         ac_password = get_password("Google Keep note",ac_username)
+        keep = gkeepapi.Keep()
+        keep.login(ac_username, ac_password)
 
+        #trying to get assistant default note page
+        try:
+            note = keep.get(get_assistant_name())
+            note.text = note.text + voice_command
+        except:
+            # note page of your assistant doesn't exists, creating one
+            keep.createNote(get_assistant_name(),voice_command)
 
         return True, f"J'ai ajouté {voice_command} à vos notes."
