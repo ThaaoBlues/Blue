@@ -24,3 +24,5 @@ reminder:* une alarme/* un réveil/* un réveil/* une alarme
 skip:skip/change de musique/* musique suivante
 mute:mute */silence
 fullscreen:* plein écran/* fullscreen
+add_note:ajoute * à mes notes
+read_note:lis mes notes/quelles sont mes notes/qu'est ce que j'ai noté

@@ -20,4 +20,4 @@ pywin32
 pyautogui
 comtypes==1.1.7
 secretstorage
-gkeepapi
+simplenote

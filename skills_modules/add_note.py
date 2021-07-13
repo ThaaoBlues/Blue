@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from keyring import get_password
 from json import loads
-import gkeepapi
 from util.res import get_assistant_name
+import simplenote
 
 def initialize(voice_command,sentences):
 
@@ -14,24 +14,34 @@ def initialize(voice_command,sentences):
     ac_username = "null"
     with open("config/accounts.blue","r") as f:
         for line in f.read().splitlines():
-            if loads(line)['service'] == "Google Keep note":
+            if loads(line)['service'] == "simplenote":
                 ac_username = loads(line)['username']
                 f.close()
                 break
     if ac_username == "null":
-        return False, "Vous n'avez pas encore enregistré votre compte google keep notes."
+        return False, "Vous n'avez pas encore enregistré votre compte simplenote.com"
 
     else:
-        ac_password = get_password("Google Keep note",ac_username)
-        keep = gkeepapi.Keep()
-        keep.login(ac_username, ac_password)
+        ac_password = get_password("simplenote",ac_username)
+
+        #connecting to simplenote
+        sn = simplenote.Simplenote('thaaoblues81@gmail.com', 'a88xme35v22v53emx88a')
+
 
         #trying to get assistant default note page
-        try:
-            note = keep.get(get_assistant_name())
-            note.text = note.text + voice_command
-        except:
+        found = False
+        for note in sn.get_note_list():
+            if note == 0:
+                break
+            if get_assistant_name() in note[0]['tags']:
+                note_key = note[0]['key']
+                content = note[0]['content']
+                sn.update_note({'key':note_key,'tags':["test1"],'content':content+"\n"+"proutprout"}) 
+                found = True
+                break
+
+        if not found:
             # note page of your assistant doesn't exists, creating one
-            keep.createNote(get_assistant_name(),voice_command)
+            sn.add_note({'tags':get_assistant_name(),'content':voice_command})
 
         return True, f"J'ai ajouté {voice_command} à vos notes."

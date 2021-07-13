@@ -52,9 +52,13 @@ def action(page):
                 keyring.set_password(ac_service,ac_username,ac_password)
                 with open("config/accounts.blue","a") as f:
                     f.write(dumps({"service":ac_service,"username":ac_username}))
-                    f.close()
+                    f.close()            
+                    
+                return render_template("success_message.html")
+
             except:
                 return jsonify({"error": "malformed post request"})
+
 
     elif page == "[MANAGE CREDS]":
 
@@ -254,6 +258,6 @@ def page_not_found(error):
 
 
 def start_webserver():
-    app.run(host="0.0.0.0",port="80",debug=True)
+    app.run(host="0.0.0.0",port="80")
 
 
