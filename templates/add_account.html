@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADD A SERVICE ACCOUNT</title>
+</head>
+<body>
+    <form action="/process/[ADD CREDS]" method="post">
+        <div>
+            <label for="services">Choose a service:</label>
+            <select name="service" id="service" required>
+                <option value="google_keep">Google Keep notes</option>
+            </select>
+        </div>
+        <br>
+        <div>
+            <label for="username">Username : </label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <label for="password">Password : </label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <br><br>
+        <div class="button">
+            <button type="submit">Save credentials</button>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,7 +1,5 @@
-import datetime
+import keyring
 
 
-print()
-
-
-
+keyring.set_password("test", "username", "password")
+print(keyring.get_password("test", "username"))

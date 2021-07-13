@@ -47,6 +47,9 @@ def check_files_integrity():
     
     if not path.exists("config/custom_servers.blue"):
         open("config/custom_servers.blue","w")
+
+    if not path.exists("config/accounts.blue"):
+        open("config/accounts.blue","w")
     
     if not path.exists("config/custom_rss_feed.blue"):
         open("config/custom_rss_feed.blue","w")

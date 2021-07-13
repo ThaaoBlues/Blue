@@ -10,7 +10,7 @@ This assistant is designed for french language, it will use a translator if you 
 
 - Linux (debian-based):
 ```bash
-sudo apt install python python-pip python-pyaudio git
+sudo apt install python python-pip python-pyaudio git dbus-python
 git clone https://www.github.com/ThaaoBlues/Blue
 cd ./Blue
 pip install -r requirements.txt

@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request,abort, send_file, send_from_directory, flash, redirect
+from flask import Flask, render_template, request,abort,jsonify, send_file, send_from_directory, flash, redirect
 from werkzeug.utils import secure_filename
 from os import path
 from util.res import *
 from json import dumps, loads
-
+import keyring
 
 UPLOAD_FOLDER = path.dirname(__file__)+'/skills_modules/'
 ALLOWED_EXTENSIONS = {'py'}
@@ -36,8 +36,30 @@ def action(page):
 
         return render_template("manager_modules.html",modules=modules)
 
-    if page == "[ADD IROBOT CLEANER]":
-        return render_template("add_irobot_cleaner.html")
+    elif page == "[ADD CREDS]":
+
+        #display the page
+        if request.method == "GET":
+            return render_template("add_account.html")
+        
+        #creation of a new account
+        else:
+
+            try:
+                ac_service = request.form['service']
+                ac_username = request.form['username']
+                ac_password = request.form['password']
+                keyring.set_password(ac_service,ac_username,ac_password)
+                with open("config/accounts.blue","a") as f:
+                    f.write(dumps({"service":ac_service,"username":ac_username}))
+                    f.close()
+            except:
+                return jsonify({"error": "malformed post request"})
+
+    elif page == "[MANAGE CREDS]":
+
+        return render_template("manage_accounts.html")
+
 
     elif page == "[ADD WEBSITE VOICE COMMAND]":
         return render_template("add_custom_website.html")
@@ -141,18 +163,15 @@ def process(process_id):
 
             return render_template("success_message.html")
 
-
-    if process_id == "[ADD IROBOT CLEANER]":
-
-        ip = request.form['ip_addr']
-        password = request.form['password']
-        name = str(request.form['name']).lower()
-
-        with open("config/irobot_cleaners.blue","a") as f:
-            f.write(f"{name}\n{password}\n{ip}\n")
-            f.close()
+    elif process_id == "[DELETE ACCOUNT]":
+        ac_service = request.args.get("service")
+        username = keyring.get_credential(ac_service)
+        password = keyring.get_password(ac_service,username)
+        keyring.delete_password(ac_service,username,password)
 
         return render_template("success_message.html")
+
+        
     
     elif process_id == "[ADD RSS FEED]":
         voice_command = str(request.form['command']).lower()
