@@ -51,7 +51,7 @@ def action(page):
                 ac_password = request.form['password']
                 keyring.set_password(ac_service,ac_username,ac_password)
                 with open("config/accounts.blue","a") as f:
-                    f.write(dumps({"service":ac_service,"username":ac_username}))
+                    f.write(dumps({"service":ac_service,"username":ac_username})+"\n")
                     f.close()            
                     
                 return render_template("success_message.html")

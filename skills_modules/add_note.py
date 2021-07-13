@@ -25,7 +25,7 @@ def initialize(voice_command,sentences):
         ac_password = get_password("simplenote",ac_username)
 
         #connecting to simplenote
-        sn = simplenote.Simplenote('thaaoblues81@gmail.com', 'a88xme35v22v53emx88a')
+        sn = simplenote.Simplenote(ac_username,ac_password )
 
 
         #trying to get assistant default note page

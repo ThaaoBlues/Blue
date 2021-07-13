@@ -28,7 +28,6 @@ def initialize(voice_command,sentences):
                 break
             if get_assistant_name() in note[0]['tags']:
                 response = note[0]['content']
-                
                 found = True
                 break
 
