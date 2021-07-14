@@ -4,6 +4,7 @@ from os import path
 from util.res import *
 from json import dumps, loads
 import keyring
+from util.res import *
 
 UPLOAD_FOLDER = path.dirname(__file__)+'/skills_modules/'
 ALLOWED_EXTENSIONS = {'py'}
@@ -40,7 +41,7 @@ def action(page):
 
         #display the page
         if request.method == "GET":
-            return render_template("add_account.html")
+            return render_template("add_account.html",services= get_registered_services())
         
         #creation of a new account
         else:

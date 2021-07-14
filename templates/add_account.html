@@ -11,7 +11,9 @@
         <div>
             <label for="services">Choose a service:</label>
             <select name="service" id="service" required>
-                <option value="simplenote">Simplenote (https://simplenote.com)</option>
+                {%for service in services%}
+                <option value="{{service}}">{{service}}</option>
+                {%endfor%}
             </select>
         </div>
         <br>

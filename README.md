@@ -112,11 +112,15 @@ A webserver is running on port 80 to access and config Blue easily.
 ## YOU CAN NOW ADD YOUR OWN PYTHON-WRITTEN SKILLS FOR BLUE DIRECTLY FROM THE WEBSERVER !
 
 
-### the python script must follow this pattern:
+### Blue skill script example :
 
 ```python
 
 
+# -*- coding: utf-8 -*-
+from keyring import get_password
+from util.res import get_assistant_name, is_user_account_for_service, is_service_registered, register_service, get_username_for_service
+import simplenote
 
 def initialize(voice_command,sentences):
     """
@@ -124,14 +128,58 @@ def initialize(voice_command,sentences):
     :sentences: the sentences that you have specified while uploading the skill
     :returns: response is a string containing the sentence you want to say aloud
     """
+    
     #use the following lines to strip voice_command and get only the main word(s)
     for sentence in sentences:
         for part in sentence.split("*"):
-            voice_command = voice_command.replace(part,"")
-        
+            voice_command = voice_command.replace(part,"",1)
+    
+    # usefull if you don't want words like "the"
     voice_command = remove_useless_words(voice_command)
 
-    return True, response
+
+    #check if the external service "simplenote" has been registered
+    if not is_service_registered("simplenote"):
+        register_service("simplenote")
+
+
+    #check if user has registered an simplenote account    
+    if is_user_account_for_service("simplenote"):
+       #an account has been registered, getting his username
+        ac_username = get_username_for_service("simplenote")
+
+    # no account available for this service, returning some sentences to guide him
+    else:
+        return False, "Vous n'avez pas encore enregistré votre compte simplenote.com"
+
+    #getting password from secure keyring
+    ac_password = get_password("simplenote",ac_username)
+
+    #==========================================
+    #           simplenote api stuff
+    #==========================================
+
+    #connecting to simplenote
+    sn = simplenote.Simplenote(ac_username,ac_password )
+
+    #trying to get assistant default note page
+    found = False
+    for note in sn.get_note_list():
+        if note == 0:
+            break
+        if get_assistant_name() in note[0]['tags']:
+            note_key = note[0]['key']
+            content = note[0]['content']
+            sn.update_note({'key':note_key,'tags':[get_assistant_name()],'content':content+"\n"+voice_command}) 
+            found = True
+            break
+
+    if not found:
+        # note page of your assistant doesn't exists, creating one
+        sn.add_note({'tags':[get_assistant_name()],'content':voice_command})
+
+
+    return True, f"J'ai ajouté {voice_command} à vos notes."
 
 
 ```

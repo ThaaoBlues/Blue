@@ -13,7 +13,89 @@ import logging
 import click
 from xml.etree import ElementTree
 from xml.sax.saxutils import escape
-from json import dumps
+from json import dumps, loads
+
+
+
+def get_registered_services():
+    """
+    return a list of services names, written in services.blue
+    """
+
+    with open("config/services.blue","r") as f:
+        services = f.read().splitlines()
+        f.close()
+
+    return services
+
+def is_service_registered(service_name):
+    """
+    return True if the service name is present in services.blue, else False
+    
+    """
+
+    return True if service_name in get_available_services() else False
+
+
+def register_service(service_name):
+    """
+    add a new service name in services.blue
+    """
+
+    with open("config/services.blue","a") as f:
+        f.write(f"{service_name}\n")
+        f.close()
+
+
+def delete_registered_service(service_name):
+    """
+    delete an already registered service from services.blue
+    return True if the service is deleted and False if the service doesn't exists
+    """
+
+    try:
+        services = get_available_services()
+        with open("config/services.blue","w") as f:
+            services.pop(services.index(service_name))
+            f.writelines(services)
+            f.close()
+        return True
+    except:
+        return False
+
+
+def is_user_account_for_service(service_name):
+    """
+    return True if the user has already stored credentials for a service else False
+    """
+
+    ac_username = "null"
+    with open("config/accounts.blue","r") as f:
+        for line in f.read().splitlines():
+            if loads(line)['service'] == service_name:
+                f.close()
+                return True
+    if ac_username == "null":
+        return False
+
+
+def get_username_for_service(service_name):
+
+    """
+    get a username for the given external service
+    return "null" if none is available
+    """
+
+    ac_username = "null"
+    with open("config/accounts.blue","r") as f:
+        for line in f.read().splitlines():
+            if loads(line)['service'] == service_name:
+                ac_username = loads(line)['username']
+                f.close()
+
+
+    return ac_username
+
 
 def get_assistant_name():
 

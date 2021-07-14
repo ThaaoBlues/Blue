@@ -57,6 +57,9 @@ def check_files_integrity():
     if not path.exists("config/reminders.xml"):
         init_reminders_file()
 
+    if not path.exists("config/services.blue"):
+        open("config/services.blue","w")
+
 
     locale = getlocale()[0][2:]
     if locale not in get("https://raw.githubusercontent.com/ThaaoBlues/Blue/main/language-files/supported_languages.txt").text:
