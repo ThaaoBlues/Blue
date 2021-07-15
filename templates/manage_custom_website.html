@@ -7,8 +7,8 @@
 </head>
 <body>
     <ul>
-        {%for i in range(1,lenght-1)%}
-            <li>{{array[i]}}<button onclick="window.location.href='/process/[MANAGE IROBOT CLEANER]{{name[i]}}'">remove this website</button></li>
+        {%for i in range(lenght)%}
+            <li>{{array[i]['url']}} - voice command : {{array[i]['voice_command']}}<button onclick="window.location.href='/process/[DELETE WEBSITE]?website_id={{i}}'">remove this website</button></li>
         {%endfor%}
         
     </ul>

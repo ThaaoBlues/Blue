@@ -72,9 +72,6 @@ python Blue.py
 - give you the date
 
 
-- open your google drive/Classroom/gmail
-
-
 - shutdown himself
 
 
@@ -113,6 +110,10 @@ A webserver is running on port 80 to access and config Blue easily.
 
 
 ### Blue skill script example :
+
+
+file : ``skills_modules/add_note.py``
+purpose : Add a note by voice command to a simplenote account with the simplenote api
 
 ```python
 
@@ -155,9 +156,9 @@ def initialize(voice_command,sentences):
     #getting password from secure keyring
     ac_password = get_password("simplenote",ac_username)
 
-    #==========================================
-    #           simplenote api stuff
-    #==========================================
+    #==================================================
+    # simplenote api stuff/ not important for the demo
+    #==================================================
 
     #connecting to simplenote
     sn = simplenote.Simplenote(ac_username,ac_password )
@@ -178,7 +179,7 @@ def initialize(voice_command,sentences):
         # note page of your assistant doesn't exists, creating one
         sn.add_note({'tags':[get_assistant_name()],'content':voice_command})
 
-
+    #finally return a sentence to make Blue say something and True to mark processing as successfully terminated
     return True, f"J'ai ajouté {voice_command} à vos notes."
 
 

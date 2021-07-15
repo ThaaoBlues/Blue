@@ -8,7 +8,8 @@ import playsound
 from difflib import SequenceMatcher
 from util.translator import translate
 from multiprocessing import Process
-
+from functools import partial
+from webbrowser import open as open_url
 
 def starred_sentences_ratio(line,voice_command,sentence):
     """
@@ -46,7 +47,22 @@ def full_sentence_ratio(line,voice_command, sentence):
     
     """
     return {"module" : line.split(":")[0], "ratio": SequenceMatcher(None, voice_command, sentence).ratio()}
-    
+
+
+
+def check_user_custom_commands(voice_command):
+
+    #custom websites part
+    custom_websites = get_custom_websites_voice_commands()
+    for website in custom_websites:
+        if voice_command == website['voice_command'] :
+            Process(target = open_url, args=(website['url'],) ).start()
+            return True
+
+    #coming soon : custom request to server part
+
+
+    return False
 
 
 def init_skill_call(module, ratio,final_sentences,voice_command):
@@ -58,47 +74,52 @@ def init_skill_call(module, ratio,final_sentences,voice_command):
 
 
 def check_skills(voice_command):
-    
-    pinfo("checking skills...")
-    with open("config/skills.blue","r",encoding="utf-8") as f:
-        lines = f.read().splitlines()
-        
-        pinfo("trying starred sentences ratio...")
-        for line in lines:
-            
-            sentences = line.split(":")[1]
-            for sentence in sentences.split("/"):
 
-                result = starred_sentences_ratio(line,voice_command,sentence)
-                if result['match']:
-                    init_skill_call(result['module'], result['ratio'],sentences,voice_command)
-                    return True
+    pinfo("checking user custom commands...")
+
+    if not check_user_custom_commands(voice_command):
+
+        pinfo("checking skills...")
+        with open("config/skills.blue","r",encoding="utf-8") as f:
+            lines = f.read().splitlines()
+
+            pinfo("trying starred sentences ratio...")
+            for line in lines:
+
+                sentences = line.split(":")[1]
+                for sentence in sentences.split("/"):
+
+                    result = starred_sentences_ratio(line,voice_command,sentence)
+                    if result['match']:
+                        init_skill_call(result['module'], result['ratio'],sentences,voice_command)
+                        return True
 
 
-        ratio = 0
-        module = None
-        final_sentences = ""
-        pinfo("trying full sentences ratio...")
-        for line in lines:
-            
-            sentences = line.split(":")[1]
-            for sentence in sentences.split("/"):
-                final_sentences = sentences
-                #starred lines ratio didn't work, using full ratio to get the higher match
-                result = full_sentence_ratio(line,voice_command,sentence.strip("*"))
-                if result['ratio'] > ratio:
-                    module = result['module']
-        
-        if ratio > 0.2:
-            #calling module on higher ratio obtained
-            init_skill_call(module, ratio,final_sentences,voice_command)
-        else:
-            module = "open_website"
-            init_skill_call(module, ratio,"",voice_command)
-        
+            ratio = 0
+            module = None
+            final_sentences = ""
+            pinfo("trying full sentences ratio...")
+            for line in lines:
+
+                sentences = line.split(":")[1]
+                for sentence in sentences.split("/"):
+                    final_sentences = sentences
+                    #starred lines ratio didn't work, using full ratio to get the higher match
+                    result = full_sentence_ratio(line,voice_command,sentence.strip("*"))
+                    if result['ratio'] > ratio:
+                        module = result['module']
+
+            if ratio > 0.2:
+                #calling module on higher ratio obtained
+                init_skill_call(module, ratio,final_sentences,voice_command)
+            else:
+                module = "open_website"
+                init_skill_call(module, ratio,"",voice_command)
+
+            return True
+
+    else:
         return True
-
-
 
 
 def speak(text):
@@ -115,9 +136,6 @@ def speak(text):
 
 def call_skill(module,voice_command,sentences):
 
-
-    for i in range(len(sentences)):
-        sentences[i] = sentences[i].replace("startswith","",1)
     
     try:
         skill = importlib.import_module(f"skills_modules.{module}")

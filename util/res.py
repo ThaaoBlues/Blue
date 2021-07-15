@@ -17,6 +17,21 @@ from json import dumps, loads
 
 
 
+
+def get_custom_websites_voice_commands():
+    """
+    return a list of json objects containing data from user registereed voice commands to open a website
+    
+    """
+
+    with open("config/custom_websites.blue","r") as f:
+        websites = f.read().splitlines()
+        f.close()
+
+
+    return [loads(i) for i in websites]
+
+
 def get_registered_services():
     """
     return a list of services names, written in services.blue

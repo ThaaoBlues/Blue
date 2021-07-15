@@ -93,22 +93,10 @@ def action(page):
     
     
     elif page == "[MANAGE WEBSITE VOICE COMMAND]":
-        with open("config/custom_websites.blue","r") as f:
-            array = [""]
-            name = [""]
-            a = f.read().split("\n")
-            i=0
-            for line in range(0,len(a)):
-                print(a[line])
-                if line%2==0:
-                    array.append(a[line]+"||")
-                    name.append(a[line])
-                    i+=1
-                else:
-                    array[i] += a[line]
+       
+        array = get_custom_websites_voice_commands()
 
-
-        return render_template("manage_custom_website.html",lenght=len(array),array=array,name=name)
+        return render_template("manage_custom_website.html",lenght=len(array),array=array)
     
 
     elif page == "[ADD REMINDER]":
@@ -143,6 +131,27 @@ def action(page):
 
 @app.route("/process/<process_id>",methods=['GET','POST'])
 def process(process_id):
+
+
+    if process_id == "[DELETE WEBSITE]":
+        website_id = int(request.args.get("website_id"))
+        
+        with open("config/custom_websites.blue","r") as f:
+            registered_websites = f.read().splitlines()
+            f.close()
+
+        #remove desired website from list
+        registered_websites.pop(website_id)
+
+        with open("config/custom_websites.blue","w") as f:
+
+            f.writelines(registered_websites)
+            f.close()
+
+
+        return render_template("success_message.html")
+ 
+
 
     if process_id == "[ADD BLUE SKILL]":
 
@@ -194,7 +203,7 @@ def process(process_id):
         url = request.form['url']
 
         with open("config/custom_websites.blue","a") as f:
-            f.write(f"{voice_command}\n{url}\n")
+            f.write(dumps({"url":url,"voice_command":voice_command}))
             f.close()
 
         return render_template("success_message.html")

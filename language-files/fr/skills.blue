@@ -15,7 +15,6 @@ jokes:raconte moi une blague/dis moi une blague/fais moi rire/fais moi rigoler
 maths:combien font */combien ça fait */ça fait combien */calcule */calcule moi */fais le calcul *
 maps:aller à */comment aller à */montre-moi un intinéraire vers */montre-moi l'intinéraire vers */montre-moi l'intinéraire pour aller à */montre-moi un intinéraire pour aller à */affiche l'intinéraire pour aller à */affiche un intinéraire pour aller à */affiche l'intinéraire pour aller à */affiche une carte de */affiche la carte de *
 twitch:* le stream de * sur twitch/* le stream twitch de *
-test:test
 thanks:merci *
 volume_up:monte le volume/agmente le volume/augmente le son/monte le son
 volume_down:baisse le volume/descends le volume/baisse le son/descend le son
@@ -26,3 +25,4 @@ mute:mute */silence
 fullscreen:* plein écran/* fullscreen
 add_note:ajoute * à mes notes
 read_note:lis mes notes/quelles sont mes notes/qu'est ce que j'ai noté
+test:test
