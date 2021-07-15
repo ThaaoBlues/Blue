@@ -10,11 +10,11 @@ This assistant is designed for french language, it will use a translator if you 
 
 - Linux (debian-based):
 ```bash
-sudo apt install python python-pip python-pyaudio git dbus-python
+sudo apt install python3 python3-pip python3-pyaudio git python3-dbus
 git clone https://www.github.com/ThaaoBlues/Blue
 cd ./Blue
-pip install -r requirements.txt
-python Blue.py
+sudo python3 -m pip install -r requirements.txt
+sudo python3 Blue.py
 ```
 
 - Windows :
