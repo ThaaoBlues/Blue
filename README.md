@@ -36,6 +36,9 @@ python Blue.py
 - read your [Simplenote](https://simplenote.com) notes
 
 
+- delete a note from your [Simplenote](https://simplenote.com) account
+
+
 - play/pause/skip/fullscreen music/video from youtube
 (needs [this browser extension](https://chrome.google.com/webstore/detail/hotkey-music-controller-y/pohakmokiogdbhiocmacgalcmnfdbbne/related) to make keyboard shortcuts work on browser)
 
