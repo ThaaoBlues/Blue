@@ -14,6 +14,94 @@ import click
 from xml.etree import ElementTree
 from xml.sax.saxutils import escape
 from json import dumps, loads
+from locale import getlocale
+import playsound
+from gtts import gTTS
+from keyring import get_password as get_pwd_from_keyring
+
+
+
+def get_password(service,ac_username):
+    """
+    extract the password linked to the specified service and username from the secure keyring
+
+    """
+    return get_pwd_from_keyring(service,ac_username)
+
+
+def is_waiting_user_command():
+
+    """
+    
+    return True if a skill is waiting a specific user command, else False
+    
+    """
+
+    with open("config/general_config.blue","r") as f:
+        config = loads(f.read())
+        f.close()
+
+    return "True" == config['is_waiting_user_command']
+
+
+def get_user_response():
+    """
+    wait the user to speak and return his voice command
+    """
+
+    with open("config/logs.txt","r") as f:
+        initial_voice_command = f.read()
+        f.close()
+
+
+    with open("config/general_config.blue","r") as f:
+        config = loads(f.read())
+        f.close()
+
+    config['is_waiting_user_command'] = "True"
+
+    with open("config/general_config.blue","w") as f:
+        f.write(dumps(config))
+        f.close()
+
+
+    user_response = initial_voice_command
+
+    while initial_voice_command == user_response:
+
+        with open("config/logs.txt","r") as f:
+            user_response = f.read()
+            f.close()
+
+    with open("config/general_config.blue","r") as f:
+        config = loads(f.read())
+        f.close()
+
+    config['is_waiting_user_command'] = "False"
+
+    with open("config/general_config.blue","w") as f:
+        f.write(dumps(config))
+        f.close()
+
+    return user_response
+
+
+
+
+
+def speak(sentence):
+    """
+    simply speak a text in your langage (automatically translated)
+    """
+    try:
+        tts = gTTS(sentence,lang=getlocale()[0][:2])
+        sn = str(randint(1,100000))+".mp3"
+        tts.save(sn)
+        playsound.playsound(sn)
+        remove(sn)
+    except Exception as e:
+        print(e)
+        pass
 
 
 
@@ -49,7 +137,7 @@ def is_service_registered(service_name):
     
     """
 
-    return True if service_name in get_available_services() else False
+    return True if service_name in get_registered_services() else False
 
 
 def register_service(service_name):
@@ -114,11 +202,12 @@ def get_username_for_service(service_name):
 
 def get_assistant_name():
 
-    with open("config/assistant_name.blue","r")  as f:
-        name = f.read()
+    with open("config/general_config.blue","r")  as f:
+        config = loads(f.read())
         f.close()
+    
 
-    return name
+    return config['assistant_name']
 
 def add_wake_up_alarm(days_left,time,url):
 

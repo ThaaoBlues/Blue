@@ -75,48 +75,55 @@ def init_skill_call(module, ratio,final_sentences,voice_command):
 
 def check_skills(voice_command):
 
-    pinfo("checking user custom commands...")
+    pinfo("logging voice command...")
+    with open("config/logs.txt","w") as f:
+        f.write(voice_command)
+        f.close()
 
-    if not check_user_custom_commands(voice_command):
+    #check if a skill is waiting user to speak or not, if not we can begin the process
+    if not is_waiting_user_command():
+        pinfo("checking user custom commands...")
 
-        pinfo("checking skills...")
-        with open("config/skills.blue","r",encoding="utf-8") as f:
-            lines = f.read().splitlines()
+        if not check_user_custom_commands(voice_command):
 
-            pinfo("trying starred sentences ratio...")
-            for line in lines:
+            pinfo("checking skills...")
+            with open("config/skills.blue","r",encoding="utf-8") as f:
+                lines = f.read().splitlines()
 
-                sentences = line.split(":")[1]
-                for sentence in sentences.split("/"):
+                pinfo("trying starred sentences ratio...")
+                for line in lines:
 
-                    result = starred_sentences_ratio(line,voice_command,sentence)
-                    if result['match']:
-                        init_skill_call(result['module'], result['ratio'],sentences,voice_command)
-                        return True
+                    sentences = line.split(":")[1]
+                    for sentence in sentences.split("/"):
+
+                        result = starred_sentences_ratio(line,voice_command,sentence)
+                        if result['match']:
+                            init_skill_call(result['module'], result['ratio'],sentences,voice_command)
+                            return True
 
 
-            ratio = 0
-            module = None
-            final_sentences = ""
-            pinfo("trying full sentences ratio...")
-            for line in lines:
+                ratio = 0
+                module = None
+                final_sentences = ""
+                pinfo("trying full sentences ratio...")
+                for line in lines:
 
-                sentences = line.split(":")[1]
-                for sentence in sentences.split("/"):
-                    final_sentences = sentences
-                    #starred lines ratio didn't work, using full ratio to get the higher match
-                    result = full_sentence_ratio(line,voice_command,sentence.strip("*"))
-                    if result['ratio'] > ratio:
-                        module = result['module']
+                    sentences = line.split(":")[1]
+                    for sentence in sentences.split("/"):
+                        final_sentences = sentences
+                        #starred lines ratio didn't work, using full ratio to get the higher match
+                        result = full_sentence_ratio(line,voice_command,sentence.strip("*"))
+                        if result['ratio'] > ratio:
+                            module = result['module']
 
-            if ratio > 0.2:
-                #calling module on higher ratio obtained
-                init_skill_call(module, ratio,final_sentences,voice_command)
-            else:
-                module = "open_website"
-                init_skill_call(module, ratio,"",voice_command)
+                if ratio > 0.2:
+                    #calling module on higher ratio obtained
+                    init_skill_call(module, ratio,final_sentences,voice_command)
+                else:
+                    module = "open_website"
+                    init_skill_call(module, ratio,"",voice_command)
 
-            return True
+                return True
 
     else:
         return True

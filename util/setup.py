@@ -16,16 +16,21 @@ def init_reminders_file():
 
 def get_hot_word():
 
-    if not path.exists("config/assistant_name.blue"):
+    if not path.exists("config/general_config.blue"):
         hot_word = input("\nplease select a word/sentence to trigger your assistant\n-->")
         psuccess(f"Congratulations ! Your assistant is now called {hot_word} !")
-        with open("config/assistant_name.blue","w") as f:
-            f.write(hot_word)
+        
+        with open("config/general_config.blue","w") as f:
+            f.write(dumps({"assistant_name" : hot_word, "is_waiting_user_command" : False}))
+            f.close()
 
         return hot_word
     else:
-        with open("config/assistant_name.blue","r") as f:
-            return f.read()
+        with open("config/general_config.blue","r") as f:
+            config = loads(f.read())
+            f.close()
+
+        return config['assistant_name']
 
 
 def check_files_integrity():
@@ -34,9 +39,11 @@ def check_files_integrity():
         mkdir("config")
         hot_word = input("\nplease select a word/sentence to trigger your assistant\n-->")
         psuccess(f"Congratulations ! Your assistant is now called {hot_word} !")
-        with open("config/assistant_name.blue","w") as f:
-            f.write(hot_word)
-    
+        with open("config/general_config.blue","w") as f:
+            f.write(dumps({"assistant_name" : hot_word, "is_waiting_user_command" : False}))
+            f.close()
+
+
     if not path.exists("skills_modules/"):
         mkdir("skills_modules")
     

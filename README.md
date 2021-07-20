@@ -122,8 +122,7 @@ purpose : Add a note by voice command to a simplenote account with the simplenot
 
 
 # -*- coding: utf-8 -*-
-from keyring import get_password
-from util.res import get_assistant_name, is_user_account_for_service, is_service_registered, register_service, get_username_for_service
+from util.res import *
 import simplenote
 
 def initialize(voice_command,sentences):
@@ -188,6 +187,23 @@ def initialize(voice_command,sentences):
 
 ```
 
+### list of useful functions :
+
+they all needs to include util.res to work
+
+- ``voice_command = get_user_response()`` to capture the next user command and exclude its usage on normal process
+
+- ``speak('Hello World !')`` speak a sentence automatically traducted in the user language
+
+- ``boolean = is_user_account_for_service('my_service')`` If you plan to use an online account, check if the user has registered his account into Blue
+
+- ``boolean = is_service_registered("my_service")`` If you plan to use an online account, check if the service you use has been registred into blue configuration web-page so the user can link his account  
+
+- ``register_service("my_service")`` Register an online service that needs an account so the user can register his credentials into the configuration page so you can use it later
+
+- ``ac_username = get_username_for_service("my_service")`` Get the username which the user is using to connect to the service (please check if you have registered this service and if the user has registered an account before using this function)
+
+- ``ac_password = get_password("my_service",ac_username)`` extract the password linked to the specified service and username from the secure keyring
 
 ### while uploading, the sentences to trigger your skill must follow these rules:
 
