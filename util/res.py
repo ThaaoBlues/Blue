@@ -91,9 +91,10 @@ def get_user_response():
 
 def speak(sentence):
     """
-    simply speak a text in your langage (automatically translated)
+    simply speak a text in your langage
     """
     try:
+        
         tts = gTTS(sentence,lang=getlocale()[0][:2])
         sn = str(randint(1,100000))+".mp3"
         tts.save(sn)
