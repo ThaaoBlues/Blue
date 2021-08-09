@@ -33,9 +33,9 @@ def handle_client(cli):
         try:
             voice_command = cli.recv(4048)
 
-            #make sure json is rightly formated
+            #make sure json is rightly formated and bytes are decoded
             voice_command = voice_command.decode(
-                "utf-8").strip("\n").replace("'", "\"")
+                "utf-8").strip("\n")
 
             if voice_command != "":
                 json = loads(voice_command)
