@@ -27,6 +27,7 @@ def start_server():
 
 
 def handle_client(cli):
+    
     while True:
 
         try:
@@ -103,5 +104,3 @@ class AndroidSpecialFeatures():
 
             speak(battery_warn)
 
-
-initialize()
