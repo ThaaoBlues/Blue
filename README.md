@@ -24,6 +24,8 @@ sudo python3 Blue.py
     - type ``pip install pipwin`` then ``pipwin install pyaudio`` and ``pip install -r requirements.txt``
     - and finally launch Blue with ``python Blue.py``
 
+### Don't forget to download the [android app](https://www.github.com/thaaoblues/blue_android_app) for a better experience.
+
 
 ## Blue can do a bunch of things like:
 
