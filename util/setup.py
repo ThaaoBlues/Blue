@@ -91,7 +91,7 @@ def check_files_integrity():
 
     if not path.exists("config/skills.blue"):
         with open("config/skills.blue","w",encoding="utf-8") as f:
-            f.write(get(f"https://raw.githubusercontent.com/ThaaoBlues/Blue/main/language-files/{locale}/skills.blue").text.strip("\n").replace("&#10;","\n"))
+            f.write(get(f"https://raw.githubusercontent.com/ThaaoBlues/Blue/main/language-files/{locale}/skills.blue").text.replace("&#10;",""))
             f.close()
 
     if not path.exists("config/unnecessary.blue"):
