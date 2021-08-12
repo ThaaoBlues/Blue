@@ -232,4 +232,4 @@ ___
 ## Contributors to the translations :
 
 - [BartAgterbosch](https://github.com/BartAgterbosch) (English and Dutch)
-
+- [dataf3l](https://github.com/dataf3l) (Spanish)
