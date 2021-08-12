@@ -14,7 +14,6 @@ import click
 from xml.etree import ElementTree
 from xml.sax.saxutils import escape
 from json import dumps, loads
-from locale import getlocale
 import playsound
 from gtts import gTTS
 from keyring import get_password as get_pwd_from_keyring
@@ -86,6 +85,16 @@ def get_user_response():
     return user_response
 
 
+def get_locale()-> str:
+    """
+    return the defined locale from the config file
+    """
+
+    with open("config/general_config.blue","r") as f:
+        json = loads(f.read())
+        f.close()
+
+    return json["locale"]
 
 
 
@@ -95,7 +104,7 @@ def speak(sentence):
     """
     try:
         
-        tts = gTTS(sentence,lang=getlocale()[0][:2])
+        tts = gTTS(sentence,lang=get_locale())
         sn = str(randint(1,100000))+".mp3"
         tts.save(sn)
         playsound.playsound(sn)

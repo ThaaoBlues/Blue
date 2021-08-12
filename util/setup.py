@@ -33,14 +33,30 @@ def get_hot_word():
         return config['assistant_name']
 
 
+def input_locale(locale:str)->str:
+    """"""
+    while True:
+        c = input(f"Is your language '{locale}' accuratly detected ?[Y/N]")
+        if c in "Yy":
+            return locale
+        elif c in "Nn":
+            return input("set your locale (2 letters format like 'en' for English or 'fr' for French)\n->")
+        else:
+            pwarn("please type Y for yes or N for no.")
+    
+
+
 def check_files_integrity():
     
     if not path.exists("config/"):
         mkdir("config")
         hot_word = input("\nplease select a word/sentence to trigger your assistant\n-->")
         psuccess(f"Congratulations ! Your assistant is now called {hot_word} !")
+
+        locale = input_locale(getlocale()[0][:2])
+
         with open("config/general_config.blue","w") as f:
-            f.write(dumps({"assistant_name" : hot_word, "is_waiting_user_command" : False}))
+            f.write(dumps({"assistant_name" : hot_word, "is_waiting_user_command" : False, "locale":locale}))
             f.close()
 
 
@@ -68,7 +84,7 @@ def check_files_integrity():
         open("config/services.blue","w")
 
 
-    locale = getlocale()[0][2:]
+    locale = get_locale()
     if locale not in get("https://raw.githubusercontent.com/ThaaoBlues/Blue/main/language-files/supported_languages.txt").text:
         locale = "fr"
 

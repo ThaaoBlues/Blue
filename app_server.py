@@ -2,7 +2,6 @@ from util.res import *
 from util.translator import translate
 import socket
 from multiprocessing import Process, freeze_support
-from locale import getlocale
 from skills import check_skills
 from json import loads
 from webbrowser import open as display_website
@@ -57,9 +56,10 @@ def handle_client(cli):
             # now get to the real work
             pinfo(f"IN-APP VOICE COMMAND : {voice_command}")
 
-            if getlocale()[0][:2] != 'fr':
+            #this does absolutley nothing but i keep it in case the translator re-works
+            if get_locale() != 'fr':
                 voice_command = translate(
-                    voice_command, getlocale()[0][:2], True)
+                    voice_command, get_locale(), True)
 
             if not check_skills(voice_command):
                 print("Je ne sais pas encore faire cela")
@@ -98,9 +98,9 @@ class AndroidSpecialFeatures():
 
         if not is_charging and battery < 25.0:
             battery_warn = "Votre battery est faible, vous devriez recharger votre téléphone portable."
-            if getlocale()[0][:2] != 'fr':
+            if get_locale() != 'fr':
                 battery_warn = translate(
-                    battery_warn, getlocale()[0][:2], True)
+                    battery_warn, get_locale(), True)
 
             speak(battery_warn)
 
