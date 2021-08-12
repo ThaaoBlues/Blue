@@ -85,7 +85,7 @@ def check_files_integrity():
 
 
     locale = get_locale()
-    if locale not in get("https://raw.githubusercontent.com/ThaaoBlues/Blue/main/language-files/supported_languages.txt").text:
+    if locale not in get("https://raw.githubusercontent.com/ThaaoBlues/Blue/main/language-files/supported_languages.txt").text.split("/"):
         locale = "fr"
 
 

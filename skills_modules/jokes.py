@@ -1,10 +1,9 @@
 from jokeapi import Jokes
-from locale import getlocale
-
+from util.res import *
 
 def initialize(voice_command,sentences):
     j = Jokes()
-    joke = j.get_joke(blacklist=['racist','nsfw'],lang=getlocale()[0][:2])
+    joke = j.get_joke(blacklist=['racist','nsfw'],lang=get_locale())
     
     try:
         if joke['error'] != "":
