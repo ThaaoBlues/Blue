@@ -52,10 +52,7 @@ if __name__ == '__main__':
             voice_command = listen()
             if voice_command != None:
                 print(voice_command)
-                #translate to french so the modules can be triggered if you are not french
-                if get_locale() != 'fr':
-                    voice_command = translate(voice_command,get_locale(),True)
-
+                
                 if(hot_word in voice_command):
                     voice_command = voice_command.replace(hot_word,"")
 

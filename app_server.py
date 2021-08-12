@@ -56,11 +56,6 @@ def handle_client(cli):
             # now get to the real work
             pinfo(f"IN-APP VOICE COMMAND : {voice_command}")
 
-            #this does absolutley nothing but i keep it in case the translator re-works
-            if get_locale() != 'fr':
-                voice_command = translate(
-                    voice_command, get_locale(), True)
-
             if not check_skills(voice_command):
                 print("Je ne sais pas encore faire cela")
 

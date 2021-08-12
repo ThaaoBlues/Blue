@@ -131,7 +131,7 @@ def check_skills(voice_command):
 
 def speak(text):
     try:
-        tts = gTTS(text,lang=getlocale()[0][:2])
+        tts = gTTS(text,lang=get_locale())
         sn = str(randint(1,100000))+".mp3"
         tts.save(sn)
         playsound.playsound(sn)
@@ -153,8 +153,9 @@ def call_skill(module,voice_command,sentences):
     ret, response = skill.initialize(voice_command,sentences)
 
     try:
-        if getlocale()[0][:2] != 'fr':
-            response = translate(response,'fr',dest=getlocale()[0][:2])
+        locale = get_locale()
+        if locale != 'fr':
+            response = translate(response,'fr',dest=locale)
 
     except Exception as e:
         perror(f"Error while translating Blue response to your language : {e}")
