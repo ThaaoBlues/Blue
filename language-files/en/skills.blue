@@ -8,14 +8,14 @@ date:what day are we/what day is it/give me the date/give me the date of today&#
 say:say */repeat */repeat after me *&#10;
 stop:stop/close *&#10;
 shutdown:shutdown/goodbye/shut up/shut the fuck up/put yourself on sleep&#10;
-speedtest:effectuate a speedtest/try to make a speedtest/do a speedtest please&#10;
+speedtest:start a speedtest/try to make a speedtest/do a speedtest please&#10;
 wikipedia:what is the definition of */what is the meaning of */who was */who is */who are *&#10;
 ip:what is my ip address/give me my ip address&#10;
-camera:open the camera/display la camera/mirror mode&#10;
-jokes:say a joke/read me a joke/fmake me laugh&#10;
+camera:open the camera/display the camera/mirror mode&#10;
+jokes:say a joke/read me a joke/make me laugh&#10;
 maths:what are */make the sum of */calculate *&#10;
-maps:go to */how to go to*/show me the road to */show me an itinerary to */show me an itinerary to go to */display the map of *&#10;
-twitch:* the stream of * on twitch/* the stream twitch of *&#10;
+maps:go to */how to go to*/show me the road to */show me a route to */show me a route to go to */display the map of *&#10;
+twitch:* the stream of * on twitch/* the twitch stream of *&#10;
 thanks:thanks *&#10;
 volume_up:volume up/turn up the volume/speak louder
 volume_down:volume down/decrease the volume/decrease the sound level
