@@ -226,3 +226,9 @@ All the commands are designed for french people, the script use a translator so 
 
 
 If you are using Blue on a machine running 24/24, you need to desactivate the sleep mode of your os and the screen auto-lock to not have to retype your password when blue turn off the screen.
+
+
+## Contributors to the translations :
+
+- [BartAgterbosch](https://github.com/BartAgterbosch) (English and Dutch)
+
