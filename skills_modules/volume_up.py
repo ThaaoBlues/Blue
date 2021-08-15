@@ -11,7 +11,7 @@ except ImportError:
 def initialize(voice_command,sentences):
 
     if system() == "Windows":
-        press('volumedown',presses=5)
+        press('volumeup',presses=5)
     else:
         m = Mixer()
         current_volume = m.getvolume() # Get the current Volume
