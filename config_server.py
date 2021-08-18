@@ -5,6 +5,7 @@ from util.res import *
 from json import dumps, loads
 import keyring
 from util.res import *
+from datetime import datetime
 
 UPLOAD_FOLDER = path.dirname(__file__)+'/skills_modules/'
 ALLOWED_EXTENSIONS = {'py'}
@@ -105,23 +106,31 @@ def action(page):
 
             return render_template("add_reminder.html")
         else:
+
+            type = request.form['type']
             
-            try:
-                w = request.form['week']
+            if type == "reminder":
                 #this is a date based reminder
+                f_time = str(request.form['date']) + " " +str(request.form['time'])
+                f_time = datetime.strptime(datetime.strptime(f_time, "%Y-%m-%d %H:%M").strftime("%d/%m/%Y %H:%M"),"%d/%m/%Y %H:%M")
+                add_reminder(f_time, request.form['time'],request.form["content"])
 
                 return render_template("success_message.html")
 
-            except:
+            elif type == "wakeup":
 
                 #this is a wake-up alarm
-                add_wake_up_alarm(str(request.form['date']).split("-")[2],request.form['time'],request.form["wakeup_music"])
+                f_time = str(request.form['date']) + " " +str(request.form['time'])
+                f_time = datetime.strptime(datetime.strptime(f_time, "%Y-%m-%d %H:%M").strftime("%d/%m/%Y %H:%M"),"%d/%m/%Y %H:%M")
+                add_wake_up_alarm(f_time,request.form['time'],request.form["wakeup_music"])
+                
                 return render_template("success_message.html")
                 
 
             
     elif page == "[MANAGE REMINDERS]":
-        pass
+
+        return render_template("manage_reminders.html",reminders = get_all_reminders())
 
     else:
         return abort(404)
@@ -258,8 +267,21 @@ def process(process_id):
     elif process_id == "[MANAGE CUSTOM VOICE COMMAND TO SEND TO A SERVER]'":
         return render_template("success_message.html")
 
+    
+    elif process_id == "[DELETE_REMINDER]":
+        id = int(request.args.get("id"))
+        reminders = get_all_reminders()
+
+        reminders.pop(id)
+
+        rewrite_reminders_file(reminders)
+
+        return redirect(request.base_url)
+
     else:
-        return render_template("config_page.html")
+            return render_template("config_page.html")
+
+
 
 @app.errorhandler(404)
 def page_not_found(error):
@@ -268,6 +290,8 @@ def page_not_found(error):
 
 
 def start_webserver():
-    app.run(host="0.0.0.0",port="80")
+    app.run(host="0.0.0.0",port="80",debug=True)
 
+
+start_webserver()
 

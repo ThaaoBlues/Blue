@@ -1,6 +1,6 @@
 from socket import gethostname, gethostbyname_ex,create_connection
 from requests import get
-from datetime import date
+from datetime import datetime
 from random import randint
 from os import listdir, remove,chdir,path,getcwd
 from psutil import cpu_percent, virtual_memory
@@ -167,7 +167,7 @@ def delete_registered_service(service_name):
     """
 
     try:
-        services = get_available_services()
+        services = get_registered_services()
         with open("config/services.blue","w") as f:
             services.pop(services.index(service_name))
             f.writelines(services)
@@ -219,34 +219,103 @@ def get_assistant_name():
 
     return config['assistant_name']
 
-def add_wake_up_alarm(days_left,time,url):
+
+
+def add_wake_up_alarm(future_date:datetime,time:str,url:str):
+
+    """
+    
+    add a wakeup alarm and start the reminder module
+    
+    """
+
+
 
     et = ElementTree.parse("config/reminders.xml")
     root = et.getroot()
 
-    new_ele = ElementTree.SubElement(root,"wakeup")
-    new_ele.text = dumps({"days_left" : abs(int(days_left)-date.today().day),"time" : time, "url" : escape(url)})
+    new_ele = ElementTree.SubElement(root,"reminder")
+    days_left = future_date - datetime.strptime(datetime.today().strftime("%d-%m-%Y %H:%M"),"%d-%m-%Y %H:%M")
+    json = {"type" : "wakeup","time" : time, "url" : escape(url),"id" : len(get_all_reminders())}
+    new_ele.text = dumps(json)
     et.write("config/reminders.xml")
     
     from skills_modules import reminder
 
-    reminder.start_wakeup_timer(abs(int(days_left)-date.today().day),time,url)
+    reminder.start_wakeup_timer(days_left.days,days_left.seconds//3600,(days_left.seconds//60)%60,json)
 
 
-def add_reminder(date,time):
-    pass
 
-def get_reminders_list():
-    pass
 
-def get_wakeup_list():
+
+def get_all_reminders():
+    """
+    get alarms and their type; store it into and array of json dicts
+    
+    """
+    et = ElementTree.parse("config/reminders.xml")
+    root = et.getroot()
+    
+    alarms = []
+
+    for ele in root:
+        json = loads(ele.text)
+
+        alarms.append(json)
+
+    return alarms
+
+
+def rewrite_reminders_file(reminders:list):
+    
+    with open("config/reminders.xml","w") as f:
+        f.write("<reminders_root>")
+
+        for i in range(len(reminders)):
+            reminders[i]['id'] = i
+            f.write(f"\n<reminder>{dumps(reminders[i])}</reminder>")
+
+        f.write("\n</reminders_root>")
+
+
+
+def add_reminder(future_date:datetime,time:str,content:str):
+
 
     et = ElementTree.parse("config/reminders.xml")
     root = et.getroot()
-    all_tags = [ele.tag for ele in root]
-    all_times = [ele.attrib['time'] for ele in root]
+    new_ele = ElementTree.SubElement(root,"reminder")
 
-    return {"tags" : all_tags,"times" : all_times}
+    print("now : ",datetime.today().strftime("%d-%m-%Y %H:%M"))
+    days_left = future_date - datetime.strptime(datetime.today().strftime("%d-%m-%Y %H:%M"),"%d-%m-%Y %H:%M")
+    json = {"type" : "reminder", "date" : future_date.strftime("%d-%m-%Y"),"time" : time, "content" : escape(content),"id" : len(get_all_reminders())}
+    
+    new_ele.text = dumps(json)
+
+    et.write("config/reminders.xml")
+    
+    from skills_modules import reminder
+
+    reminder.start_reminder_timer(days_left.days,days_left.seconds//3600,(days_left.seconds//60)%60,json)
+
+
+def check_reminder(json:dict)-> bool:
+
+    """
+    check if a remdinder is still in config file
+    """
+
+    root = ElementTree.parse("config/reminders.xml").getroot()
+
+    for ele in root:
+        if ele.text == dumps(json):
+            return True
+
+    return False
+
+
+    
+
 
 def remove_useless_words(string):
 
