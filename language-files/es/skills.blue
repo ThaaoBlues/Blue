@@ -25,4 +25,5 @@ skip:saltar/cambia la canción&#10;
 mute:silencia */silencio&#10;
 add_note:agrega * a mis notas&#10;
 read_note:lee mis notas/muestra mis notas&#10;
+countdown:* cuenta atrás de */* cronómetros de *&#10;
 test:prueba&#10;

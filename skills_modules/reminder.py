@@ -1,7 +1,5 @@
 from util.res import *
-from datetime import datetime
 from threading import Timer
-from calendar import monthrange
 from functools import partial
 from webbrowser import open as open_url
 from skills import speak

@@ -25,4 +25,5 @@ skip:skip/change the music&#10;
 mute:mute */silence/shut up&#10;
 add_note:add * to my notes&#10;
 read_note:read my notes/what are my notes/what did i note&#10;
+countdouwn:count down * seconds/count * seconds/time * seconds/count down * hours/count * hours/time * hours/count down * minutes/count * minutes/time * minutes/* countdown&#10;
 test:test&#10;
