@@ -9,6 +9,7 @@ stop:stop/arrête/ferme *&#10;
 shutdown:éteins toi/adieu/tais toi/ferme ta gueule/ferme la/mets toi en veille&#10;
 speedtest:effectue un speedtest/effectue un test de vitesse/fais un speedtest s'il te plaît/fais un test de vitesse s'il te plaît/c'est un speedtest s'il te plaît&#10;
 wikipedia:quelle est la définition de *&#10;
+deezer:* musique * sur deezer/* son * sur deezer/* morceau * sur deezer/* sur deezer&#10;
 ip:quelle est mon adresse ip/donne moi mon adresse ip/cherche mon adresse ip&#10;
 camera:ouvre la camera/affiche la camera/allume la camera&#10;
 jokes:raconte moi une blague/dis moi une blague/fais moi rire/fais moi rigoler&#10;
