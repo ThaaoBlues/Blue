@@ -5,7 +5,7 @@ speechrecognition
 gtts
 playsound
 pyautogui
-psutil
+#psutil
 youtube-search-python
 pafy
 youtube-dl
@@ -16,7 +16,6 @@ speedtest-cli
 opencv-python
 numpy
 jokeapi
-pyautogui
 comtypes==1.1.7
 secretstorage
 simplenote

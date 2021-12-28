@@ -5,6 +5,7 @@ from multiprocessing import Process, freeze_support
 from skills import check_skills
 from json import loads
 from webbrowser import open as display_website
+from pyautogui import *
 
 
 def initialize():
@@ -83,6 +84,8 @@ class AndroidSpecialFeatures():
 
         if json["type"] == "website":
             Process(target=display_website, args=(json["url"],)).start()
+        
+
 
     def check_battery(self, battery: float, is_charging: bool):
         """

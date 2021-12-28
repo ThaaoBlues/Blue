@@ -82,6 +82,7 @@ def check_files_integrity():
 
     if not path.exists("config/services.blue"):
         open("config/services.blue","w")
+        register_service("simplenote")
 
 
     locale = get_locale()
