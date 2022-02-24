@@ -1,11 +1,8 @@
 from util.res import *
 import speech_recognition as sr
-from time import sleep
-import locale
 from skills import check_skills
 from util import setup
 from config_server import start_webserver
-from util.translator import translate
 from multiprocessing import Process,freeze_support
 import app_server
 
@@ -64,11 +61,9 @@ if __name__ == '__main__':
                     if not check_skills(voice_command):
                         print("Je ne sais pas encore faire cela")
 
-    except Exception as e:
+    except KeyboardInterrupt:
         perror("No desktop microphone found or microphone listening loop manually disabled, you must use the android app.")
-        app_proc.kill()
-        web_proc.kill()
-    
+        
 
 
 
