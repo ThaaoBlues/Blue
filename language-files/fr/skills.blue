@@ -1,6 +1,6 @@
 open_website:va sur */va sur le site de */ouvre le site de */affiche le site de */quelle est * de */quels sont les * de */quel est le * de */recherche des informations sur */qui était */c'est qui */qui est */c'est qui */qu'est-ce qu*&#10;
 heure:quelle heure est il/quelle heure il est/donne moi l'heure&#10;
-youtube:mets * musique de */mets * vidéo de */play * video of */display * video of */mets * de */joue * de */* sur youtube/mets le top * sur youtube&#10;
+youtube:mets * musique de * sur youtube/mets * vidéo de */play * video of */display * video of */joue * de */* sur youtube/mets le top * sur youtube&#10;
 rss:donne-moi des nouvelles/dis-moi les informations/dis-moi les dernières nouvelles/dis-moi les dernières informations/lis-moi le journal/give me some news&#10;
 google-search:recherche comment faire */cherche comment on fait */cherche des */recherche des *&#10;
 date:quel jour sommes-nous/quel jour on est/quel jour est-on/donne moi le jour/on est quelle date/quelle est la date d'aujourd'hui&#10;
@@ -9,6 +9,7 @@ stop:stop/arrête/ferme *&#10;
 shutdown:éteins toi/adieu/tais toi/ferme ta gueule/ferme la/mets toi en veille&#10;
 speedtest:effectue un speedtest/effectue un test de vitesse/fais un speedtest s'il te plaît/fais un test de vitesse s'il te plaît/c'est un speedtest s'il te plaît&#10;
 wikipedia:quelle est la définition de *&#10;
+deezer:mets * musique * sur deezer/* son * sur deezer/* morceau * sur deezer/* sur deezer&#10;
 ip:quelle est mon adresse ip/donne moi mon adresse ip/cherche mon adresse ip&#10;
 camera:ouvre la camera/affiche la camera/allume la camera&#10;
 jokes:raconte moi une blague/dis moi une blague/fais moi rire/fais moi rigoler&#10;
@@ -16,9 +17,9 @@ maths:combien font */combien ça fait */ça fait combien */calcule */calcule moi
 maps:aller à */comment aller à */montre-moi un intinéraire vers */montre-moi l'intinéraire vers */montre-moi l'intinéraire pour aller à */montre-moi un intinéraire pour aller à */affiche l'intinéraire pour aller à */affiche un intinéraire pour aller à */affiche l'intinéraire pour aller à */affiche une carte de */affiche la carte de *&#10;
 twitch:* le stream de * sur twitch/* le stream twitch de *&#10;
 thanks:merci *&#10;
-volume_up:monte le volume/agmente le volume/augmente le son/monte le son
-volume_down:baisse le volume/descends le volume/baisse le son/descend le son
-pause:mets en pause */pause/play/remet la *
+volume_up:monte le volume/agmente le volume/augmente le son/monte le son&#10;
+volume_down:baisse le volume/descends le volume/baisse le son/descend le son&#10;
+pause:mets en pause */pause/play/remet la *&#10;
 reminder:* une alarme/* un réveil/* un réveil/* une alarme&#10;
 skip:skip/change de musique/* musique suivante&#10;
 mute:mute */silence&#10;
