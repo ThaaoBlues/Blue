@@ -105,10 +105,13 @@ def speak(sentence):
     try:
         
         tts = gTTS(sentence,lang=get_locale())
-        sn = str(randint(1,100000))+".mp3"
-        tts.save(sn)
-        playsound.playsound(sn)
-        remove(sn)
+        audio_file = str(randint(1,100000))+".mp3"
+        tts.save(audio_file)
+        # it seems that playsound have some problems with file path ?
+        # https://stackoverflow.com/questions/68826091/the-specified-device-is-not-open-or-is-not-recognized-by-mci
+        # downgraded playsound to ==1.2.2
+        playsound.playsound(path.join(path.dirname(__file__),audio_file))
+        remove(audio_file)
     except Exception as e:
         print(e)
         pass

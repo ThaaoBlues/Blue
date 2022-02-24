@@ -8,15 +8,29 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 <body>
-    <form action="/process/[ADD BLUE SKILL]" method="post" enctype="multipart/form-data">
-        <h1>Import a Blue skill writen in python : </h1>
-        <input type="file" name="file">
-        <div style="margin-top: 10px;">
-            <label for="voice_command" >Commands that will trigger this skill : (separated by /), if you want to insert place of random words, just add *</label>
-            <br>
-            <input type="text" id="voice_command" name="voice_command">
+
+    <div class="container d-flex justify-content-center">
+
+
+        <div class="row mt-5 mx-3">
+            <div class="row">
+                <h1>Import a Blue skill written in python : </h1>
+            </div>
+            <form action="/process/[ADD BLUE SKILL]" method="post" enctype="multipart/form-data">
+                <div class="row mt-3" >
+                    <input class="form-control-file" type="file" name="file"/>
+                </div>
+                <div class="row mt-3" >
+                    <label for="voice_command" >Commands that will trigger this skill : (separated by /), if you want to insert place of random words, just add *</label>
+                    <input type="text" id="voice_command" name="voice_command"/>
+                </div>
+
+                <div class="row mt-3" >
+                    <input class="btn btn-primary" type="submit" value="Upload"/>
+                </div>
+            </form>
         </div>
-        <input type="submit" style="margin-top: 10px;" value="Upload">
-    </form>
+
+    </div>
 </body>
 </html>

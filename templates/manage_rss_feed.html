@@ -12,7 +12,7 @@
         {%for i in range(lenght)%}
             {%if feeds[i]['url'] != ""%}
                 
-                <li>{{feeds[i]['url']}}<button onclick="window.location.href='/process/[DELETE RSS FEED]?feed_id={{i}}'">remove this news feed</button></li>
+                <li>{{feeds[i]['url']}}<button class="btn btn-primay ms-3" onclick="window.location.href='/process/[DELETE RSS FEED]?feed_id={{i}}'">remove this news feed</button></li>
 
             {%endif%}
         {%endfor%}

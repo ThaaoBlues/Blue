@@ -5,5 +5,6 @@ powershell Expand-Archive main.zip -DestinationPath blue
 cd blue
 python -m pip install pipwin
 pipwin install pyaudio
+pipwin install psutil
 python -m pip install -r requirements.txt
 python Blue.py

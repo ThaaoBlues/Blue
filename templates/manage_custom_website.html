@@ -10,7 +10,7 @@
 <body>
     <ul>
         {%for i in range(lenght)%}
-            <li>{{array[i]['url']}} - voice command : {{array[i]['voice_command']}}<button onclick="window.location.href='/process/[DELETE WEBSITE]?website_id={{i}}'">remove this website</button></li>
+            <li>{{array[i]['url']}} - voice command : {{array[i]['voice_command']}}<button class="btn btn-primary ms-3" onclick="window.location.href='/process/[DELETE WEBSITE]?website_id={{i}}'">remove this website</button></li>
         {%endfor%}
         
     </ul>

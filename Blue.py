@@ -12,13 +12,15 @@ import app_server
 
 def listen():
     print("listening...")
+    voice_command = ""
     try:
         with sr.Microphone() as source:
             data = r.record(source,duration=5)
             voice_command = r.recognize_google(data,language=get_locale())
             return voice_command
-    except KeyboardInterrupt:
-        raise KeyboardInterrupt
+    except Exception as e:
+        if type(e) == KeyboardInterrupt:
+            raise KeyboardInterrupt
 
 
 
@@ -36,10 +38,11 @@ if __name__ == '__main__':
 
     #start configuration server
     freeze_support()
-    Process(target=start_webserver).start()
+    web_proc = Process(target=start_webserver)
+    web_proc.start()
 
     #start app handling server
-    app_server.initialize()
+    app_proc = app_server.initialize()
 
     #init voice recognizer
     try:
@@ -59,9 +62,11 @@ if __name__ == '__main__':
                     if not check_skills(voice_command):
                         print("Je ne sais pas encore faire cela")
 
-    except:
+    except Exception as e:
+        print(e)
         perror("No desktop microphone found or microphone listening loop manually disabled, you must use the android app.")
-
+        app_proc.kill()
+        web_proc.kill()
     
 
 

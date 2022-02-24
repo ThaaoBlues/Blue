@@ -9,9 +9,12 @@ from pyautogui import *
 
 
 def initialize():
-    Process(target=start_server).start()
+    p = Process(target=start_server)
+    p.start()
+    
     psuccess("App server started. IP : {}".format(get_private_ip()))
-
+    
+    return p
 
 def start_server():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -27,6 +30,8 @@ def start_server():
 
 
 def handle_client(cli):
+    
+    asf = AndroidSpecialFeatures()
     
     while True:
 
@@ -48,10 +53,10 @@ def handle_client(cli):
 
                 voice_command = json['voice_command']
                 del json['voice_command']
-                AndroidSpecialFeatures().process_data(json)
+                asf.process_data(json)
 
             else:
-                AndroidSpecialFeatures().process_data(json)
+                asf.process_data(json)
                 return
 
             # now get to the real work
@@ -64,16 +69,19 @@ def handle_client(cli):
             print(e)
 
 
-"""'voice_command': 'user voice command'
+
+
+
+class AndroidSpecialFeatures():
+    
+    
+    """'voice_command': 'user voice command'
 
 CLASS USED TO PROCESS ADDITIONAL DATA SENT BY THE PHONE
 NO DATA WILL BE STORED, NO DATA WILL BE SENT ANYWHERE
 
 
 """
-
-
-class AndroidSpecialFeatures():
 
     def process_data(self, json: dict):
         """

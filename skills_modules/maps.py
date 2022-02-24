@@ -8,7 +8,7 @@ def initialize(voice_command,sentences):
 
     url = "www.maps.google.com/maps/dir/" + voice_command
 
-     if system() == "Linux":
+    if system() == "Linux":
 
         p_video = Popen(["xdg-open",f"\"{url}\""])
 
@@ -16,5 +16,5 @@ def initialize(voice_command,sentences):
         p_video = Popen(["start",url],shell=True)
 
 
-    response = "J'ai affiché la selecction d'itinéraires vers " + voice_command
+    response = "J'ai affiché la selection d'itinéraires vers " + voice_command
     return True, response

@@ -12,31 +12,67 @@
 </head>
 <body>
 
-    <form method="POST" class="mx-5 my-5">
-        <input type="hidden" name="type" value="wakeup" />
-        <label for="time">Choose your wake-up day ;) (month and year will not be taken)</label>
-        <input id="date" type="date" name="date">
-        <br>
-        <label for="time">Select a wake-up Hour :D</label>
-        <input name="time" id="time" type="time" required>
-        <br>
-        <label for="wakeup_music">Enter a youtube music URL as ringtone for your wake-up ;)</label>
-        <input type="url" name="wakeup_music" id="wakeup_music" required>
-        <br>
-        <input type="submit">
 
-    </form>
-<hr>
-    <form method="POST" class="mx-5 my-6 mt-5">
-        <input type="hidden" name="type" value="reminder" />
-        <label for="time">Select a reminder Hour and day :D</label>
-        <input name="time" id="time" type="time" required>
-        <input id="date" type="date" name="date" required>
-        <label for="content">Type something that I will say to remind you ! :D</label>
-        <input type="text" name="content" id="content" required>
-        <input type="submit">
-    </form>
+    <div class="container d-flex justify-content-center">
 
+
+        <div class="col-sx mx-auto">
+            <div class="row mt-5 mx-3" style="max-width: 350px;">
+                <h3>Wake-up alarm :</h3>
+                <form method="POST" class="">
+                    <input type="hidden" name="type" value="wakeup" />
+                    <div class="row mt-3">
+                        <label for="time">Choose your wake-up day ;) (month and year will not be taken)</label>
+                        <input id="date" type="date" name="date"/>
+                    </div>
+    
+                    <div class="row mt-3">
+                        <label for="time">Select a wake-up Hour :D</label>
+                        <input name="time" id="time" type="time" required/>
+                    </div>
+    
+                    <div class="row mt-3">
+                        <label for="wakeup_music">Enter a youtube music URL as ringtone for your wake-up ;)</label>
+                        <input type="url" name="wakeup_music" id="wakeup_music" required/>
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <input class="btn btn-primary" type="submit">
+                    </div>
+                    
+                    
+    
+                </form>
+
+            </div>
+
+            <hr>
+
+            <div class="row mt-5 mx-3" style="max-width: 350px;">
+                <h3>Reminder :</h3>
+                <form method="POST" class="">
+                    <div class="row mt-3">
+                        <label for="time">Select a reminder Hour and day :D</label>
+                        <input name="time" id="time" type="time" required>        
+                    </div>
+                    <div class="row mt-3">
+                        <input id="date" type="date" name="date" required>
+                        <label for="content">Type something that I will say to remind you ! :D</label>     
+                    </div>
+                    <div class="row mt-3">
+                        <input type="text" name="content" id="content" required>
+                    </div>
+                    <input type="hidden" name="type" value="reminder" />
+        
+                    <div class="row mt-3">
+                        <input class="btn btn-primary" type="submit">
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+        
     
 </body>
 
