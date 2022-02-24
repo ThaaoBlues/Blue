@@ -15,13 +15,15 @@ def listen():
     voice_command = ""
     try:
         with sr.Microphone() as source:
+
             data = r.record(source,duration=5)
             voice_command = r.recognize_google(data,language=get_locale())
-            return voice_command
+        
+        return voice_command
+   
     except Exception as e:
-        if type(e) == KeyboardInterrupt:
+        if e.__class__.__name__ != "UnknownValueError":
             raise KeyboardInterrupt
-
 
 
 
@@ -63,7 +65,6 @@ if __name__ == '__main__':
                         print("Je ne sais pas encore faire cela")
 
     except Exception as e:
-        print(e)
         perror("No desktop microphone found or microphone listening loop manually disabled, you must use the android app.")
         app_proc.kill()
         web_proc.kill()
