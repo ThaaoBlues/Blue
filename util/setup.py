@@ -99,3 +99,18 @@ def check_files_integrity():
         with open("config/unnecessary.blue","w",encoding="utf-8") as f:
             f.write(get(f"https://raw.githubusercontent.com/ThaaoBlues/Blue/main/language-files/{locale}/unnecessary.blue").text)
             f.close()
+
+
+    # check if blue has all the modules
+    
+    r = get("https://api.github.com/repos/thaaoblues/blue/git/trees/main?recursive=1").json()
+    
+    for ele in r["tree"]:
+        if ele["path"].startswith("skills_modules/") and not path.exists(ele["path"]):    
+            # found a missing module, add it
+            pinfo("found a missing module, adding it : "+ ele["path"])
+            with open(ele["path"],"wb") as f:
+                f.write(get(f"https://raw.githubusercontent.com/ThaaoBlues/Blue/main/{ele['path']}").content)
+            
+                
+                
