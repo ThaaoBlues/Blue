@@ -27,9 +27,11 @@ curl "https://raw.githubusercontent.com/ThaaoBlues/Blue/main/install_blue.sh" | 
 
 - wake you up with a video/music (program the day and the hour by the web page)
 
-- watch iptv (beta)
+- watch iptv (beta) (french only, needs translation for other languages)
 
-- take pictures
+- take pictures (french only, needs translation for other languages)
+
+- take screenshots (french only, needs translation for other languages)
 
 - add notes to your [Simplenote](https://simplenote.com) account
 
