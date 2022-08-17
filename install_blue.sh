@@ -10,5 +10,7 @@ cd ./Blue &> ./blue_install.log
 echo [+] Installing required python packages via pip... 
 python3 -m pip install -r linux_requirements.txt --no-cache-dir &> ./blue_install.log
 echo [v] Python packages installed, starting Blue !
-python3 Blue.py
+echo [!] Please enter the name of your assistant, it will be used to trigger him -->
+read hot_word
+echo $hot_word | python3 Blue.py
 wait
