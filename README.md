@@ -29,6 +29,8 @@ curl "https://raw.githubusercontent.com/ThaaoBlues/Blue/main/install_blue.sh" | 
 
 - watch iptv (beta)
 
+- take pictures
+
 - add notes to your [Simplenote](https://simplenote.com) account
 
 

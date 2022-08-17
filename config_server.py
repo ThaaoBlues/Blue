@@ -13,7 +13,7 @@ ALLOWED_EXTENSIONS = {'py'}
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 
 def allowed_file(filename):
@@ -277,10 +277,34 @@ def process(process_id):
         rewrite_reminders_file(reminders)
 
         return redirect(request.base_url)
+    
+    
+    elif process_id == "[DELETE_IMAGE]":
+        img = request.args.get("img",default=False)
+        
+        if img and (img in listdir("images/")):
+            remove(f"images/{img}")
+            return jsonify({"Success":"Image removed from disk."})
+        else:
+            return jsonify({"Error":"Invalid image name."})
 
     else:
             return render_template("config_page.html")
 
+
+
+@app.route("/images/<image>")
+
+def images(image):
+    
+    
+    images = listdir("images")
+    if (not image in images) and (image != "all"):
+        return abort(404)
+    elif image == "all":
+        return render_template("images.html",images=images)
+    else:
+        return send_file(f"images/{image}")
 
 
 @app.errorhandler(404)
