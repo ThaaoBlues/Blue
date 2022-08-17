@@ -1,4 +1,3 @@
-from platform import system
 from webbrowser import open as display_website
 
 def initialize(voice_command,sentences):
