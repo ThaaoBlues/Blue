@@ -11,3 +11,4 @@ echo [+] Installing required python packages via pip...
 python3 -m pip install -r linux_requirements.txt --no-cache-dir &> ./blue_install.log
 echo [v] Python packages installed, starting Blue !
 python3 Blue.py
+wait
