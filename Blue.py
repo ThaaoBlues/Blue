@@ -29,7 +29,7 @@ if __name__ == '__main__':
 
     auto_chdir_to_file_root()
 
-    #make sure the user have choosen a hot word
+    #make sure the user have chosen a hot word
     setup.check_files_integrity()
     
     hot_word = setup.get_hot_word()
